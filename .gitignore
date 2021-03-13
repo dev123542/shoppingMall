@@ -1,0 +1,8 @@
+## 메일 설정 파일만 ignore
+mail-context.xml
+
+## 네이버, 카카오 API 설정 파일만 ignore
+src/main/java/com/shoppingMall/member/controller/KakaoLoginBO.java
+src/main/java/com/shoppingMall/member/controller/NaverLoginBO.java
+target/classes/com/shoppingMall/member/controller/KakaoLoginBO.class
+target/classes/com/shoppingMall/member/controller/NaverLoginBO.class
