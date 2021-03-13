@@ -146,6 +146,7 @@
 			          justify-content: space-evenly;
 			  position: relative;
 			  border: 1px solid #bcb8b9;
+			  border-right:0;
 		}
 		
 		#tab_container_wrap ul.tabs .tab-01 a{
@@ -159,7 +160,7 @@
 		}
 		
 		#tab_container_wrap ul.tabs li{
-		    width: 271px;
+		    width: 299px;
 		    height: 42px;
 		    text-align: center;
 		    line-height: 40px;
@@ -331,7 +332,7 @@
 		<ul class="tabs">
 			<li class="tab-01"><a href="#tab1" >상품상세정보</a></li>
 			<li><a href="#tab2">배송,교환,반품안내</a></li>
-			<li><a href="#tab3">코디상품</a></li>
+			<!-- <li><a href="#tab3">다른상품</a></li> -->
 			<li><a href="#tab4">상품후기</a></li>
 			<li><a href="#tab5">Q&amp;A</a></li>
 		</ul>
@@ -353,7 +354,7 @@
 				<ul class="tabs">
 					<li><a href="#tab1">상품상세정보</a></li>
 					<li class="tabs-02"><a href="#tab2">배송,교환,반품안내</a></li>
-					<li><a href="#tab3">코디상품</a></li>
+					<!-- <li><a href="#tab3">다른상품</a></li> -->
 					<li><a href="#tab4">상품후기</a></li>
 					<li><a href="#tab5">Q&amp;A</a></li>
 				</ul>
@@ -370,18 +371,18 @@
 				<ul class="tabs">
 						<li><a href="#tab1">상품상세정보</a></li>
 						<li><a href="#tab2">배송,교환,반품안내</a></li>
-						<li class="tabs-03"><a href="#tab3">코디상품</a></li>
+						<li class="tabs-03"><a href="#tab3">다른상품</a></li>
 						<li><a href="#tab4">상품후기</a></li>
 						<li><a href="#tab5">Q&amp;A</a></li>
 				</ul>
 				<!-- <h4>코디상품</h4> -->
 				<p>${fn:replace(product.product_contents_order,crcn,br)}</p> 
-			</div> --%>
+			</div>  --%>
 			<div class="tab_content" id="tab4">
 				<ul class="tabs">
 						<li><a href="#tab1">상품상세정보</a></li>
 						<li><a href="#tab2">배송,교환,반품안내</a></li>
-						<li><a href="#tab3">코디상품</a></li>
+						<!-- <li><a href="#tab3">다른상품</a></li> -->
 						<li class="tabs-04"><a href="#tab4">상품후기</a></li>
 						<li><a href="#tab5">Q&amp;A</a></li>
 				</ul>
@@ -392,7 +393,7 @@
 				<ul class="tabs">
 						<li><a href="#tab1">상품상세정보</a></li>
 						<li><a href="#tab2">배송,교환,반품안내</a></li>
-						<li><a href="#tab3">코디상품</a></li>
+						<!-- <li><a href="#tab3">다른상품</a></li> -->
 						<li><a href="#tab4">상품후기</a></li>
 						<li class="tabs-05"><a href="#tab5">Q&amp;A</a></li>
 				</ul>
@@ -415,6 +416,11 @@
 			</form>
 		</div>		       
         <input type="hidden" name="isLogOn" id="isLogOn" value="${isLogOn}"/>
+    </div>
+    
+    <!-- 상품 후기 작성 팝업 -->
+    
+    
 </div>	<!-- productDetail -->
 </div> <!-- product_container -->
 </body>
