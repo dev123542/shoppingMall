@@ -8,4 +8,4 @@ target/classes/com/shoppingMall/member/controller/KakaoLoginBO.class
 target/classes/com/shoppingMall/member/controller/NaverLoginBO.class
 
 ## jdbc config
-jdbc.properties
+src/main/webapp/WEB-INF/config/jdbc/jdbc.properties
