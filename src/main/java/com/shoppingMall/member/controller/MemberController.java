@@ -98,10 +98,10 @@ public class MemberController{
 			model.addAttribute("naver_url", naverAuthUrl);
 			model.addAttribute("kakao_url", kakaoAuthUrl);
 
-//			String clientId = "bH3SGcRseY20jBA92qeT";//애플리케이션 클라이언트 아이디값";
+//			String clientId = "";//애플리케이션 클라이언트 아이디값";
 //		    String redirectURI;
 //			try {
-//				redirectURI = URLEncoder.encode("http://localhost:8080/project/member/callback", "UTF-8");
+//				redirectURI = URLEncoder.encode("http://", "UTF-8");
 //				SecureRandom random = new SecureRandom();
 //			    String state = new BigInteger(130, random).toString();
 //			    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
@@ -237,11 +237,11 @@ public class MemberController{
 		// 파싱한 닉네임을 세션에 저장
 		session.setAttribute("member", id);
 
-//        String clientId = "bH3SGcRseY20jBA92qeT";//애플리케이션 클라이언트 아이디값";
-//        String clientSecret = "1tPLtpvorY";//애플리케이션 클라이언트 시크릿값";
+//        String clientId = "";//애플리케이션 클라이언트 아이디값";
+//        String clientSecret = "";//애플리케이션 클라이언트 시크릿값";
 //        String code2 = request.getParameter("code");
 //        String state2 = request.getParameter("state");
-//        String redirectURI = URLEncoder.encode("http://localhost:8080/project/member/callback", "UTF-8");
+//        String redirectURI = URLEncoder.encode("http://", "UTF-8");
 //        String apiURL;
 //        apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
 //        apiURL += "client_id=" + clientId;
