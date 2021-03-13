@@ -6,3 +6,6 @@ src/main/java/com/shoppingMall/member/controller/KakaoLoginBO.java
 src/main/java/com/shoppingMall/member/controller/NaverLoginBO.java
 target/classes/com/shoppingMall/member/controller/KakaoLoginBO.class
 target/classes/com/shoppingMall/member/controller/NaverLoginBO.class
+
+## jdbc config
+jdbc.properties
