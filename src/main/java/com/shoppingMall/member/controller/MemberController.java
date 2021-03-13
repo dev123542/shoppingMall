@@ -307,9 +307,9 @@ public class MemberController{
 		HashMap<String, Object> kakaoUserInfo = kakaoLoginBO.getUserInfo(accessToken);
 		//String nickname = (String) kakaoUserInfo.get("nickname");
 		String kakaoID = (String) kakaoUserInfo.get("kakaoID");
-		System.out.println("code:" + code);
+		//System.out.println("code:" + code);
 		//System.out.println("nickname:" + nickname);
-
+		System.out.println("kakaoID:"+kakaoID);
 		session.setAttribute("member", kakaoID);
 		session.setAttribute("accessToken", accessToken);
 
