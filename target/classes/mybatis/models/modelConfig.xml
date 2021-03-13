@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration 	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+  <typeAliases>
+	<typeAlias type="com.shoppingMall.member.vo.MemberVO"  alias="MemberVO" />
+	<typeAlias type="com.shoppingMall.cart.vo.CartVO"  alias="CartVO" />
+	<typeAlias type="com.shoppingMall.product.vo.ProductVO"  alias="ProductVO" />
+	<typeAlias type="com.shoppingMall.product.vo.ImageFileVO"  alias="ImageFileVO" />
+	<typeAlias type="com.shoppingMall.product.vo.CategoryVO"  alias="CategoryVO" />
+	<typeAlias type="com.shoppingMall.board.vo.QnaVO"  alias="QnaVO" />
+	<typeAlias type="com.shoppingMall.board.vo.ReplyVO"  alias="ReplyVO" />
+	<typeAlias type="com.shoppingMall.board.vo.PageMaker"  alias="PageMaker" />
+	<typeAlias type="com.shoppingMall.board.vo.SearchCriteria"  alias="SearchCriteria" />
+	<typeAlias type="com.shoppingMall.board.vo.CriteriaVO"  alias="CriteriaVO" />
+	<typeAlias type="com.shoppingMall.board.utill.FileUtils"  alias="Util" />
+	<typeAlias type="com.shoppingMall.product.vo.ProductDetailVO"  alias="ProductDetailVO" />
+	<typeAlias type="com.shoppingMall.order.vo.OrderVO"  alias="OrderVO" />
+	<typeAlias type="com.shoppingMall.order.vo.OrderDetailsVO"  alias="OrderDetailsVO" />
+	<typeAlias type="com.shoppingMall.order.vo.OrderListVO"  alias="OrderListVO" />
+  </typeAliases>
+</configuration>
+
+
+

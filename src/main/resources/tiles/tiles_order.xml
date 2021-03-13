@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	
+	<!-- 주문 페이지 -->
+ 	<!-- <definition name="/order/orderMain" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/order/orderMain.jsp" />
+	</definition> 
+	
+	주문 완료 페이지
+	<definition name="/order/orderComplete" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/order/orderComplete.jsp" />
+	</definition> -->
+	
+	<!-- 동적 페이지 이동 -->
+	<definition name="/order/*" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/order/{1}.jsp" />
+	</definition>  
+	
+</tiles-definitions>
+
+

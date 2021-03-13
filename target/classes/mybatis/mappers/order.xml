@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.order">
+
+	<resultMap id="orderResult" type="OrderVO">
+		<result property="order_no" column="order_no" />
+		<result property="member_id" column="member_id" />
+		<result property="member_add1" column="member_add1" />
+		<result property="member_add2" column="member_add2" />
+		<result property="member_add3" column="member_add3" />
+		<result property="phone" column="phone" />
+		<result property="order_date" column="order_date" />
+		<result property="amount" column="amount" />
+		<result property="orderRec" column="orderRec" />
+		<result property="order_msg" column="order_msg" />
+		<result property="total_goods_price" column="total_goods_price" />
+		<result property="payment" column="payment" />
+		<result property="bank" column="bank" />
+		<result property="status" column="status" />
+	</resultMap>
+	
+	<resultMap id="orderDetailsResult" type="OrderDetailsVO">
+		<result property="order_details_no" column="order_details_no" />
+		<result property="order_no" column="order_no" />
+		<result property="product_no" column="product_no" />
+		<result property="cartStock" column="cartStock" />
+	</resultMap>
+	
+	<resultMap id="orderListResult" type="OrderListVO">
+		<result property="order_no" column="order_no" />
+		<result property="member_id" column="member_id" />
+		<result property="member_add1" column="member_add1" />
+		<result property="member_add2" column="member_add2" />
+		<result property="member_add3" column="member_add3" />
+		<result property="phone" column="phone" />
+		<result property="order_date" column="order_date" />
+		<result property="amount" column="amount" />
+		<result property="orderRec" column="orderRec" />
+		<result property="order_msg" column="order_msg" />
+		
+		<result property="order_details_no" column="order_details_no" />
+		<result property="product_no" column="product_no" />
+		<result property="cartStock" column="cartStock" />
+		
+		<result property="product_name" column="product_name" />
+		<result property="product_image" column="product_image" />
+		<result property="origin_price" column="origin_price" />
+	</resultMap>
+
+
+	<!-- 장바구니에 담은 상품목록 가져오기 -->
+	<select id="selectOrderCartList"  parameterType="String"  resultType="CartVO">
+	    <![CDATA[
+			SELECT member_id, product_no, cart_goods_qty, cart_date, origin_price, sale_price, cart_no 
+				FROM s_cart 
+			WHERE member_id = #{member_id}
+		]]>
+	</select>
+	
+	<!-- 장바구니에 담은 상품목록 개수 -->
+	<select id="selectOrderCount"  parameterType="String"  resultType="int">
+	    <![CDATA[
+			SELECT count(product_no)
+				FROM s_cart 
+			WHERE member_id = #{member_id}
+		]]>
+	</select>
+	
+	<!-- 장바구니에 담은 상품목록 가져오기 - 상품 이미지 -->
+	<select id="selectOrderProductList" parameterType="int" resultType="ProductVO" >
+		
+	    <![CDATA[
+		    SELECT * 
+		    FROM s_product
+		    WHERE product_no in
+	    ]]>
+		<foreach item="item" collection="list" open="(" separator="," close=")">
+			#{item.product_no}
+		</foreach>
+		ORDER BY product_credate desc
+	</select>
+
+	<!-- 주문 정보 저장 -->
+ 	<insert id="orderInfo" parameterType="OrderVO">
+ 		INSERT INTO s_order(order_no, member_id, orderRec, member_add1, member_add2, member_add3, phone, amount, status, order_msg, payment, bank, total_goods_price)
+ 		VALUES(#{order_no}, #{member_id}, #{orderRec}, #{member_add1}, #{member_add2}, #{member_add3}, #{phone}, #{amount}, #{status}, #{order_msg}, #{payment}, #{bank}, #{total_goods_price})
+ 	</insert>
+ 
+ 	<!-- 주문 상세 정보 저장 -->
+ 	<insert id="orderInfoDetails" parameterType="OrderDetailsVO">
+ 		<!-- <selectKey resultType="int" keyProperty="order_details_no" order="BEFORE">
+	    	SELECT s_order_details_seq.nextval FROM dual
+	    </selectKey> -->
+ 		INSERT INTO s_order_details(order_details_no, order_no, product_no, cartStock)
+ 			SELECT s_order_details_seq.nextval, #{order_no}, product_no, CART_GOODS_QTY 
+ 				FROM s_cart
+ 	</insert>
+ 
+ 	<!-- 장바구니 비우기 -->
+ 	<delete id="deleteCart" parameterType="String">
+ 		DELETE s_cart WHERE member_id = #{member_id}
+ 	</delete>
+ 	
+ 	<!-- 주문 완료 페이지 -->
+ 	<select id="orderComplete" parameterType="String" resultMap="orderResult">
+ 		SELECT order_no, member_id, orderRec, member_add1, member_add2, member_add3, total_goods_price
+ 		FROM s_order
+ 		WHERE order_no = #{order_no}
+ 	</select>
+ 	
+ 	<!-- 특정 회원의 주문 목록 불러오기 -->
+ 	<select id="orderList" resultMap="orderResult">
+ 		SELECT 
+ 			order_no, member_id, orderRec, member_add1, member_add2, member_add3, phone, total_goods_price, order_date, status
+ 		FROM s_order
+ 			WHERE member_id = #{member_id}
+ 				ORDER BY order_date
+ 	</select>
+ 	
+ 	<!-- 주문 정보과 주문 상세 정보 보여주기 -->
+ 	<select id="orderView" resultType="OrderListVO" parameterType="OrderVO">
+ 		SELECT
+ 			o.order_no, o.member_id, o.orderRec, o.member_add1, o.member_add2, o.member_add3, o.phone, o.amount, o.order_date, o.total_goods_price,
+ 			d.order_details_no, d.product_no, d.cartStock,
+ 			p.product_name, p.product_image, p.origin_price
+ 		FROM s_order o 
+ 					INNER JOIN s_order_details d ON o.order_no = d.order_no
+ 					INNER JOIN s_product p ON d.product_no = p.product_no
+ 		WHERE o.member_id = #{member_id} 
+ 			AND o.order_no = #{order_no}
+ 	</select>
+ 	
+ 	
+</mapper>

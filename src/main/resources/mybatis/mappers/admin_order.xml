@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.admin.order">
+	
+	
+	<!-- 모든 회원들의 주문 목록 간단 조회 -->
+	<select id="adminOrderList" resultType="OrderVO">
+		SELECT order_no, member_id, orderRec, member_add1, member_add2, member_add3, order_date, total_goods_price,
+			   payment, bank, status
+		FROM s_order
+		ORDER BY order_date desc
+	</select>
+	
+		
+</mapper>

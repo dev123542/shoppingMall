@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.cart">
+	<!-- 리절트 맵 정의 -->
+	<resultMap id="cartResult" type="CartVO">
+		<result property="member_id" column="member_id" />
+		<result property="product_no" column="product_no" />
+		<result property="cart_goods_qty" column="cart_goods_qty" />
+		<result property="cart_date" column="cart_date" />
+		<result property="origin_price" column="origin_price" />
+		<result property="sale_price" column="sale_price" />
+		<result property="cart_no" column="cart_no" />
+	</resultMap>
+	
+	<resultMap id="productResult" type="ProductVO">
+		<result property="product_no" column="product_no" />
+		<result property="product_name" column="product_name" />
+		<result property="product_sort" column="product_sort" />
+		<result property="cate_code" column="cate_code" />
+		<result property="origin_price" column="origin_price" />
+		<result property="sale_price" column="sale_price" />
+		
+		<result property="product_color" column="product_color" />
+		<result property="product_content" column="product_content" />
+		<result property="product_image" column="product_image" />
+		<result property="product_credate" column="product_credate" />
+	</resultMap>
+
+	 <!-- mybatis 부적합한 열유형 1111 해결됨  -->
+	<select id="selectCartList"  parameterType="CartVO"  resultMap="cartResult">
+	    <![CDATA[
+			select member_id, product_no, cart_goods_qty, cart_date, origin_price, sale_price, cart_no from s_cart 
+			where member_id=#{member_id, jdbcType=VARCHAR}
+		]]>
+	</select>
+
+	<select id="selectProductList" resultMap="productResult" parameterType="java.util.Map">
+	    <!-- <![CDATA[
+		    SELECT c.*, f.file_name 
+		    FROM s_product c, s_file f 
+		    WHERE c.product_no = f.product_no
+		    AND file_type = 'main image'
+		    AND c.product_no in
+	    ]]> -->
+	    <![CDATA[
+		    SELECT *
+		    FROM s_product
+		    WHERE product_no in
+	    ]]>
+		<foreach item="item" collection="list" open="(" separator="," close=")">
+			#{item.product_no}
+		</foreach>
+		ORDER BY product_credate desc
+	</select>
+
+	<select id="selectCountInCart" resultType="String" parameterType="CartVO">
+	    <![CDATA[
+		    select decode(count(*), 0, 'false', 'true') from s_cart
+			where product_no=#{product_no} and member_id=#{member_id} 
+    	]]>
+	</select>
+
+	<insert id="insertProductInCart" parameterType="CartVO">
+    	<![CDATA[
+	    	insert into s_cart(cart_no, product_no, member_id)
+		     values(#{cart_no}, #{product_no},#{member_id})
+    	]]>
+	</insert>
+ 
+	<update id="updateCartProductCount" parameterType="CartVO">
+	    <![CDATA[
+			update s_cart set cart_goods_qty=#{cart_goods_qty} 
+			where member_id=#{member_id} and product_no=#{product_no}
+    	]]>
+	</update>
+	
+	<delete id="deleteCartProduct" parameterType="int">
+	    <![CDATA[
+	      delete from s_cart where cart_no=#{cart_no}
+    	]]>
+	</delete>
+
+
+	<select id="selectMaxCartId" resultType="int">
+	    <![CDATA[
+			select nvl(max(cart_no), 0) + 1 from s_cart 
+    	]]>
+	</select>
+ 
+</mapper>

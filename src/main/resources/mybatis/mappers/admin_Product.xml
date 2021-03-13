@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.admin.product"> 
+	<resultMap id="productResult" type="ProductVO">
+	  <result property="product_no" column="product_no" />
+	  <result property="product_name" column="product_name" />
+	  <result property="product_sort" column="product_sort" />
+	  <result property="cate_parent" column="cate_parent" />
+	  <result property="cate_name" column="cate_name" />
+	  <result property="origin_price" column="origin_price" />
+	  <result property="sale_price" column="sale_price" />
+	  <result property="product_color" column="product_color" />
+	  <result property="product_content" column="product_content" />
+	  <result property="product_image" column="product_image" />
+	  <result property="product_credate" column="product_credate" />
+	  <collection property="categoryResult" resultMap="categoryResult" />
+	</resultMap> 
+	
+	<resultMap id="imageResult" type="ImageFileVO">
+	   <result property="product_no" column="product_no" />
+	   <result property="image_no" column="image_no" />
+	   <result property="fileName" column="fileName" />
+	   <result property="fileType" column="fileType" />
+	   <result property="reg_id" column="reg_id" />
+	</resultMap>
+	
+	<resultMap id="categoryResult" type="CategoryVO">
+	   <result property="cate_code" column="cate_code" />
+	   <result property="cate_name" column="cate_name" />
+	   <result property="cate_parent" column="cate_parent" />
+	</resultMap>
+	
+	<resultMap id="productDetailResult" type="ProductDetailVO">
+	   <result property="product_detail_no" column="product_detail_no" />
+	   <result property="product_no" column="product_no" />
+	   <result property="product_color" column="product_color" />
+	   <result property="cate_parent" column="cate_parent" />
+	   <result property="cate_name" column="cate_name" />
+	</resultMap>
+	
+	
+	<!-- 상품 등록 -->
+	<insert id="addNewProduct"  parameterType="java.util.Map">
+		<selectKey resultType="int" keyProperty="product_no" order="BEFORE">
+	    	select product_no_seq.nextval from dual
+	    </selectKey>
+	    <![CDATA[
+		    insert into s_product(
+			    					product_no, 
+			    					cate_parent, 
+			    					cate_name, 
+			    					product_name, 
+			    					product_sort,
+			    					origin_price,
+			    					sale_price,
+			    					product_color,
+			    					product_image,
+			    					product_credate,
+			    					product_content
+		    					)
+		    			values(
+		    					#{product_no},
+		    					#{cate_parent},
+		    					#{cate_name},
+		    					#{product_name},
+		    					#{product_sort},
+		    					#{origin_price},
+		    					#{sale_price},
+		    					#{product_color},
+		    					#{file_name},
+		    					sysdate,
+		    					#{product_content}
+		    				   )
+	    ]]>
+	</insert>
+	
+	<!-- 상품 이미지 등록(삭제할 생각) -->
+	<!-- <insert id="insertProductImageFile" parameterType="ImageFileVO">
+		<selectKey resultType="int" keyProperty="image_no" order="BEFORE">
+	    	select image_no_seq.nextval from dual
+	    </selectKey>
+	    <![CDATA[
+	    	insert into s_file(
+	    						image_no,
+	    						product_no,
+	    						file_name,
+	    						file_type,
+	    						reg_id
+	    					  )
+	    				values(
+	    						#{image_no},
+	    						#{product_no},
+	    						#{file_name},
+	    						#{file_type},
+	    						#{reg_id}
+	    					  )
+	    ]]>
+	</insert> -->
+
+	<!-- 상품 목록 -->  
+ 	<select id="selectAdminProductList" resultMap="productResult" parameterType="java.util.Map">  
+		 
+		 SELECT a.* 
+			FROM(
+			        SELECT 
+			              row_number() over(order by product_no desc) as num,  
+			              p.product_no, 
+			              p.product_sort, 
+			              p.product_name, 
+			   		      p.origin_price,
+			              p.product_color, 
+			              p.cate_name,
+			              p.product_image,
+			              p.sale_price,
+			              c.cate_code     
+			        FROM s_product p, s_category c 
+			        WHERE c.cate_parent is null AND c.cate_code = p.cate_parent
+			    ) a 
+			WHERE num BETWEEN #{rowStart} AND #{rowEnd}
+			<include refid="adminProductsearch"></include>
+			<if test="origin_price != null and !origin_price.equals('')">
+			    	ORDER BY 
+			    		<choose>
+			    			<when test="origin_price == 'desc'">
+			    				origin_price desc
+			    			</when>
+			    			<otherwise>origin_price asc</otherwise>
+			    		</choose>
+			</if>
+	</select>
+	
+	<!-- 관리자 상품 목록 where절 추가 -->
+	<sql id="adminProductsearch">
+		<if test="product_name != null and !product_name.equals('')">
+			AND product_name LIKE '%' || #{product_name}|| '%'
+		</if>
+		<if test="product_sort != null and !product_sort.equals('all') and !product_sort.equals('')">
+			AND product_sort = #{product_sort}
+		</if>
+		<if test="cate_parent != null and !cate_parent.equals('')">
+			AND cate_code = #{cate_parent}
+		</if>
+	</sql>
+
+	<!-- 관리자 상품목록 검색결과 총 개수 -->
+	<select id="adminProductSearchCount" resultType="int" parameterType="java.util.Map">
+		SELECT count(product_no)
+		FROM s_product
+		WHERE product_no > 0
+		<include refid="adminProductsearch"></include>
+	</select>
+
+	<!-- 관리자 상품목록의 상품 총 개수 -->
+	<select id="selectAdminProductListCount" resultType="int">
+	   	SELECT count(product_no)
+	   	FROM s_product
+	</select>
+	
+	<!-- 상품 목록에서 상품 정보 추가 미완성-->
+	<insert id="insertNewProductDetail" parameterType="java.util.Map">
+		<selectKey resultType="int" keyProperty="product_detail_no" order="BEFORE">
+	    	select product_detail_no_seq.nextval from dual
+	    </selectKey>
+	    <![CDATA[
+			INSERT INTO s_product_detail(
+											product_detail_no, 
+											product_no, 
+											product_color,
+											cate_parent,
+											cate_name
+										)
+								 VALUES(
+									 		#{product_detail_no},
+									 		#{product_no},
+									 		#{product_color},
+									 		#{cate_code},
+									 		#{cate_name}
+								 		)
+		]]>
+	</insert>
+	
+	<!-- 추가된 상품 정보 조회 -->
+	<select id="selectAdminProductDetail" resultMap="productDetailResult">
+		SELECT product_no ,product_color, cate_name
+		FROM s_product_detail
+	</select>
+	
+	<!-- 관리자 메인에서 차트 -->
+	<!-- <select id="chart" resultMap="categoryResult">
+		SELECT c.cate_name 
+		FROM s_product p, s_category c 
+		WHERE p.cate_parent = c.cate_code 
+		AND c.cate_parent is null; 
+	</select> -->
+</mapper>

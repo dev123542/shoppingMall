@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.member">
+	<resultMap id="memberResult" type="MemberVO">
+	  <result property="member_id" column="member_id" />
+	  <result property="pw" column="pw" />
+	  <result property="email" column="email" />
+	  <result property="phone" column="phone" />
+	  <result property="member_credate" column="member_credate" />
+	  <result property="verify" column="verify" />
+	  <result property="authority" column="authority" />
+	</resultMap> 
+	
+	
+	<!-- 회원 가입 -->
+	<insert id="signUp"  parameterType="memberVO">
+		insert into s_member(member_id, member_name, pw, email, phone)
+		values(#{member_id}, #{member_name}, #{pw}, #{email}, #{phone})
+	</insert>
+	
+	<!-- 회원가입 아이디 중복확인 -->
+	<select id="idCheck" resultType="int" parameterType="String">
+		select count(*) from s_member where member_id = #{member_id}
+	</select>
+	
+	<!-- 로그인 -->
+    <select id="login" resultMap="memberResult" resultType="memberVO"  parameterType="memberVO">
+  		select member_id, pw from s_member where member_id = #{member_id}
+    </select>
+    
+    <!-- 아이디 찾기 -->
+   	<select id="findId" parameterType="memberVO" resultType="memberVO">
+		<![CDATA[
+			select member_id from s_member 
+			where member_name = #{member_name} and email = #{email}
+		]]>
+	</select>
+	
+    <!-- 회원 정보 수정 정보 보이기 -->
+	<select id="showInfo"  resultMap="memberResult" resultType="memberVO"  parameterType="String">
+		select member_id, pw, member_name, email, phone, member_credate
+		from s_member
+		where member_id = #{member_id}
+	</select>
+	
+	<!-- 회원 가입 수정에서 현재 비밀번호 비교 -->
+	<select id="pwCheck" resultMap="memberResult" resultType="memberVO"  parameterType="memberVO">
+		select pw from s_member where member_id = #{member_id}
+	</select>
+	
+	<!-- 회원 정보 수정 -->
+	<update id="updateMyInfo" parameterType="memberVO">
+		update s_member set pw = #{pw}, email = #{email}, phone = #{phone}
+		where member_id = #{member_id}
+	</update>
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="siginOut" parameterType="String">
+		delete from s_member where member_id = #{member_id}
+	</delete>
+	
+	<!-- 관리자 로그인 -->
+	<select id="adminLogin" resultMap="memberResult" resultType="memberVO"  parameterType="memberVO">
+		select * from s_authorities where member_id = #{member_id}
+	</select>
+</mapper>

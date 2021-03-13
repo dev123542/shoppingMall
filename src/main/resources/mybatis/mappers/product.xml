@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.product">
+<!-- 리절트 맵 정의 -->	
+	<!-- 상품정보 productResult  -->
+	<resultMap id="productResult" type="ProductVO">
+		<result property="product_no" column="product_no" />
+		<result property="product_name" column="product_name" />
+		<result property="product_sort" column="product_sort" />
+		<result property="cate_parent" column="cate_parent" />
+		
+		<result property="origin_price" column="origin_price" />
+		<result property="sale_price" column="sale_price" />
+		
+		<result property="product_color" column="product_color" />
+		<result property="product_content" column="product_content" />
+		<result property="product_image" column="product_image" />
+		<result property="product_credate" column="product_credate" />
+		<result property="discount_rate" column="discount_rate" />
+		
+	</resultMap>
+	<resultMap id="imageResult" type="ImageFileVO">
+		<result property="product_no" column="product_no" />
+		<result property="image_no" column="image_no" />
+		<result property="file_name" column="file_name" />
+		<result property="file_type" column="file_type" />
+		<result property="reg_id" column="reg_id" />
+		
+	</resultMap>
+	
+	
+	<!-- 상품정보조회 -->
+	<!-- <select id="selectProductDetail" resultMap="ProductResult" parameterType="String"  >
+	    <![CDATA[
+		    select product_name, origin_price, sale_price, product_color, product_content, product_image
+		    from s_product
+    	]]>
+	</select> -->
+	<!-- <select id="selectGoodsDetailImage" resultMap="imageResult" parameterType="String"  >
+	    <![CDATA[
+		    	select * from  t_goods_detail_image 
+		    	where  fileType!='main_image'
+				and goods_id=#{goods_id}
+    	]]>
+	</select> -->
+	
+	
+	<!-- 카테고리의 상품 목록 -->
+	<select id="newProductList" resultMap="productResult" parameterType="map"> 
+				select b.*
+					from (
+					      select rownum rnum, a.* 
+					      	from(
+					      		 select product_no, product_name, product_color, origin_price, sale_price, product_image, product_sort,  discount_rate
+					      		 from s_product
+ 								 <where>
+ 								 		<if test="sort == 'best'">product_sort = '베스트'</if>
+							      		<if test="sort == 'itbag'">product_sort = '잇백'</if>
+ 								 		<if test="sort != null and sort != 'best' and sort != 'itbag' and cate_name == null">cate_parent = #{sort}</if>
+ 								 		<if test="cate_name != null">cate_parent = #{sort} and cate_name = #{cate_name}</if>
+ 								 		
+ 								 		
+ 								 		<!-- 원본 -->
+ 								 		<!-- <if test="cate_name == null and sort == 'new'">product_sort = '신상품'</if>  -->
+ 								 		<!-- <if test="cate_name != null">cate_parent = #{sort} and cate_name = #{cate_name}</if>
+ 								 		
+ 								 		<if test="cate_name == null">cate_parent = #{sort}</if> 
+ 								 		<if test="cate_name != null">cate_parent = #{sort} and cate_name = #{cate_name}</if>
+										
+							      		<if test="sort != null and sort == 'best'">product_sort = '베스트'</if>
+							      		<if test="sort != null and sort == 'itbag'">product_sort = '잇백'</if>
+							      		<if test="sort != null">product_sort = '신상품' and cate_parent = #{sort} and cate_name = #{cate_name}</if>
+							      		<if test="sort != null and sort == '100'">cate_parent = 100</if>
+							      		
+							      		<if test="sort != null and sort == '200'">cate_parent = 200</if>
+							      		<if test="sort != null and sort == '300'">cate_parent = 300</if>
+							      		<if test="sort != null and sort == '400'">cate_parent = 400</if>
+							      		<if test="sort != null and sort == '500'">cate_parent = 500</if>
+							      		<if test="sort != null and sort == '600'">cate_parent = 600</if>
+							      		<if test="sort != null and sort == '700'">cate_parent = 700</if> -->
+							      </where> 
+						   
+					     		 order by
+					     		 <choose>
+					     		 	<when test="sort ==null and cate_name == null and s == 'best'">product_no desc</when>
+					     		 	<when test="s == 'asc'">origin_price asc</when>
+					     		 	<when test="s == 'desc'">origin_price desc</when>
+					     		 	<otherwise>product_credate desc</otherwise>
+					     		 	
+					     		 	
+					     		 	
+					     		 	<!-- 원본 -->
+					     		 	<!-- <when test="s == 'best'">product_no desc</when>
+					     		 	<when test="s == 'asc'">origin_price asc</when>
+					     		 	<when test="s == 'desc'">origin_price desc</when>
+					     		 	<otherwise>product_credate desc</otherwise> -->
+					     		 </choose>
+					      		)a )b
+				where b.rnum BETWEEN #{rowStart} and #{rowEnd}
+				<!-- 상품종류를 itbag으로 등록한 상품이 아직 없어서 상품이 안나옴
+				best:인기순정렬 - 매출액으로 정렬하려 했으나 지금은 데이터가 없어서 임시로 생성일 내림차순 정렬 해둠 -->
+	</select>
+	
+	<!-- 카테고리의 상품 총 개수 -->
+	<select id="newProductCount" resultType="int" parameterType="map">
+		select count(product_no)
+		from s_product 
+		<where>
+			<if test="sort == 'best'">product_sort = '베스트'</if>
+			<if test="sort == 'itbag'">product_sort = '잇백'</if>
+ 			<if test="sort != null and sort != 'best' and sort != 'itbag' and cate_name == null">cate_parent = #{sort}</if>
+ 			<if test="cate_name != null and sort != null">cate_parent = #{sort} and cate_name = #{cate_name}</if>
+		
+			<!-- 원본 -->
+			<!-- <if test="sort != null and sort == 'best'">product_sort = '베스트'</if>
+			<if test="sort != null and sort == 'itbag'">product_sort = '잇백'</if>
+			<if test="sort != null and sort == '100'">cate_parent = 100</if>
+			<if test="sort != null and sort == '200'">cate_parent = 200</if>
+			<if test="sort != null and sort == '300'">cate_parent = 300</if>
+			<if test="sort != null and sort == '400'">cate_parent = 400</if>
+			<if test="sort != null and sort == '500'">cate_parent = 500</if>
+			<if test="sort != null and sort == '600'">cate_parent = 600</if>
+			<if test="sort != null and sort == '700'">cate_parent = 700</if> -->
+		</where> 
+	</select>
+
+
+    <select id="selectProductDetail" resultMap="productResult" parameterType="String">
+        <!-- <![CDATA[
+		    select g.*,d.file_name from s_product g, s_file d
+	        where g.product_no=d.product_no
+	        and d.file_type='main image'
+	        and g.product_no=#{product_no}
+	        order by g.product_no
+    	]]> -->
+    	<![CDATA[
+		    select * from s_product
+	        where product_no=#{product_no}
+    	]]>
+    </select>
+    
+    <!-- (삭제할 생각) -->
+    <!-- <select id="selectProductDetailImage" resultMap="imageResult"   parameterType="String"  >
+	    <![CDATA[
+		    	select * from s_file 
+		    	where file_type!='main image'
+				and product_no=#{product_no}
+    	]]>
+	</select> -->
+	
+	<select id="selectCateName" resultMap="productResult" parameterType="String">
+		 <![CDATA[  
+		 select p.product_no, p.product_name, p.product_color, p.origin_price, p.sale_price, p.product_image, p.product_sort, c.cate_code, c.cate_name from s_product p
+		    inner join s_category c
+	        on p.cate_name = c.cate_name
+	        and p.cate_parent = c.cate_parent
+	        where p.cate_name = #{cate_name}
+	        and p.cate_parent = #{cate_parent}
+    	]]>
+	</select> 	
+
+</mapper>

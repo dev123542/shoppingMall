@@ -1,0 +1,208 @@
+@charset "UTF-8";
+
+/*------------------------------- 추가 -----------------------------------*/
+/* SMS_float_left
+SMS_relative
+SMS_main_prd_display
+SMS_main_display_prd
+SMS_main_display_title
+SMS_main_display_thumnail
+MS_prod_img_s
+prd-title
+tit
+sub
+main
+line
+MS_prod_img_s */
+
+/*------------------------------------------------------------------*/
+/* main-product css*/
+/*------------------------------------------------------------------*/
+
+.SMS_main_prd_display {
+  min-width: 720px;
+  max-width: 1200px;
+  margin:0 auto;
+}
+
+/* TITLE */
+.prd-title {
+	/* *overflow: hidden; */
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+.prd-title .tx {
+	display: inline-block;
+	/* *display: inline; */
+	zoom: 1;
+	line-height: 0;
+	font-size: 21px;
+	font-weight: 600;
+	letter-spacing: 3px;
+}
+
+.prd-title .tx .tit {
+	padding-left: 100px;
+	padding-right: 100px;
+}
+
+.prd-title .tx .tit > span {
+	position: relative;
+	line-height: 20px;
+	padding: 0 20px;
+	background: #fff;
+}
+
+.prd-title .line {
+	margin-top: -10px;
+	border-bottom: 1px solid transparent;
+	border-color: #ebebeb;
+}
+
+.prd-title .tx hr {
+	display: block;
+	border-bottom: 1px solid transparent;
+	border-bottom-color: #ddd;
+}
+
+.prd-title .sub {
+	font-size: 16px;
+	margin-top: 25px;
+}
+
+/* element style */
+.SMS_float_left {
+float:left;
+}
+
+.SMS_relative {
+position:relative;
+z-index: 0;
+}
+
+#SMS_main_prd_display .SMS_main_display_title {
+padding:30px 0 0;
+margin:0 auto;
+}
+
+.SMS_main_display_prd > ul > li {
+width:250px; 
+height:490px;
+margin:0 23px;
+border:0px solid #fff;
+}
+
+.SMS_main_display_prd > ul > li:hover {
+border:0px solid #ddd;
+}
+
+.SMS_main_display_prd > ul > li > ul {
+width:250px;
+margin:0 auto;
+}
+
+.SMS_main_display_prd > ul > li > ul > li.SMS_main_display_thumnail img {
+width:250px;
+margin-bottom:7px;
+}
+
+.SMS_main_display_prd > ul > li > ul > li.SMS_main_display_name {
+font-family:"verdana","arial";
+font-size:12px;
+color:#343434;
+}
+
+.SMS_main_display_prd > ul > li > ul > li.SMS_main_display_name strong {
+color:#333;
+}
+
+.SMS_main_display_prd > ul > li > ul > li.SMS_main_display_icon {
+line-height:0;
+margin:3px 0;
+}
+
+.SMS_main_display_prd > ul > li > ul > li .new_discount_icon {
+    display: block;
+    line-height: 0;
+    margin: 7px 0 9px;
+    font-size: .9rem;
+    font-weight: bold;
+}
+.SMS_main_display_prd > ul > li > ul > li .new_discount_icon.red {
+    color: tomato;
+    font-style: italic;
+}
+.SMS_main_display_prd > ul > li > ul > li .new_discount_icon.green {
+    color: green;
+}
+.SMS_main_display_prd > ul > li > ul > li .new_discount_icon.blue {
+    color: #002157;
+    font-style: italic;
+}
+
+.SMS_main_display_prd .SMS_main_display_price > .SMS_main_display_sales_p,
+.SMS_main_display_prd .SMS_main_display_price > .SMS_main_display_discount_p {
+font-size: 12px;
+font-weight: normal;
+color: #aaa;
+font-family: "verdana","arial";
+}
+
+.SMS_main_display_prd .SMS_main_display_price > .SMS_main_display_sales_p.strike {
+	font-size: 10px;
+	color: #ccc;
+	margin: 0 5px 0 0;
+	text-decoration: line-through;
+}
+
+.SMS_main_display_prd .SMS_main_display_price .ptype_01 > .SMS_main_display_sales_p {
+font-family:"verdana","arial";
+font-size:10px;
+color:#ccc;
+text-decoration: line-through;
+margin:0 5px 7px 0;
+}
+
+.SMS_main_display_prd .SMS_main_display_price .ptype_01 > .SMS_main_display_discount_p {
+font-family:"verdana","arial";
+padding:0;
+color:#aaa;
+font-weight:normal;
+margin:0 0 7px;
+}
+
+.SMS_main_display_prd .SMS_main_display_price .ptype_02 > .SMS_main_display_origin_p {
+/*�뚮퉬�먭�*/
+font-family:"verdana","arial";
+font-size:10px;
+color:#ccc;
+text-decoration: line-through;
+margin:0 5px 7px 0;
+}
+
+.SMS_main_display_prd .SMS_main_display_price .ptype_02 > .SMS_main_display_sales_p {
+/*�먮ℓ媛�*/
+font-family:"verdana","arial";
+padding:0;
+color:#aaa;
+font-weight:normal;
+margin:0 0 7px;
+}
+
+/* clear_both */
+.cb_clear:before,
+.cb_clear:after {
+content: '\0020';
+display: block;
+overflow: hidden;
+visibility: hidden;
+width: 0;
+height: 0;
+}
+.cb_clear:after {
+clear: both;
+}
+.cb_clear {
+zoom: 1;
+}

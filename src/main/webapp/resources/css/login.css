@@ -1,0 +1,542 @@
+@charset "UTF-8";
+/*------------------------------------------------------------------*/
+/* reset css*/
+/*------------------------------------------------------------------*/
+img {
+  border: none;
+  vertical-align: bottom;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+
+address {
+  font-style: normal;
+}
+
+/* 기존CSS */
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/*------------------------------------------------------------------*/
+/* core css*/
+/*------------------------------------------------------------------*/
+img {
+  border: none;
+  vertical-align: bottom;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+
+address {
+  font-style: normal;
+}
+
+.bld {
+  display: none;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+.clb {
+  clear: both;
+}
+
+a:visited {
+  color: #000;
+}
+
+.inbox {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.body__container {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+/*------------------------------------------------------------------*/
+/* loginForm css*/
+/*------------------------------------------------------------------*/
+.login_wrap {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 80px 20px;
+  font-size: 0.9rem;
+}
+
+.login_wrap .login_wrap_01 {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin-right: 2vw;
+  position: relative;
+  min-height: 400px;
+  background-color: #f2f2f2;
+  border: 1px solid #dedede;
+  padding: 40px 20px 20px;
+}
+
+.login_wrap .login_wrap_01::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 30px;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  width: 92%;
+  height: 1px;
+  background-color: #dedede;
+}
+
+.login_wrap .login_wrap_01 .login_title {
+  position: absolute;
+  top: -20px;
+  color: #fff;
+  background-color: #414141;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+}
+
+.login_wrap .login_wrap_01 .login_txt {
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+.login_wrap .login_wrap_01 .login_form form ul {
+  position: relative;
+}
+
+.login_wrap .login_wrap_01 .login_form form ul .login_idpw .login_id dt {
+  margin: 14px 0 4px;
+}
+
+.login_wrap .login_wrap_01 .login_form form ul .login_idpw .login_id dt .em {
+  color: #ff4500;
+  font-size: 1rem;
+}
+
+.login_wrap .login_wrap_01 .login_form form ul .login_idpw .login_id dd input {
+  color: #ababab;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  cursor: text;
+  text-indent: 8px;
+  padding: 10px 0;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #dedede;
+  -o-border-image: initial;
+     border-image: initial;
+}
+
+.login_wrap .login_wrap_01 .login_form form ul .login_idpw .login_pw dt {
+  margin: 14px 0 4px;
+}
+
+.login_wrap .login_wrap_01 .login_form form ul .login_idpw .login_pw dt .em {
+  color: #ff4500;
+  font-size: 1rem;
+}
+
+.login_wrap .login_wrap_01 .login_form form ul .login_idpw .login_pw dd input {
+  color: #ababab;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  cursor: text;
+  text-indent: 8px;
+  padding: 10px 0;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #dedede;
+  -o-border-image: initial;
+     border-image: initial;
+}
+
+.login_wrap .login_wrap_01 .login_form form ul .security_log {
+  margin-top: 6px;
+}
+
+.login_wrap .login_wrap_01 .login_form form ul .login_submit {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.login_wrap .login_wrap_01 .login_form form ul .login_submit a {
+  position: relative;
+}
+
+.login_wrap .login_wrap_01 .login_form form ul .login_submit a input, .login_wrap .login_wrap_01 .login_form form ul .login_submit a button {
+  color: #fff;
+  background-color: #002157;
+  padding: 12px 80px;
+  border-width: 0;
+  border-style: none;
+  border-color: none;
+  font-size: .8rem;
+  font-weight: bold;
+  white-space: pre;
+  cursor: pointer;
+}
+
+.login_wrap .login_wrap_01 .login_form .sns_logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  font-size: 0.8rem;
+}
+
+.login_wrap .login_wrap_01 .login_form .sns_logo a {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  border: 1px solid #dedede;
+  background-color: #fff;
+  color: #414141;
+  padding: 6px 2px 6px 0;
+  margin: 4px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  white-space: pre;
+}
+
+.login_wrap .login_wrap_01 .login_form .sns_logo a img {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.login_wrap .login_wrap_01 .login_form .btns {
+  position: relative;
+  margin-top: 20px;
+}
+
+.login_wrap .login_wrap_01 .login_form .btns::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  width: 100%;
+  height: 1px;
+  background-color: #dedede;
+}
+
+.login_wrap .login_wrap_01 .login_form .btns dl {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-top: 20px;
+}
+
+.login_wrap .login_wrap_01 .login_form .btns dl dt {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.login_wrap .login_wrap_01 .login_form .btns dl dd button {
+  color: #111;
+  background-color: #fff;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0 4px;
+  font-size: .9rem;
+  padding: 4px 12px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #dedede;
+  cursor: pointer;
+}
+
+.login_wrap .login_wrap_02 {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin-left: 2vw;
+  position: relative;
+  min-height: 400px;
+  background-color: #f2f2f2;
+  border: 1px solid #dedede;
+  padding: 40px 20px 20px;
+}
+
+.login_wrap .login_wrap_02::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 30px;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  width: 92%;
+  height: 1px;
+  background-color: #dedede;
+}
+
+.login_wrap .login_wrap_02 .signup_title {
+  position: absolute;
+  top: -20px;
+  color: #fff;
+  background-color: #414141;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+}
+
+.login_wrap .login_wrap_02 .signup_txt {
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+.login_wrap .login_wrap_02 .signup_txt .br::after {
+  content: '';
+  display: block;
+  padding-bottom: 10px;
+}
+
+.login_wrap .login_wrap_02 .signup_input {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.login_wrap .login_wrap_02 .signup_input a {
+  position: relative;
+}
+
+.login_wrap .login_wrap_02 .signup_input a input, .login_wrap .login_wrap_02 .signup_input a button {
+  color: #fff;
+  background-color: #002157;
+  padding: 12px 80px;
+  border-width: 0;
+  border-style: none;
+  border-color: none;
+  font-size: .8rem;
+  font-weight: bold;
+  white-space: pre;
+  cursor: pointer;
+}
+
+.login_banner .login_banner_box ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.login_banner .login_banner_box ul li {
+  outline: 2px solid #dedede;
+  margin: 10px 14px;
+}

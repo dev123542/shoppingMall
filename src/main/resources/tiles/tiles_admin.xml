@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<!-- 기본 레이아웃 -->
+	<definition name="baseLayout3" template="/WEB-INF/views/admin/common/layout.jsp">
+		<put-attribute name="title" value="관리자" />
+		<put-attribute name="header" value="/WEB-INF/views/admin/common/header.jsp" />
+		<put-attribute name="side" value="/WEB-INF/views/admin/common/side.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/admin/common/footer.jsp" />
+	</definition>
+	
+	<!-- 팝업창 레이아웃 -->
+	<definition name="emptyLayout" template="/WEB-INF/views/admin/common/emptyLayout.jsp">
+		<put-attribute name="content" value="" />
+	</definition>
+	
+	<!-- 관리자 메인 -->
+ 	<definition name="/admin/main/main" extends="baseLayout3">
+		<put-attribute name="body" value="/WEB-INF/views/admin/main/main.jsp" />
+	</definition>
+	
+	<!-- 메뉴에 맞는 화면 보여주기 -->
+	<definition name="/admin/*/*" extends="baseLayout3">
+		<put-attribute name="body" value="/WEB-INF/views/admin/{1}/{2}.jsp" />
+	</definition>
+	
+	<!-- 상품 목록 -->
+	<definition name="/admin/product/productList" extends="baseLayout3">
+		<put-attribute name="body" value="/WEB-INF/views/admin/product/productList.jsp" />
+	</definition>
+	
+	<!-- 상품 목록에서 정보 추가 창 띄우기 -->
+ 	<definition name="/admin/product/addNewModelForm" extends="emptyLayout">
+		<put-attribute name="content" value="/WEB-INF/views/admin/product/addNewModelForm.jsp" />
+	</definition> 
+</tiles-definitions>
+
+

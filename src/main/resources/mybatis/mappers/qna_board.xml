@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="mapper.qna">
+	<resultMap id="qnaResult" type="QnaVO">
+	  <result property="bno" column="bno" />
+	  <result property="title" column="title" />
+	  <result property="content" column="contentl" />
+	  <result property="writer" column="writer" />
+	  <result property="regdate" column="regdate" />
+	</resultMap>
+	
+   <!-- 게시판 글 작성 -->
+	<insert id="insert" parameterType="QnaVO" useGeneratedKeys="true" keyProperty="bno">
+	    <selectKey keyProperty="bno" resultType="int" order="BEFORE">
+	    	SELECT qna_board_seq.NEXTVAL FROM DUAL
+	    </selectKey>
+	    INSERT INTO qna_board(    BNO 
+	   					       , TITLE 
+	   					       , CONTENT 
+	   					       , WRITER  )
+	                  VALUES(    #{bno}
+	                 		   , #{title}
+	                 		   , #{content}
+	                 		   , #{writer}  )
+   
+    </insert>
+    
+    <!-- 파일 첨부 -->
+     <insert id="insertFile" parameterType="hashMap">
+		INSERT INTO qna_file(
+			FILE_NO,
+			BNO,
+			ORG_FILE_NAME,
+			STORED_FILE_NAME,
+			FILE_SIZE
+		)VALUES(
+			seq_qna_file_no.NEXTVAL,
+			#{BNO},
+			#{ORG_FILE_NAME},
+			#{STORED_FILE_NAME},
+			#{FILE_SIZE}
+		)
+    </insert>
+    
+    <!-- 첨부파일 조회 -->
+	<select id="selectFileList" parameterType="int" resultType="hashMap">
+		SELECT FILE_NO,
+			   ORG_FILE_NAME,
+			   ROUND(FILE_SIZE/1024,1) AS FILE_SIZE
+		  FROM qna_file
+		 WHERE BNO = #{BNO}
+		   AND DEL_GB = 'N'
+		   ORDER BY FILE_NO ASC
+	</select>
+	
+	<!-- 첨부파일 다운 -->
+	<select id="selectFileInfo" parameterType="hashMap" resultType="hashMap">
+		SELECT 
+			STORED_FILE_NAME,
+			ORG_FILE_NAME
+		FROM qna_file
+		WHERE FILE_NO = #{FILE_NO}
+	</select>
+	
+	<!-- 첨부파일 수정 -->
+	<update id="updateFile" parameterType="hashMap">
+    	UPDATE MP_FILE SET
+    	DEL_GB = 'Y'
+    	WHERE FILE_NO = #{FILE_NO}
+    </update>
+    
+   <select id="read" parameterType="int" resultType="QnaVO">
+		SELECT	BNO
+			  , TITLE
+			  , CONTENT
+			  , WRITER
+			  , REGDATE
+		 FROM qna_board
+		 WHERE BNO = #{bno}
+	</select>
+	
+	<update id="update" parameterType="QnaVO">
+		UPDATE qna_board
+		   SET TITLE    =   #{title},
+		   	   CONTENT  =   #{content}
+		 WHERE BNO = #{bno} 
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM qna_board
+		 WHERE BNO = #{bno}
+	</delete>
+	
+	<select id="listPage" resultType="QnaVO" parameterType="SearchCriteria">
+		SELECT  BNO, 
+		        TITLE, 
+		        CONTENT,
+		        WRITER, 
+		        REGDATE,
+		        HIT
+		 FROM ( 
+		        SELECT BNO, 
+		               TITLE, 
+		               CONTENT, 
+		               WRITER, 
+		               REGDATE,
+		               HIT, 
+		               ROW_NUMBER() OVER(ORDER BY BNO DESC) AS RNUM
+		         FROM qna_board
+		         WHERE 1=1 
+		         	<include refid="search"></include>
+		                       ) MP
+		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY BNO DESC
+	</select>
+	
+	<select id="listCount" parameterType="SearchCriteria" resultType="int">
+		SELECT COUNT(BNO)
+		   FROM qna_board
+		   WHERE 1=1
+		<include refid="search"></include>	
+		   AND BNO > 0
+	</select>
+	
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">AND TITLE LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'c'.toString()">AND CONTENT LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'w'.toString()">AND WRITER LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'tc'.toString()">AND (TITLE LIKE '%' || #{keyword} || '%') or (CONTENT LIKE '%' || #{keyword} || '%')</if>
+		</if>
+	</sql>
+	
+	 <!-- 게시판 조회수 -->
+    <update id="boardHit" parameterType="int">
+    	UPDATE qna_board SET
+    	HIT = HIT+1
+    	WHERE BNO = #{bno}
+    </update>
+</mapper>
+
