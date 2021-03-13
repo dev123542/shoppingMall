@@ -16,39 +16,9 @@
 <html>
 
 <head>
-<link href="${path}/resources/css/productDetail.css" rel="stylesheet" type="text/css" media="screen">
-    <style>
-        #layer {
-            z-index: 2;
-            position: absolute;
-            top: 0px;
-            left: 0px;
-            width: 100%;
-            font:10px
-        }
-
-        #popup {
-            z-index: 3;
-            position: fixed;
-            text-align: center;
-            left: 50%;
-            top: 45%;
-            width: 300px;
-            height: 200px;
-            background-color: #fff;
-            border: 3px solid #87cb42;
-            font:10px
-        }
-
-        #close {
-            z-index: 4;
-            float: right;
-        }
-
-    </style>
-    
-    <script src="${path }/resources/js/jquery-1.6.2.min.js"></script> <!-- tab_container JS --> 
-   <script src="${path }/resources/js/tabs.js"></script> <!-- tab_container JS --> 
+<link href="${path}/resources/css/productDetail.css" rel="stylesheet" type="text/css" media="screen"/>
+<script src="${path }/resources/js/jquery-1.6.2.min.js"></script> <!-- tab_container JS --> 
+<script src="${path }/resources/js/tabs.js"></script> <!-- tab_container JS --> 
     
     <script type="text/javascript">
         function add_cart(product_no) {
@@ -132,6 +102,88 @@
         } */
 
     </script>
+    <style>
+        #layer {
+            z-index: 2;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            font:10px
+        }
+
+        #popup {
+            z-index: 3;
+            position: fixed;
+            text-align: center;
+            left: 50%;
+            top: 45%;
+            width: 300px;
+            height: 200px;
+            background-color: #fff;
+            border: 3px solid #87cb42;
+            font:10px
+        }
+
+        #close {
+            z-index: 4;
+            float: right;
+        }
+
+		/* tab */
+		#tab_container_wrap .tabs{
+			  margin-top: 80px;
+			  margin-bottom: 30px;
+			  display: -webkit-box;
+			  display: -ms-flexbox;
+			  display: flex;
+			  -webkit-box-orient: horizontal;
+			  -webkit-box-direction: normal;
+			      -ms-flex-flow: row nowrap;
+			          flex-flow: row nowrap;
+			  -webkit-box-pack: space-evenly;
+			      -ms-flex-pack: space-evenly;
+			          justify-content: space-evenly;
+			  position: relative;
+			  border: 1px solid #bcb8b9;
+		}
+		
+		#tab_container_wrap ul.tabs .tab-01 a{
+			color: #fff;
+		}
+		#tab_container_wrap ul.tabs .tab-01{
+			background: #002157;
+		}
+		#tab_container_wrap ul.tabs li:nth-child(-n+5){
+			border-right: 1px solid #bcb8b9;
+		}
+		
+		#tab_container_wrap ul.tabs li{
+		    width: 271px;
+		    height: 42px;
+		    text-align: center;
+		    line-height: 40px;
+		}
+		
+		.tab_content ul.tabs .tabs-02 a,
+		.tab_content ul.tabs .tabs-03 a,
+		.tab_content ul.tabs .tabs-04 a,
+		.tab_content ul.tabs .tabs-05 a{
+			color: #fff;
+		}
+		.tab_content ul.tabs .tabs-02,
+		.tab_content ul.tabs .tabs-03,
+		.tab_content ul.tabs .tabs-04,
+		.tab_content ul.tabs .tabs-05{
+			background: #002157;
+		}
+		
+		.service_information_img{
+			text-align:center;
+		}
+    </style>
+    
+    
 </head>
 
 <body>
@@ -275,17 +327,17 @@
 </h3>
  -->        
         <!-- 내용 들어 가는 곳 -->
-	<div id="container">
+	<div id="tab_container_wrap">
 		<ul class="tabs">
-			<li><a href="#tab1">상품상세정보</a></li>
+			<li class="tab-01"><a href="#tab1" >상품상세정보</a></li>
 			<li><a href="#tab2">배송,교환,반품안내</a></li>
 			<li><a href="#tab3">코디상품</a></li>
 			<li><a href="#tab4">상품후기</a></li>
 			<li><a href="#tab5">Q&amp;A</a></li>
 		</ul>
-		<div class="tab_container">
+		<div class="detailinfo">
 			<div class="tab_content" id="tab1">
-				<h4>상품상세정보</h4>				
+				<!-- <h4>상품상세정보</h4> -->				
 				<%-- <p>${fn:replace(product.product_image,crcn,br)}</p> --%>
 				
 				<!--  since2004.jpg 경로 찾기 -->
@@ -298,19 +350,53 @@
 				<%-- </c:forEach> --%>
 			</div>
 			<div class="tab_content" id="tab2">
-				<h4>배송,교환,반품안내</h4>
+				<ul class="tabs">
+					<li><a href="#tab1">상품상세정보</a></li>
+					<li class="tabs-02"><a href="#tab2">배송,교환,반품안내</a></li>
+					<li><a href="#tab3">코디상품</a></li>
+					<li><a href="#tab4">상품후기</a></li>
+					<li><a href="#tab5">Q&amp;A</a></li>
+				</ul>
+				<div class="service_information">
+					<div class="service_information_img">
+						<img src="${path }/resources/image/whosbagnotice.jpg" alt="배송안내이미지" />
+					</div>
+				</div>
+				
+				<!-- <h4>배송,교환,반품안내</h4> -->
 				 <%-- <p>${fn:replace(product.product_writer_intro,crcn,br) }</p>  --%>
 			</div>
-			<div class="tab_content" id="tab3">
-				<h4>코디상품</h4>
-				<%-- <p>${fn:replace(product.product_contents_order,crcn,br)}</p> --%> 
-			</div>
+			<%-- <div class="tab_content" id="tab3">
+				<ul class="tabs">
+						<li><a href="#tab1">상품상세정보</a></li>
+						<li><a href="#tab2">배송,교환,반품안내</a></li>
+						<li class="tabs-03"><a href="#tab3">코디상품</a></li>
+						<li><a href="#tab4">상품후기</a></li>
+						<li><a href="#tab5">Q&amp;A</a></li>
+				</ul>
+				<!-- <h4>코디상품</h4> -->
+				<p>${fn:replace(product.product_contents_order,crcn,br)}</p> 
+			</div> --%>
 			<div class="tab_content" id="tab4">
-				<h4>상품후기</h4>
+				<ul class="tabs">
+						<li><a href="#tab1">상품상세정보</a></li>
+						<li><a href="#tab2">배송,교환,반품안내</a></li>
+						<li><a href="#tab3">코디상품</a></li>
+						<li class="tabs-04"><a href="#tab4">상품후기</a></li>
+						<li><a href="#tab5">Q&amp;A</a></li>
+				</ul>
+				<!-- <h4>상품후기</h4> -->
 				 <%-- <p>${fn:replace(product.product_publisher_comment ,crcn,br)}</p> --%> 
 			</div>
 			<div class="tab_content" id="tab5">
-				<h4>Q&amp;A</h4>
+				<ul class="tabs">
+						<li><a href="#tab1">상품상세정보</a></li>
+						<li><a href="#tab2">배송,교환,반품안내</a></li>
+						<li><a href="#tab3">코디상품</a></li>
+						<li><a href="#tab4">상품후기</a></li>
+						<li class="tabs-05"><a href="#tab5">Q&amp;A</a></li>
+				</ul>
+				<!-- <h4>Q&amp;A</h4> -->
 				<%-- <p>${fn:replace(product.product_recommendation,crcn,br) }</p> --%>
 			</div>
 		</div>
