@@ -16,11 +16,12 @@
 <html>
 
 <head>
+<link href="${path}/resources/css/style.css" rel="stylesheet" type="text/css" />
 <link href="${path}/resources/css/productDetail.css" rel="stylesheet" type="text/css" media="screen"/>
-<script src="${path }/resources/js/jquery-1.6.2.min.js"></script> <!-- tab_container JS --> 
+<script src="${path }/resources/js/jquery-3.5.1.min.js"></script>
+<!--<script src="${path }/resources/js/jquery-1.6.2.min.js"></script>  tab_container JS --> 
 <script src="${path }/resources/js/tabs.js"></script> <!-- tab_container JS --> 
-    
-    <script type="text/javascript">
+<script type="text/javascript">
         function add_cart(product_no) {
         	if(${member != null}){
 	            $.ajax({
@@ -101,8 +102,51 @@
             formObj.submit();
         } */
 
-    </script>
-    <style>
+        
+	 // 상품 후기 관련 제이쿼리        
+	 $(document).ready(function(){
+		 
+		  // 후기 작성 팝업창
+	      $('.write-review').on('click', function(){
+	            $('.review-dimm').addClass('on');
+	      });
+	      
+	      // 후기 작성 닫힘 버튼
+	       $('.review-close').on('click', function(){
+	          $('.review-dimm').removeClass('on');
+	      }); 
+	
+	      // input file
+	       $('.file-label').click(function (e) {
+	        e.preventDefault();
+	        $('#review-file').click();
+	      }); 
+	      
+	      // 후기를 눌렀을 때
+	       $('.review-top').on('click', function(e){
+	
+	        e.preventDefault();
+	
+	        var reviewBottom = $(this).next('#review-bottom');
+	        var li = $(this).parents('.review-list-item');
+	        var prv = $(this).find('.p-prv');
+	
+	        if(reviewBottom.css('display') == 'none'){
+	          reviewBottom.css('display', 'block');
+	          li.css('background', '#f5f5f5');
+	          prv.css('opacity', '0');
+	
+	        } else{
+	          reviewBottom.css('display', 'none');
+	          li.css('background', 'none');
+	          prv.css('opacity', '1');
+	        }
+	        
+	      }); 
+	        
+	  });       
+</script>
+<style>
         #layer {
             z-index: 2;
             position: absolute;
@@ -182,11 +226,8 @@
 		.service_information_img{
 			text-align:center;
 		}
-    </style>
-    
-    
+</style>   
 </head>
-
 <body>
 <div class="product_container">
 <div class="productDetail inbox">
@@ -386,6 +427,202 @@
 						<li class="tabs-04"><a href="#tab4">상품후기</a></li>
 						<li><a href="#tab5">Q&amp;A</a></li>
 				</ul>
+				
+				<!-- 후기 목록 -->
+				  <section class="review-container">
+				    <div class="review-wrap">
+				      <div class="write-review-box"> 
+<!--				        <div class="write-review" onclick="write()">후기 쓰기</div>-->
+ 				        <a href="#" class="write-review">후기 쓰기</a>
+ 				        <a href="javascript:" onClick="javascript:imagePopup('close');"> </a>
+				      </div>
+				
+				      <!-- 후기 -->
+				      <div class="review-list-box">
+				        <ul class="review-list">
+				          <li class="review-list-item">
+				            <!-- 후기 한 줄 컨테이너 -->
+				            <div class="review-box">
+				              <!-- 바로 보여지는 글 부분 -->
+				              <div class="review-top">
+				                <a href="#" class="review-top-inner">
+				                  <div class="review-top-info">
+				                    <!-- 별점 -->
+				                    <span class="cell-rating">
+				                      <span class="rating">
+				                        <span class="rating-item">
+				                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" style="width: 100%;height: 100%;">
+				                            <path d="M4.146 3.95L0 4.583l3 3.075L2.292 12 6 9.95 9.708 12 9 7.658l3-3.075-4.146-.633L6 0z" style="fill: rgb(212, 212, 212);fill-rule: evenodd;stroke: rgb(212, 212, 212);stroke-width: 0;"></path>
+				                          </svg>
+				                        </span>
+				                        <span class="rating-item">
+				                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" style="width: 100%;height: 100%;">
+				                            <path d="M4.146 3.95L0 4.583l3 3.075L2.292 12 6 9.95 9.708 12 9 7.658l3-3.075-4.146-.633L6 0z" style="fill: rgb(212, 212, 212);fill-rule: evenodd;stroke: rgb(212, 212, 212);stroke-width: 0;"></path>
+				                          </svg>
+				                        </span>
+				                        <span class="rating-item">
+				                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" style="width: 100%;height: 100%;">
+				                            <path d="M4.146 3.95L0 4.583l3 3.075L2.292 12 6 9.95 9.708 12 9 7.658l3-3.075-4.146-.633L6 0z" style="fill: rgb(212, 212, 212);fill-rule: evenodd;stroke: rgb(212, 212, 212);stroke-width: 0;"></path>
+				                          </svg>
+				                        </span>
+				                        <span class="rating-item">
+				                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" style="width: 100%;height: 100%;">
+				                            <path d="M4.146 3.95L0 4.583l3 3.075L2.292 12 6 9.95 9.708 12 9 7.658l3-3.075-4.146-.633L6 0z" style="fill: rgb(212, 212, 212);fill-rule: evenodd;stroke: rgb(212, 212, 212);stroke-width: 0;"></path>
+				                          </svg>
+				                        </span>
+				                        <span class="rating-item">
+				                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" style="width: 100%;height: 100%;">
+				                            <path d="M4.146 3.95L0 4.583l3 3.075L2.292 12 6 9.95 9.708 12 9 7.658l3-3.075-4.146-.633L6 0z" style="fill: rgb(212, 212, 212);fill-rule: evenodd;stroke: rgb(212, 212, 212);stroke-width: 0;"></path>
+				                          </svg>
+				                        </span>
+				                      </span>
+				                    </span>
+				                    <!-- 작성 회원 아이디 -->
+				                    <span class="cell-reviewer">
+				                      <span>회원</span>
+				                    </span>
+				                    <!-- 작성일 -->
+				                    <div class="cell-date">
+				                      <span>2021.03.03</span>
+				                    </div>
+				                  </div>
+				                  <p class="review-title">
+				                    <span class="review-area">너무 좋아요</span>
+				                    <span class="photo-prv">
+				                      <span class="photo-box">
+				                        <span class="photo">
+				                          <img src="${path }/resources/image/group01-banner02.jpg" alt="" class="p-load p-prv" />
+				                        </span>
+				                      </span>
+				                    </span>
+				                  </p>
+				                </a>
+				              </div>
+				              <!-- review-top end -->
+				    
+				              <!-- 후기를 누르면 자세히 나오는 내용 -->
+				              <div id="review-bottom">
+				                <div class="review-detail">
+				                  <ul class="review-detail-list">
+				                    <li class="review-detail-item">
+				                      <div class="detail-photo-box">
+				                        <div class="photo">
+				                          <img src="${path }/resources/image/group01-banner02.jpg" alt="" class="p-load p-prv" />
+				                        </div>
+				                      </div>
+				                    </li>
+				                  </ul>
+				                </div>
+				              </div>
+				              <!-- review-bottom end -->
+				            </div>
+				          </li>
+				    
+				          <!-- 2 -->
+				          <li class="review-list-item">
+				            <!-- 후기 한 줄 컨테이너 -->
+				            <div class="review-box">
+				              <!-- 바로 보여지는 글 부분 -->
+				              <div class="review-top">
+				                <a href="#" class="review-top-inner">
+				                  <div class="review-top-info">
+				                    <!-- 별점 -->
+				                    <span class="cell-rating">
+				                      <span class="rating">
+				                        <span class="rating-item">
+				                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" style="width: 100%;height: 100%;">
+				                            <path d="M4.146 3.95L0 4.583l3 3.075L2.292 12 6 9.95 9.708 12 9 7.658l3-3.075-4.146-.633L6 0z" style="fill: rgb(212, 212, 212);fill-rule: evenodd;stroke: rgb(212, 212, 212);stroke-width: 0;"></path>
+				                          </svg>
+				                        </span>
+				                        <span class="rating-item">
+				                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" style="width: 100%;height: 100%;">
+				                            <path d="M4.146 3.95L0 4.583l3 3.075L2.292 12 6 9.95 9.708 12 9 7.658l3-3.075-4.146-.633L6 0z" style="fill: rgb(212, 212, 212);fill-rule: evenodd;stroke: rgb(212, 212, 212);stroke-width: 0;"></path>
+				                          </svg>
+				                        </span>
+				                        <span class="rating-item">
+				                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" style="width: 100%;height: 100%;">
+				                            <path d="M4.146 3.95L0 4.583l3 3.075L2.292 12 6 9.95 9.708 12 9 7.658l3-3.075-4.146-.633L6 0z" style="fill: rgb(212, 212, 212);fill-rule: evenodd;stroke: rgb(212, 212, 212);stroke-width: 0;"></path>
+				                          </svg>
+				                        </span>
+				                        <span class="rating-item">
+				                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" style="width: 100%;height: 100%;">
+				                            <path d="M4.146 3.95L0 4.583l3 3.075L2.292 12 6 9.95 9.708 12 9 7.658l3-3.075-4.146-.633L6 0z" style="fill: rgb(212, 212, 212);fill-rule: evenodd;stroke: rgb(212, 212, 212);stroke-width: 0;"></path>
+				                          </svg>
+				                        </span>
+				                        <span class="rating-item">
+				                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" style="width: 100%;height: 100%;">
+				                            <path d="M4.146 3.95L0 4.583l3 3.075L2.292 12 6 9.95 9.708 12 9 7.658l3-3.075-4.146-.633L6 0z" style="fill: rgb(212, 212, 212);fill-rule: evenodd;stroke: rgb(212, 212, 212);stroke-width: 0;"></path>
+				                          </svg>
+				                        </span>
+				                      </span>
+				                    </span>
+				                    <!-- 작성 회원 아이디 -->
+				                    <span class="cell-reviewer">
+				                      <span>회원</span>
+				                    </span>
+				                    <!-- 작성일 -->
+				                    <div class="cell-date">
+				                      <span>2021.03.03</span>
+				                    </div>
+				                  </div>
+				                  <p class="review-title">
+				                    <span class="review-area">너무 좋아요</span>
+				                    <span class="photo-prv">
+				                      <span class="photo-box">
+				                        <span class="photo">
+				                          <img src="${path }/resources/image/group01-banner01.jpg" alt="" class="p-load p-prv" />
+				                        </span>
+				                      </span>
+				                    </span>
+				                  </p>
+				                </a>
+				              </div>
+				              <!-- review-top end -->
+				    
+				              <!-- 후기를 누르면 자세히 나오는 내용 -->
+				              <div id="review-bottom">
+				                <div class="review-detail">
+				                  <ul class="review-detail-list">
+				                    <li class="review-detail-item">
+				                      <div class="detail-photo-box">
+				                        <div class="photo">
+				                          <img src="${path }/resources/image/group01-banner01.jpg" alt="" class="p-load p-prv" />
+				                        </div>
+				                      </div>
+				                    </li>
+				                  </ul>
+				                </div>
+				              </div>
+				              <!-- review-bottom end -->
+				            </div>
+				          </li>
+				    
+				        </ul>
+				      </div>
+				      <!-- review-list-box end -->
+				    </div>
+				  </section>
+				  <!-- review section end -->
+				
+				<!-- paging start -->
+         	<%-- <div class="SMS_list_paging"> 
+	          <ul class="paging">
+	          	<c:if test="${pageMaker.prev }">
+	            	<li class="first"><a href="newProductList.do${pageMaker.makeQuery(pageMaker.startPage - 1) }"><img src="${path }/resources/image/paging_first.gif" alt="맨 처음 페이지 화살표"></a></li>
+	            </c:if>
+	            <c:forEach var="idx" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" >
+ 	            	<li><a href="newProductList.do${pageMaker.makeQuery(idx) }&s=${s}&sort=${sort}">${idx }</a></li>
+ 	            	<li><a href="newProductList.do${pageMaker.makeQuery(idx) }&sort=${sort}">${idx }</a></li>
+	            </c:forEach>
+	            <!-- <li class="now"><a href="/shop/shopbrand.html?type=P&amp;xcode=036&amp;sort=&amp;page=2">2</a></li> -->
+	            <c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
+	            	<li class="last"><a href="newProductList.do${pageMaker.makeQuery(pageMaker.endPage + 1) }"><img src="${path }/resources/image/paging_end.gif" alt="마지막 페이지 화살표"></a></li>
+	          	</c:if>
+	          </ul>
+	       </div> --%>
+	 <!-- paging end -->
+				
+				
 				<!-- <h4>상품후기</h4> -->
 				 <%-- <p>${fn:replace(product.product_publisher_comment ,crcn,br)}</p> --%> 
 			</div>
@@ -397,12 +634,13 @@
 						<li><a href="#tab4">상품후기</a></li>
 						<li class="tabs-05"><a href="#tab5">Q&amp;A</a></li>
 				</ul>
+				
 				<!-- <h4>Q&amp;A</h4> -->
 				<%-- <p>${fn:replace(product.product_recommendation,crcn,br) }</p> --%>
 			</div>
 		</div>
 	</div>
- 
+	
 	<div class="clear"></div>
 	<div id="layer" style="visibility: hidden">
 		<div id="popup">
@@ -419,7 +657,122 @@
     </div>
     
     <!-- 상품 후기 작성 팝업 -->
-    
+    <form action="" method="post" enctype="multipart/form-data">
+    <div class="review-dimm">
+      <section class="review">
+      <div class="review-title">
+          <h3>후기 작성</h3>
+          <button type="button" class="review-close">
+              <span>창닫기</span>
+          </button>
+      </div>  
+      <!-- 상품 -->
+      <div class="review-product-area">
+          <div class="review-product">
+            <div class="review-box">
+              <div class="review-img-box">
+                <div class="review-img">
+                  <img src="../images/city.png" alt="후기 작성 상품 이미지" />
+                </div>
+              </div>
+              <div class="review-product-info">
+                <strong>Dailylike</strong>
+                <span>상품이름</span>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <!-- 별점 -->
+      <div class="rating-box">
+        <strong>상품은 어떠셨나요?</strong>
+        <div class="rating">
+          <span class="count5">
+
+            <span class="rating-star">
+              <span class="rating-star-count">
+                <svg class="rating-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" style="width: 100%; height: 100%;">
+                  <path class="rating-path" d="M4.146 3.95L0 4.583l3 3.075L2.292 12 6 9.95 9.708 12 9 7.658l3-3.075-4.146-.633L6 0z" style="fill: rgb(212, 212, 212); fill-rule: evenodd; stroke: rgb(212, 212, 212); stroke-width: 0;"></path>
+                </svg>
+              </span>
+            </span>
+            <span class="rating-star">
+              <span class="rating-star-count">
+                <svg class="rating-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" style="width: 100%; height: 100%;">
+                  <path class="rating-path" d="M4.146 3.95L0 4.583l3 3.075L2.292 12 6 9.95 9.708 12 9 7.658l3-3.075-4.146-.633L6 0z" style="fill: rgb(212, 212, 212); fill-rule: evenodd; stroke: rgb(212, 212, 212); stroke-width: 0;"></path>
+                </svg>
+              </span>
+            </span>
+            <span class="rating-star">
+              <span class="rating-star-count">
+                <svg class="rating-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" style="width: 100%; height: 100%;">
+                  <path class="rating-path" d="M4.146 3.95L0 4.583l3 3.075L2.292 12 6 9.95 9.708 12 9 7.658l3-3.075-4.146-.633L6 0z" style="fill: rgb(212, 212, 212); fill-rule: evenodd; stroke: rgb(212, 212, 212); stroke-width: 0;"></path>
+                </svg>
+              </span>
+            </span>
+            <span class="rating-star">
+              <span class="rating-star-count">
+                <svg class="rating-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" style="width: 100%; height: 100%;">
+                  <path class="rating-path" d="M4.146 3.95L0 4.583l3 3.075L2.292 12 6 9.95 9.708 12 9 7.658l3-3.075-4.146-.633L6 0z" style="fill: rgb(212, 212, 212); fill-rule: evenodd; stroke: rgb(212, 212, 212); stroke-width: 0;"></path>
+                </svg>
+              </span>
+            </span>
+            <span class="rating-star">
+              <span class="rating-star-count">
+                <svg class="rating-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" style="width: 100%; height: 100%;">
+                  <path class="rating-path" d="M4.146 3.95L0 4.583l3 3.075L2.292 12 6 9.95 9.708 12 9 7.658l3-3.075-4.146-.633L6 0z" style="fill: rgb(212, 212, 212); fill-rule: evenodd; stroke: rgb(212, 212, 212); stroke-width: 0;"></path>
+                </svg>
+              </span>
+            </span>
+
+          </span>
+        </div>
+
+
+      </div>
+
+      <!-- 사진첨부 -->
+      <div class="review-file-box">
+        <div class="input-file">
+          <!-- 사진 미리보기 처음엔 ul이 없다가 사진을 올리면 나타나고 x버튼을 누르면 사진 삭제 처리하기 -->
+          <ul class="file-list">
+            <li>
+              <span class="prv-box">
+                <span class="prv-img"></span>
+              </span>
+              <button type="button" class="prv-remove">삭제</button>
+            </li>
+          </ul>
+          <div class="input-file-box">
+            <label for="" class="file-label">사진첨부</label>
+            <input type="file" id="review-file" accept="image/*" multiple />
+          </div>
+        </div>
+      </div>
+
+      <!-- 후기 내용 -->
+      <div class="review-txt-box">
+        <textarea name="" class="review-txt" cols="80" rows="6" placeholder="최소 15자 이상 작성 해 주세요."></textarea>
+      </div>
+
+      <!-- 후기 안내 -->
+      <div class="review-info-box">
+        <p>
+          <span>
+            품질, 배송, 문의 응대 등 상품의 구매 경험을 알려주세요.
+          </span>
+          상품과 무관한 사진 및 욕설/비속어가 포함된 후기는 고지 없이 삭제될 수 있습니다.<br />
+          구매하신 상품을 직접 촬영한 사진만 후기 등록 및 마일리지 지급이 가능합니다.<br />
+          해당 사유들로 인해 고지없이 리뷰 및 사진이 삭제되는 경우, 지급 마일리지 일부 또는 전액이 회수될 수 있습니다.<br />
+          상품 반품/취소 시, 리뷰 삭제 및 지급 마일리지가 회수 됩니다.
+				</p>
+      </div>
+      
+      <button type="button" class="review-button">작성하기</button>
+      </section>
+    </div>
+  </form>
+  <!-- review form end -->  
     
 </div>	<!-- productDetail -->
 </div> <!-- product_container -->
