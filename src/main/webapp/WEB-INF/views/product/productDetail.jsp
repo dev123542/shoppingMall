@@ -113,7 +113,12 @@
 	      
 	      // 후기 작성 닫힘 버튼
 	       $('.review-close').on('click', function(){
-	          $('.review-dimm').removeClass('on');
+	    	   $('.rating a').removeClass('on');
+	           $("#review_star").val('');
+	           $('.prv-img > img').remove();
+	           $('#file-item').css('display', 'none');
+	           $('.review-txt').val('');
+	    	   $('.review-dimm').removeClass('on');
 	      }); 
 	
 	      // input file
@@ -143,8 +148,41 @@
 	        }
 	        
 	      }); 
+	      
+	      // 후기 작성 별점
+	       $( ".rating a" ).click(function() {
+	           $(this).parent().children("a").removeClass("on");
+	           $(this).addClass("on").prevAll("a").addClass("on");
+	           var starRate = $(this).attr('id');
+	           $("#review_star").val(starRate);
+	               return false;
+	       });
 	        
 	  });       
+        
+    // 후기 사진 등록 썸네일
+	function setThumbnail(event){
+		var reader = new FileReader();
+			
+		reader.onload = function(event){
+      		var li = document.getElementById("file-item");
+			var img = document.createElement("img");
+			img.setAttribute("src", event.target.result);
+      		li.style.display = "block";
+			document.querySelector(".prv-img").appendChild(img);
+		};
+		
+		reader.readAsDataURL(event.target.files[0]);
+	}
+
+  // 썸네일 이미지 지우기
+  function deleteThumbnail(){
+    var li = document.getElementById("file-item");
+    var img = document.querySelector(".prv-img > img");
+    img.remove();
+    li.style.display = "none";
+  }      
+      
 </script>
 <style>
         #layer {
@@ -451,29 +489,12 @@
 				                    <span class="cell-rating">
 				                      <span class="rating">
 				                        <span class="rating-item">
-				                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" style="width: 100%;height: 100%;">
-				                            <path d="M4.146 3.95L0 4.583l3 3.075L2.292 12 6 9.95 9.708 12 9 7.658l3-3.075-4.146-.633L6 0z" style="fill: rgb(212, 212, 212);fill-rule: evenodd;stroke: rgb(212, 212, 212);stroke-width: 0;"></path>
-				                          </svg>
-				                        </span>
-				                        <span class="rating-item">
-				                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" style="width: 100%;height: 100%;">
-				                            <path d="M4.146 3.95L0 4.583l3 3.075L2.292 12 6 9.95 9.708 12 9 7.658l3-3.075-4.146-.633L6 0z" style="fill: rgb(212, 212, 212);fill-rule: evenodd;stroke: rgb(212, 212, 212);stroke-width: 0;"></path>
-				                          </svg>
-				                        </span>
-				                        <span class="rating-item">
-				                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" style="width: 100%;height: 100%;">
-				                            <path d="M4.146 3.95L0 4.583l3 3.075L2.292 12 6 9.95 9.708 12 9 7.658l3-3.075-4.146-.633L6 0z" style="fill: rgb(212, 212, 212);fill-rule: evenodd;stroke: rgb(212, 212, 212);stroke-width: 0;"></path>
-				                          </svg>
-				                        </span>
-				                        <span class="rating-item">
-				                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" style="width: 100%;height: 100%;">
-				                            <path d="M4.146 3.95L0 4.583l3 3.075L2.292 12 6 9.95 9.708 12 9 7.658l3-3.075-4.146-.633L6 0z" style="fill: rgb(212, 212, 212);fill-rule: evenodd;stroke: rgb(212, 212, 212);stroke-width: 0;"></path>
-				                          </svg>
-				                        </span>
-				                        <span class="rating-item">
-				                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" style="width: 100%;height: 100%;">
-				                            <path d="M4.146 3.95L0 4.583l3 3.075L2.292 12 6 9.95 9.708 12 9 7.658l3-3.075-4.146-.633L6 0z" style="fill: rgb(212, 212, 212);fill-rule: evenodd;stroke: rgb(212, 212, 212);stroke-width: 0;"></path>
-				                          </svg>
+				                        <!-- 별 하나를 반복해서? -->
+				                          <span id="1">★</span>
+					                      <span id="2">★</span>
+					                      <span id="3">★</span>
+					                      <span id="4">★</span>
+					                      <span id="5">★</span>	
 				                        </span>
 				                      </span>
 				                    </span>
@@ -530,30 +551,12 @@
 				                    <span class="cell-rating">
 				                      <span class="rating">
 				                        <span class="rating-item">
-				                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" style="width: 100%;height: 100%;">
-				                            <path d="M4.146 3.95L0 4.583l3 3.075L2.292 12 6 9.95 9.708 12 9 7.658l3-3.075-4.146-.633L6 0z" style="fill: rgb(212, 212, 212);fill-rule: evenodd;stroke: rgb(212, 212, 212);stroke-width: 0;"></path>
-				                          </svg>
-				                        </span>
-				                        <span class="rating-item">
-				                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" style="width: 100%;height: 100%;">
-				                            <path d="M4.146 3.95L0 4.583l3 3.075L2.292 12 6 9.95 9.708 12 9 7.658l3-3.075-4.146-.633L6 0z" style="fill: rgb(212, 212, 212);fill-rule: evenodd;stroke: rgb(212, 212, 212);stroke-width: 0;"></path>
-				                          </svg>
-				                        </span>
-				                        <span class="rating-item">
-				                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" style="width: 100%;height: 100%;">
-				                            <path d="M4.146 3.95L0 4.583l3 3.075L2.292 12 6 9.95 9.708 12 9 7.658l3-3.075-4.146-.633L6 0z" style="fill: rgb(212, 212, 212);fill-rule: evenodd;stroke: rgb(212, 212, 212);stroke-width: 0;"></path>
-				                          </svg>
-				                        </span>
-				                        <span class="rating-item">
-				                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" style="width: 100%;height: 100%;">
-				                            <path d="M4.146 3.95L0 4.583l3 3.075L2.292 12 6 9.95 9.708 12 9 7.658l3-3.075-4.146-.633L6 0z" style="fill: rgb(212, 212, 212);fill-rule: evenodd;stroke: rgb(212, 212, 212);stroke-width: 0;"></path>
-				                          </svg>
-				                        </span>
-				                        <span class="rating-item">
-				                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" style="width: 100%;height: 100%;">
-				                            <path d="M4.146 3.95L0 4.583l3 3.075L2.292 12 6 9.95 9.708 12 9 7.658l3-3.075-4.146-.633L6 0z" style="fill: rgb(212, 212, 212);fill-rule: evenodd;stroke: rgb(212, 212, 212);stroke-width: 0;"></path>
-				                          </svg>
-				                        </span>
+					                        <span id="1">★</span>
+						                    <span id="2">★</span>
+						                    <span id="3">★</span>
+						                    <span id="4">★</span>
+						                    <span id="5">★</span>
+					                    </span>
 				                      </span>
 				                    </span>
 				                    <!-- 작성 회원 아이디 -->
@@ -657,7 +660,9 @@
     </div>
     
     <!-- 상품 후기 작성 팝업 -->
-    <form action="" method="post" enctype="multipart/form-data">
+    <form action="${path }/product/writeReview" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="product_no" value="${product.product_no }" />
+    
     <div class="review-dimm">
       <section class="review">
       <div class="review-title">
@@ -672,12 +677,12 @@
             <div class="review-box">
               <div class="review-img-box">
                 <div class="review-img">
-                  <img src="../images/city.png" alt="후기 작성 상품 이미지" />
+                  <img src="${path}/thumbnails.do?product_no=${product.product_no}&fileName=${product.product_image}" alt="후기 작성 상품 이미지" />
                 </div>
               </div>
               <div class="review-product-info">
-                <strong>Dailylike</strong>
-                <span>상품이름</span>
+                <strong>${product.product_name }</strong>
+                <span>${product.product_color }</span>
               </div>
             </div>
           </div>
@@ -687,45 +692,12 @@
       <div class="rating-box">
         <strong>상품은 어떠셨나요?</strong>
         <div class="rating">
-          <span class="count5">
-
-            <span class="rating-star">
-              <span class="rating-star-count">
-                <svg class="rating-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" style="width: 100%; height: 100%;">
-                  <path class="rating-path" d="M4.146 3.95L0 4.583l3 3.075L2.292 12 6 9.95 9.708 12 9 7.658l3-3.075-4.146-.633L6 0z" style="fill: rgb(212, 212, 212); fill-rule: evenodd; stroke: rgb(212, 212, 212); stroke-width: 0;"></path>
-                </svg>
-              </span>
-            </span>
-            <span class="rating-star">
-              <span class="rating-star-count">
-                <svg class="rating-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" style="width: 100%; height: 100%;">
-                  <path class="rating-path" d="M4.146 3.95L0 4.583l3 3.075L2.292 12 6 9.95 9.708 12 9 7.658l3-3.075-4.146-.633L6 0z" style="fill: rgb(212, 212, 212); fill-rule: evenodd; stroke: rgb(212, 212, 212); stroke-width: 0;"></path>
-                </svg>
-              </span>
-            </span>
-            <span class="rating-star">
-              <span class="rating-star-count">
-                <svg class="rating-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" style="width: 100%; height: 100%;">
-                  <path class="rating-path" d="M4.146 3.95L0 4.583l3 3.075L2.292 12 6 9.95 9.708 12 9 7.658l3-3.075-4.146-.633L6 0z" style="fill: rgb(212, 212, 212); fill-rule: evenodd; stroke: rgb(212, 212, 212); stroke-width: 0;"></path>
-                </svg>
-              </span>
-            </span>
-            <span class="rating-star">
-              <span class="rating-star-count">
-                <svg class="rating-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" style="width: 100%; height: 100%;">
-                  <path class="rating-path" d="M4.146 3.95L0 4.583l3 3.075L2.292 12 6 9.95 9.708 12 9 7.658l3-3.075-4.146-.633L6 0z" style="fill: rgb(212, 212, 212); fill-rule: evenodd; stroke: rgb(212, 212, 212); stroke-width: 0;"></path>
-                </svg>
-              </span>
-            </span>
-            <span class="rating-star">
-              <span class="rating-star-count">
-                <svg class="rating-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" style="width: 100%; height: 100%;">
-                  <path class="rating-path" d="M4.146 3.95L0 4.583l3 3.075L2.292 12 6 9.95 9.708 12 9 7.658l3-3.075-4.146-.633L6 0z" style="fill: rgb(212, 212, 212); fill-rule: evenodd; stroke: rgb(212, 212, 212); stroke-width: 0;"></path>
-                </svg>
-              </span>
-            </span>
-
-          </span>
+		  <a href="#" id="1">★</a>
+          <a href="#" id="2">★</a>
+          <a href="#" id="3">★</a>
+          <a href="#" id="4">★</a>
+          <a href="#" id="5">★</a>
+          <input type="hidden" id="review_star" name="review_star" value="" />
         </div>
 
 
@@ -736,23 +708,23 @@
         <div class="input-file">
           <!-- 사진 미리보기 처음엔 ul이 없다가 사진을 올리면 나타나고 x버튼을 누르면 사진 삭제 처리하기 -->
           <ul class="file-list">
-            <li>
+            <li id="file-item">
               <span class="prv-box">
                 <span class="prv-img"></span>
               </span>
-              <button type="button" class="prv-remove">삭제</button>
+              <button type="button" class="prv-remove" onclick="deleteThumbnail()">삭제</button>
             </li>
           </ul>
           <div class="input-file-box">
             <label for="" class="file-label">사진첨부</label>
-            <input type="file" id="review-file" accept="image/*" multiple />
+            <input type="file" name="review-file" id="review-file" accept="image/*" onchange="setThumbnail(event)"  />
           </div>
         </div>
       </div>
 
       <!-- 후기 내용 -->
       <div class="review-txt-box">
-        <textarea name="" class="review-txt" cols="80" rows="6" placeholder="최소 15자 이상 작성 해 주세요."></textarea>
+        <textarea name="review-txt" class="review-txt" cols="80" rows="6" placeholder="최소 15자 이상 작성 해 주세요."></textarea>
       </div>
 
       <!-- 후기 안내 -->

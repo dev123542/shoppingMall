@@ -1390,9 +1390,14 @@ padding: 0;
   width: 10px;
   height: 10px;
   line-height: 10px;
-  display: inline-block;
   position: relative;
   vertical-align: top;
+/*   width: 10px;
+  height: 10px;
+  line-height: 10px;
+  display: inline-block;
+  position: relative;
+  vertical-align: top; */
 }
 
 .review-top-info .cell-reviewer {
@@ -1472,7 +1477,7 @@ padding: 0;
   max-width: 100%;
   width: 100%;
   min-height: 1px;
-  transition: opacity 0.2s ease-in-out;
+  /* transition: opacity 0.2s ease-in-out; */
 }
 
 /* 후기를 누르면 자세히 나오는 부분 */
@@ -1608,7 +1613,7 @@ padding: 0;
 .review-box {
   position: relative;
   min-height: 48px;
-  /* padding-left: 56px; */
+  padding-left: 56px;
 }
 
 .review-img-box {
@@ -1647,6 +1652,7 @@ padding: 0;
   line-height: 16px;
   color: #000;
   text-align: left;
+  font-weight: 600;
 }
 
 .review-product-info span {
@@ -1684,7 +1690,20 @@ padding: 0;
   justify-content: space-between;
 }
 
-.rating-star-count {
+.rating a{
+  font-size:22px;
+  letter-spacing:0;
+  display:inline-block;
+  margin-left:5px;
+  color:#ccc;
+  text-decoration:none;  
+}
+
+.rating a.on{
+  color:#ff4800;
+}
+
+/* .rating-star-count {
   display: block;
   width: 20px;
   height: 20px;
@@ -1698,11 +1717,11 @@ padding: 0;
 }
 
 .rating-path {
-  fill: rgb(212, 212, 212); /* 채워진 색: rgb(255, 72, 0)*/
+  fill: rgb(212, 212, 212); 채워진 색: rgb(255, 72, 0)
   fill-rule: evenodd;
   stroke: rgb(212, 212, 212);
   stroke-width: 0;
-}
+} */
 
 /* 사진 첨부 */
 .review-file-box {
@@ -1715,13 +1734,14 @@ padding: 0;
   display: flex;
 }
 
-.review-file-box .file-list li {
+.review-file-box .file-list #file-item {
   position: relative;
   width: 76px;
   height: 76px;
   margin-right: 5px;
   background: #303033;
   overflow: hidden;
+  display: none;
 }
 
 .review-file-box .prv-box {
@@ -1742,6 +1762,10 @@ padding: 0;
   /* background-image: ; */
   background: no-repeat 50% 50%;
   background-size: cover;
+}
+
+.review-file-box .prv-img img{
+  width:100%;
 }
 
 .review-file-box .prv-remove {
