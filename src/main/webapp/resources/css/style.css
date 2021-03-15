@@ -1263,3 +1263,597 @@ line-height: 30px;
 padding: 0;
 }
 /*------------------------------------------------------------------------- 장바구니 페이지 끝	-------------------------------------------------------------------------*/
+
+
+/*-----------------------------------------------------
+				review list (후기 댓글)
+----------------------------------------------------- */
+.review-txt-box {
+  padding: 0;
+  border-top: 1px solid #d4d4d4;
+  vertical-align: top;
+}
+
+.review-txt {
+  display: block;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+  padding: 17px 50px 0 0;
+  border: transparent;
+  background: transparent;
+  outline: none;
+  font-size: 14px;
+  line-height: 22px;
+  color: #000;
+  vertical-align: top;
+  box-sizing: border-box;
+  resize: none;
+}
+
+/* 후기 안내 */
+.review-info-box {
+  padding: 20px 0;
+  border-top: 1px solid #d4d4d4;
+  vertical-align: top;
+}
+
+.review-info-box p {
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.review-info-box span {
+  display: block;
+  margin-bottom: 4px;
+  color: #ff4800;
+  font-weight: 600;
+}
+
+/* 작성 버튼 */
+.review-button {
+  position: absolute;
+  width: 120px;
+  height: 48px;
+  line-height: 48px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  background: #303033;
+  border: 0;
+  bottom: 20px;
+  right: 20px;
+  outline: none;
+  cursor: pointer;
+}
+
+/* 후기 목록 */
+/* .review-container{
+  max-width: 1000px; 
+  margin:0 auto;
+} */
+
+
+.review-wrap{
+  margin-top: -20px;
+  padding-top: 120px;  
+}
+
+.write-review-box{
+  position: relative;
+  padding-right: 200px;
+  border-bottom: 4px solid #000;  
+}
+
+.write-review{
+  position: absolute;
+  bottom: 15px;
+  background: none;
+  font-weight: 700;
+  font-size: 14px;
+  color: #303033;
+  text-decoration: underline;
+  right: -2px;
+  background: none;
+  font-weight: 700;
+}
+
+.review-list-box .review-list .review-list-item {
+  position: relative;
+  min-height: 110px;
+  padding: 15px 0 10px;
+  box-sizing: border-box;
+  border-top: 1px solid #e4e4e4;
+}
+
+.review-top .review-top-inner {
+  display: block;
+  text-decoration: none;
+}
+
+.review-top .review-top-info {
+  position: relative;
+  padding: 6px 10px 10px;
+  color: #000;
+  font-size: 11px;
+  line-height: 15px;
+  font-weight: 300;
+}
+
+.review-top .review-top-info .cell-rating {
+  display: inline-block;
+  padding: 3px 0 0;
+}
+
+.rating-item {
+  width: 10px;
+  height: 10px;
+  line-height: 10px;
+  position: relative;
+  vertical-align: top;
+/*   width: 10px;
+  height: 10px;
+  line-height: 10px;
+  display: inline-block;
+  position: relative;
+  vertical-align: top; */
+}
+
+.review-top-info .cell-reviewer {
+  display: inline-block;
+  padding: 2px 5px 0;
+  vertical-align: top;
+}
+
+.review-top-info .cell-date {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+}
+
+.review-top-inner .review-title {
+  padding: 0 190px 0 10px;
+}
+
+.review-title .review-area {
+  display: inline-block;
+  width: 94%;
+  height: 22px;
+  padding: 1px 0;
+  font-size: 14px;
+  line-height: 22px;
+  color: #000;
+  text-align: left;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  overflow: hidden;
+}
+
+.review-title .photo-prv {
+  display: block;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 37px;
+/*   top: 50px; */
+  right: 10px;
+}
+
+.review-title .photo-box {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+}
+
+.review-title .photo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  background: no-repeat 50% 50%;
+  background-size: cover;
+}
+
+/* 목록에서 작은 이미지 */
+.p-load.p-prv {
+  opacity: 1;
+  height: auto;
+}
+
+/* 후기를 누르면 이미지가 커짐 */
+.p-load {
+  opacity: 0;
+  max-width: 100%;
+  width: 100%;
+  min-height: 1px;
+  /* transition: opacity 0.2s ease-in-out; */
+}
+
+/* 후기를 누르면 자세히 나오는 부분 */
+#review-bottom {
+  display: none;
+  /* display: block; */
+  background: #f5f5f5;
+  position: relative;
+}
+
+#review-bottom .review-detail {
+  padding: 0 10px;
+}
+
+#review-bottom .review-detail-list {
+  padding: 10px 0;
+}
+
+#review-bottom .review-detail-item {
+  /* float: left; */
+  width: 400px;
+  height: 400px;
+}
+
+#review-bottom .detail-photo-box {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+}
+
+#review-bottom .detail-photo-box .photo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  background: no-repeat 50% 50%;
+  background-size: cover;
+}
+
+/*---------------------------------------
+		write review popup (후기 작성)
+---------------------------------------*/
+.review-dimm {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 99999; /*header보다 더 큰 숫자로*/
+  display: none;
+}
+
+.review-dimm.on {
+  display: block;
+}
+
+.review-dimm .review {
+  width: 680px;
+  min-height: 666px;
+  /* height: 360px; */
+  background: #fff;
+  padding: 0 20px 88px;
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /*가로세로모두*/
+}
+
+.review-dimm .review-title h3 {
+  font-weight: 600;
+  color: #000;
+  padding: 46px 0 8px;
+  border-bottom: 2px solid #303033;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.review-close {
+  width: 60px;
+  height: 60px;
+  border: 0;
+  background: none;
+  padding: 0;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  cursor: pointer;
+  outline: none;
+}
+
+.review-close > span {
+  display: block;
+  text-indent: -99999em;
+}
+
+.review-close:before,
+.review-close:after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: #000;
+  position: absolute;
+  top: 50%;
+  right: 0%;
+}
+
+.review-close::before {
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.review-close::after {
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+/* 상품 */
+.review-product {
+  padding: 20px 0;
+  vertical-align: top;
+}
+
+.review-box {
+  position: relative;
+  min-height: 48px;
+  padding-left: 56px;
+}
+
+.review-img-box {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.review-img {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  align-items: center;
+}
+
+.review-img img {
+  width: 100%;
+}
+
+.review-product-info {
+  font-size: 11px;
+  line-height: 16px;
+  color: #000;
+  text-align: left;
+}
+
+.review-product-info strong {
+  font-size: 11px;
+  line-height: 16px;
+  color: #000;
+  text-align: left;
+  font-weight: 600;
+}
+
+.review-product-info span {
+  display: -webkit-box;
+  overflow: hidden;
+  max-height: 32px;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* 별점 */
+.rating-box {
+  padding: 20px 0;
+  border-top: 1px solid #d4d4d4;
+  vertical-align: top;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.rating-box strong {
+  font-weight: 700;
+  color: #000;
+  margin-right: 6px;
+}
+
+.rating {
+  float: right;
+}
+
+.count5 {
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.rating a{
+  font-size:22px;
+  letter-spacing:0;
+  display:inline-block;
+  margin-left:5px;
+  color:#ccc;
+  text-decoration:none;  
+}
+
+.rating a.on{
+  color:#ff4800;
+}
+
+/* .rating-star-count {
+  display: block;
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+  cursor: pointer;
+}
+
+.rating-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.rating-path {
+  fill: rgb(212, 212, 212); 채워진 색: rgb(255, 72, 0)
+  fill-rule: evenodd;
+  stroke: rgb(212, 212, 212);
+  stroke-width: 0;
+} */
+
+/* 사진 첨부 */
+.review-file-box {
+  padding: 20px 0;
+  border-top: 1px solid #d4d4d4;
+  vertical-align: top;
+}
+
+.review-file-box .file-list {
+  display: flex;
+}
+
+.review-file-box .file-list #file-item {
+  position: relative;
+  width: 76px;
+  height: 76px;
+  margin-right: 5px;
+  background: #303033;
+  overflow: hidden;
+  display: none;
+}
+
+.review-file-box .prv-box {
+  display: block;
+  width: 100%;
+  padding-top: 100%;
+}
+
+.review-file-box .prv-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  /* background-image: ; */
+  background: no-repeat 50% 50%;
+  background-size: cover;
+}
+
+.review-file-box .prv-img img{
+  width:100%;
+}
+
+.review-file-box .prv-remove {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  background: rgba(0, 0, 0, 0.6);
+  text-indent: -99999em;
+  outline: none;
+  cursor: pointer;
+}
+
+.review-file-box .prv-remove::before,
+.review-file-box .prv-remove::after {
+  content: '';
+  display: block;
+  width: 51%;
+  height: 1px;
+  background: #fff;
+  position: absolute;
+  top: 50%;
+  right: 22%;
+}
+
+.review-file-box .prv-remove::before {
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.review-file-box .prv-remove::after {
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+.review-file-box .input-file {
+  display: flex;
+  letter-spacing: -4px;
+}
+
+.input-file-box label {
+  display: block;
+  position: relative;
+  width: 76px;
+  height: 76px;
+  padding: 0;
+  box-sizing: border-box;
+  background: #303033;
+  font-size: 13px;
+  line-height: 100em;
+  color: #fff;
+  text-align: left;
+  letter-spacing: 0;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.input-file-box label::before,
+.input-file-box label::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 0;
+  background: #fff;
+  pointer-events: none;
+  content: '';
+}
+
+.input-file-box label::before {
+  width: 1px;
+  height: 22px;
+  margin-top: -11px;
+}
+
+.input-file-box label::after {
+  width: 22px;
+  height: 1px;
+  margin-left: -11px;
+}
+
+.input-file-box input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
