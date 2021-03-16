@@ -40,5 +40,15 @@
 					)
 	</insert>
 	
+	<!-- 후기 목록 -->
+	<select id="selectReview" resultMap="reviewResult" parameterType="int">
+		SELECT row_number() over(order by review_no desc), 
+			   writer, 
+			   review_txt, 
+			   review_file, 
+			   reg_date 
+		FROM review
+		WHERE product_no = #{product_no}
+	</select>
 	
 </mapper>

@@ -103,11 +103,9 @@ public class ReviewController {
 			}
 		}
 
-		
 		message= "<script>";
 		message += " alert('상품 등록 성공');";
-		//message +=" location.href='"+multipartRequest.getContextPath()+"/product/productDetail.do';";
-		message +="history.back();";
+		message +=" history.go(-2); ";
 		message +=("</script>");
 		resEntity = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 		
