@@ -108,7 +108,16 @@
 		 
 		  // 후기 작성 팝업창
 	      $('.write-review').on('click', function(){
-	            $('.review-dimm').addClass('on');
+	    	  // 회원만 작성할 수 있게 함
+		      var ms = '${sessionScope.member}';
+			  
+			   if(ms == ''){
+				  alert('회원만 작성할 수 있습니다.');
+		          location.href = '${path}/member/loginForm.do';
+			  }else{ 
+		          $('.review-dimm').addClass('on');
+				  
+			   } 
 	      });
 	      
 	      // 후기 작성 닫힘 버튼
@@ -121,33 +130,33 @@
 	    	   $('.review-dimm').removeClass('on');
 	      }); 
 	
-	      // input file
+	      // input file 실행
 	       $('.file-label').click(function (e) {
 	        e.preventDefault();
-	        $('#review-file').click();
+	        $('#review_file').click();
 	      }); 
 	      
-	      // 후기를 눌렀을 때
+	      // 후기 쓰기를 눌렀을 때
 	       $('.review-top').on('click', function(e){
-	
-	        e.preventDefault();
-	
+	        
+	    	   e.preventDefault();
+	        
 	        var reviewBottom = $(this).next('#review-bottom');
 	        var li = $(this).parents('.review-list-item');
 	        var prv = $(this).find('.p-prv');
-	
-	        if(reviewBottom.css('display') == 'none'){
-	          reviewBottom.css('display', 'block');
-	          li.css('background', '#f5f5f5');
-	          prv.css('opacity', '0');
-	
-	        } else{
-	          reviewBottom.css('display', 'none');
-	          li.css('background', 'none');
-	          prv.css('opacity', '1');
-	        }
+	 
+		    if(reviewBottom.css('display') == 'none'){
+		       reviewBottom.css('display', 'block');
+		       li.css('background', '#f5f5f5');
+		       prv.css('opacity', '0');
+		
+		    } else{
+		       reviewBottom.css('display', 'none');
+		       li.css('background', 'none');
+		       prv.css('opacity', '1');
+		    }
 	        
-	      }); 
+	     }); 
 	      
 	      // 후기 작성 별점
 	       $( ".rating a" ).click(function() {
@@ -167,6 +176,7 @@
 		reader.onload = function(event){
       		var li = document.getElementById("file-item");
 			var img = document.createElement("img");
+			
 			img.setAttribute("src", event.target.result);
       		li.style.display = "block";
 			document.querySelector(".prv-img").appendChild(img);
@@ -174,7 +184,6 @@
 		
 		reader.readAsDataURL(event.target.files[0]);
 	}
-
   // 썸네일 이미지 지우기
   function deleteThumbnail(){
     var li = document.getElementById("file-item");
@@ -182,7 +191,7 @@
     img.remove();
     li.style.display = "none";
   }      
-      
+  
 </script>
 <style>
         #layer {
@@ -659,8 +668,11 @@
         <input type="hidden" name="isLogOn" id="isLogOn" value="${isLogOn}"/>
     </div>
     
-    <!-- 상품 후기 작성 팝업 -->
-    <form action="${path }/product/writeReview" method="post" enctype="multipart/form-data">
+    
+      <!------------------------------------
+                 후기 작성 레이어 팝업            
+      ------------------------------------->
+    <form action="${path }/review/writeReview" method="post" enctype="multipart/form-data" id="reviewForm">
     <input type="hidden" name="product_no" value="${product.product_no }" />
     
     <div class="review-dimm">
@@ -688,7 +700,7 @@
           </div>
       </div>
 
-      <!-- 별점 -->
+	  <!-- 별점 -->
       <div class="rating-box">
         <strong>상품은 어떠셨나요?</strong>
         <div class="rating">
@@ -697,13 +709,13 @@
           <a href="#" id="3">★</a>
           <a href="#" id="4">★</a>
           <a href="#" id="5">★</a>
-          <input type="hidden" id="review_star" name="review_star" value="" />
+          <input type="hidden" id="review_star" name="review_star" value="0" />
         </div>
 
 
       </div>
 
-      <!-- 사진첨부 -->
+      <!-- 사진 첨부 -->
       <div class="review-file-box">
         <div class="input-file">
           <!-- 사진 미리보기 처음엔 ul이 없다가 사진을 올리면 나타나고 x버튼을 누르면 사진 삭제 처리하기 -->
@@ -716,8 +728,8 @@
             </li>
           </ul>
           <div class="input-file-box">
-            <label for="" class="file-label">사진첨부</label>
-            <input type="file" name="review-file" id="review-file" accept="image/*" onchange="setThumbnail(event)"  />
+            <label for="review_file" class="file-label">사진첨부</label>
+            <input type="file" name="review_file" id="review_file" accept="image/*" onchange="setThumbnail(event)"  />
           </div>
         </div>
       </div>
@@ -740,7 +752,7 @@
 		</p>
       </div>
       
-      <button type="button" class="review-button">작성하기</button>
+      <button type="submit" class="review-button">작성하기</button>
       </section>
     </div>
   </form>

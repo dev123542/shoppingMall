@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.review">
+	<resultMap id="reviewResult" type="ReviewVO">
+	  <result property="review_no" column="review_no" />
+	  <result property="writer" column="writer" />
+	  <result property="review_txt" column="review_txt" />
+	  <result property="review_star" column="review_star" />
+	  <result property="review_file" column="review_file" />
+	  <result property="product_no" column="product_no" />
+	  <result property="reg_date" column="reg_date" />
+	</resultMap> 
+	
+	
+	<!-- 후기 작성 -->
+	<insert id="writerReview" parameterType="java.util.Map">
+		<selectKey resultType="int" keyProperty="review_no" order="BEFORE">
+			SELECT review_no_seq.nextval FROM dual
+		</selectKey>
+		INSERT INTO review(
+							review_no,
+							writer,
+							review_txt,
+							review_star,
+							review_file,
+							product_no,
+							reg_date
+					)
+					VALUES(
+							#{review_no},
+							#{writer},
+							#{review_txt},
+							#{review_star},
+							#{review_file},
+							#{product_no},
+							SYSDATE
+					)
+	</insert>
+	
+	
+</mapper>

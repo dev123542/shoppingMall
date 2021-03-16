@@ -19,6 +19,7 @@
 	<typeAlias type="com.shoppingMall.order.vo.OrderVO"  alias="OrderVO" />
 	<typeAlias type="com.shoppingMall.order.vo.OrderDetailsVO"  alias="OrderDetailsVO" />
 	<typeAlias type="com.shoppingMall.order.vo.OrderListVO"  alias="OrderListVO" />
+	<typeAlias type="com.shoppingMall.review.vo.ReviewVO"  alias="ReviewVO" />
   </typeAliases>
 </configuration>
 
