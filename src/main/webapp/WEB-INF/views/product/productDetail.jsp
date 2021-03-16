@@ -126,7 +126,7 @@
 	           $("#review_star").val('');
 	           $('.prv-img > img').remove();
 	           $('#file-item').css('display', 'none');
-	           $('.review-txt').val('');
+	           $('.review_txt').val('');
 	    	   $('.review-dimm').removeClass('on');
 	      }); 
 	
@@ -736,7 +736,7 @@
 
       <!-- 후기 내용 -->
       <div class="review-txt-box">
-        <textarea name="review-txt" class="review-txt" cols="80" rows="6" placeholder="최소 15자 이상 작성 해 주세요."></textarea>
+        <textarea name="review_txt" class="review_txt" cols="80" rows="6" placeholder="최소 15자 이상 작성 해 주세요."></textarea>
       </div>
 
       <!-- 후기 안내 -->

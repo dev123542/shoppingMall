@@ -17,8 +17,8 @@
 	
 	<!-- 회원 가입 -->
 	<insert id="signUp"  parameterType="memberVO">
-		insert into s_member(member_id, member_name, pw, email, phone)
-		values(#{member_id}, #{member_name}, #{pw}, #{email}, #{phone})
+		insert into s_member(member_id, member_name, pw, email, phone, verify)
+		values(#{member_id}, #{member_name}, #{pw}, #{email}, #{phone}, #{verify})
 	</insert>
 	
 	<!-- 회원가입 아이디 중복확인 -->

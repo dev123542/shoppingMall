@@ -357,6 +357,8 @@ public class MemberController{
 		String encodePW = pwEncoder.encode(inputPW);
 		// 암호화시킨 비밀번호를 다시 membervo 객체에 넣는다
 		membervo.setPw(encodePW);
+		// 이메일 인증 여부
+		membervo.setVerify(1);
 		int result;
 		try {
 			result = memberService.signUp(membervo);
