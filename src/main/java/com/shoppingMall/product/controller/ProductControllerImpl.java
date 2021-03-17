@@ -24,6 +24,8 @@ import com.shoppingMall.board.vo.PageMaker;
 import com.shoppingMall.common.base.BaseController;
 import com.shoppingMall.product.service.ProductService;
 import com.shoppingMall.product.vo.ProductVO;
+import com.shoppingMall.review.service.ReviewService;
+import com.shoppingMall.review.vo.ReviewVO;
 
 import net.sf.json.JSONObject;
 
@@ -36,6 +38,9 @@ public class ProductControllerImpl extends BaseController implements ProductCont
 	@Autowired
 	private ProductService productService;
 
+	@Autowired
+	private ReviewService reviewService;
+	
 	// 상품번호조회 productDetail
 	@RequestMapping(value = "/productDetail.do", method = RequestMethod.GET)
 	public ModelAndView productDetail(@RequestParam("product_no") String product_no, HttpServletRequest request,
@@ -49,7 +54,16 @@ public class ProductControllerImpl extends BaseController implements ProductCont
 		//logger.info("상세 imageList:"+productMap.get("imageList"));
 		logger.info("상세 productVO:"+productMap.get("productVO"));
 		logger.info("상세 이미지:"+productMap.get("productVO"));
+		
+		// 상품 후기 목록 불러오기
+		int review_product_no = Integer.parseInt(String.valueOf(product_no));
+		List<ReviewVO> reviewList = reviewService.selectReview(review_product_no);
+		logger.info("후기 상품 번호:"+review_product_no);
+		logger.info("후기 목록:"+reviewList.toString());
+		//productMap.put("reviewList", reviewList);
+		
 		mav.addObject("productMap", productMap);
+		
 //		ProductVO productVO=(ProductVO)productMap.get("productVO");
 //		addproductInQuick(product_no,productVO,session);
 		return mav;

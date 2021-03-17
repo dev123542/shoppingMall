@@ -12,7 +12,14 @@
 	  <result property="review_file" column="review_file" />
 	  <result property="product_no" column="product_no" />
 	  <result property="reg_date" column="reg_date" />
+	  <collection property="productResult" resultMap="productResult" />
 	</resultMap> 
+	
+	<resultMap id="productResult" type="ProductVO">
+	   <result property="product_image" column="product_image" />
+	   <result property="product_name" column="product_name" />
+	   <result property="product_color" column="product_color" />
+	</resultMap>
 	
 	
 	<!-- 후기 작성 -->
@@ -42,13 +49,46 @@
 	
 	<!-- 후기 목록 -->
 	<select id="selectReview" resultMap="reviewResult" parameterType="int">
-		SELECT row_number() over(order by review_no desc), 
-			   writer, 
+		SELECT writer, 
 			   review_txt, 
 			   review_file, 
-			   reg_date 
+			   reg_date,
+			   review_star
+			   product_no 
 		FROM review
 		WHERE product_no = #{product_no}
+		ORDER BY reg_date DESC
 	</select>
+	
+	<!-- 마이 페이지에서 후기 목록 -->
+	<select id="myReviewList" resultMap="reviewResult" parameterType="String">
+		SELECT r.review_txt, 
+			   r.review_file,
+			   r.review_star, 
+			   r.reg_date,
+			   r.product_no, 
+			   p.product_image, 
+			   p.product_name, 
+			   p.product_color
+		FROM review r INNER JOIN s_product p
+		ON writer = #{writer} 
+			AND p.product_no = r.product_no
+		ORDER BY reg_date DESC
+	</select>
+	
+	<!-- 후기 수정 -->
+	<update id="updateReview" parameterType="java.util.Map">
+		UPDATE review 
+		SET	review_txt = #{review_txt}, 
+			review_file = #{review_file, jdbcType=VARCHAR}, 
+			review_star = #{review_star}
+		WHERE writer = #{writer} AND product_no = #{product_no}
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="deleteReview" parameterType="ReviewVO">
+		DELETE FROM review
+		WHERE writer = #{writer} AND product_no = #{product_no}
+	</delete>
 	
 </mapper>

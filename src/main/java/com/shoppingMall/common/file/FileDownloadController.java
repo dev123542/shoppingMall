@@ -18,6 +18,7 @@ import net.coobird.thumbnailator.Thumbnails;
 @Controller
 public class FileDownloadController {
 	private static String CURR_IMAGE_REPO_PATH = "C:\\shoppingMall\\file_repo";
+	private static String CURR_REVIEW_IMAGE_REPO_PATH = "C:\\shoppingMall\\file_repo\\review";
 	
 	@RequestMapping("/download")
 	protected void download(@RequestParam("fileName") String fileName,
@@ -59,5 +60,22 @@ public class FileDownloadController {
 		byte[] buffer = new byte[1024 * 8];
 		out.write(buffer);
 		out.close();
+	}
+	
+	@RequestMapping("/reviewImage")
+	protected void reviewImage(@RequestParam("product_no") String product_no,
+							   @RequestParam("review_file") String review_file, HttpServletResponse response) throws Exception{
+		
+		OutputStream out = response.getOutputStream();
+		String filePath = CURR_REVIEW_IMAGE_REPO_PATH +"\\"+product_no+"\\" + review_file;
+		File image = new File(filePath);
+		
+		if (image.exists()) { 
+			Thumbnails.of(image).size(360,432).toOutputStream(out);
+		}
+		byte[] buffer = new byte[1024 * 8];
+		out.write(buffer);
+		out.close();
+	
 	}
 }

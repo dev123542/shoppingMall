@@ -11,5 +11,7 @@ public interface ReviewDAO {
 	
 	public void writerReview(Map<String, Object> reviewMap) throws DataAccessException;
 	public List<ReviewVO> selectReview (int product_no) throws DataAccessException;
-
+	public List<ReviewVO> myReviewList (String writer) throws DataAccessException;
+	public void updateReview(Map<String, Object> reviewMap) throws DataAccessException;
+	public void deleteReview(ReviewVO review) throws DataAccessException;
 }
