@@ -6,6 +6,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="product" value="${productMap.productVO}" />
+<c:set var="reviewList" value="${productMap.reviewList}" />
 <%-- <c:set var="imageList" value="${productMap.imageList }" /> --%>
 <%
      //치환 변수 선언합니다.
@@ -487,6 +488,10 @@
 				      <!-- 후기 -->
 				      <div class="review-list-box">
 				        <ul class="review-list">
+				        <c:if test="${empty reviewList }">
+				       		<div class="empty-list">작성된 후기가 없습니다</div>
+				        </c:if>
+				        <c:forEach items="${reviewList }" var="review">
 				          <li class="review-list-item">
 				            <!-- 후기 한 줄 컨테이너 -->
 				            <div class="review-box">
@@ -498,30 +503,52 @@
 				                    <span class="cell-rating">
 				                      <span class="rating">
 				                        <span class="rating-item">
+				                        <c:set var="star"  value="${review.review_star }" />
+				                        <c:choose>
+					                     	<c:when test="${star eq 5 }">
+					                      		<span id="5">★★★★★</span>
+					                      	</c:when>
+					                      	<c:when test="${star eq 4 }">
+					                      		<span id="4">★★★★</span>
+					                      	</c:when>
+					                      	<c:when test="${star eq 3 }">
+					                      		<span id="3">★★★</span>
+					                      	</c:when>
+					                      	<c:when test="${star eq 2 }">
+					                      		<span id="2">★★</span>
+					                      	</c:when>
+					                      	<c:when test="${star eq 1 }">
+					                      		<span id="1">★</span>
+					                      	</c:when>
+					                      	<c:otherwise>
+					                      		<span style="color: #ccc;">★★★★★</span>
+					                      	</c:otherwise>
+					                     </c:choose>  
 				                        <!-- 별 하나를 반복해서? -->
-				                          <span id="1">★</span>
+<!-- 				                          <span id="1">★</span>
 					                      <span id="2">★</span>
 					                      <span id="3">★</span>
 					                      <span id="4">★</span>
-					                      <span id="5">★</span>	
+					                      <span id="5">★</span>	 -->
 				                        </span>
 				                      </span>
 				                    </span>
 				                    <!-- 작성 회원 아이디 -->
 				                    <span class="cell-reviewer">
-				                      <span>회원</span>
+				                      <span>${review.writer }</span>
 				                    </span>
 				                    <!-- 작성일 -->
 				                    <div class="cell-date">
-				                      <span>2021.03.03</span>
+				                    <fmt:formatDate value="${review.reg_date }" pattern="yyyy.MM.dd" var="reg_date"/>
+				                      <span>${reg_date }</span>
 				                    </div>
 				                  </div>
 				                  <p class="review-title">
-				                    <span class="review-area">너무 좋아요</span>
+				                    <span class="review-area">${review.review_txt }</span>
 				                    <span class="photo-prv">
 				                      <span class="photo-box">
 				                        <span class="photo">
-				                          <img src="${path }/resources/image/group01-banner02.jpg" alt="" class="p-load p-prv" />
+				                          <img src="${path }/reviewImage?product_no=${review.product_no}&review_file=${review.review_file}" alt="" class="p-load p-prv" />
 				                        </span>
 				                      </span>
 				                    </span>
@@ -537,7 +564,7 @@
 				                    <li class="review-detail-item">
 				                      <div class="detail-photo-box">
 				                        <div class="photo">
-				                          <img src="${path }/resources/image/group01-banner02.jpg" alt="" class="p-load p-prv" />
+				                          <img src="${path }/reviewImage?product_no=${review.product_no}&review_file=${review.review_file}" alt="" class="p-load p-prv" />
 				                        </div>
 				                      </div>
 				                    </li>
@@ -547,9 +574,10 @@
 				              <!-- review-bottom end -->
 				            </div>
 				          </li>
-				    
+				    	</c:forEach>
+				    	
 				          <!-- 2 -->
-				          <li class="review-list-item">
+				          <%-- <li class="review-list-item">
 				            <!-- 후기 한 줄 컨테이너 -->
 				            <div class="review-box">
 				              <!-- 바로 보여지는 글 부분 -->
@@ -607,7 +635,7 @@
 				              </div>
 				              <!-- review-bottom end -->
 				            </div>
-				          </li>
+				          </li> --%>
 				    
 				        </ul>
 				      </div>

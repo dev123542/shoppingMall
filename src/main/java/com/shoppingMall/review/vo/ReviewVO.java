@@ -2,6 +2,8 @@ package com.shoppingMall.review.vo;
 
 import java.sql.Date;
 
+import com.shoppingMall.product.vo.ProductVO;
+
 public class ReviewVO {
 	
 	private int review_no;
@@ -11,6 +13,8 @@ public class ReviewVO {
 	private String review_file;
 	private int product_no;
 	private Date reg_date;
+	
+	private ProductVO productResult;
 	
 	public int getReview_no() {
 		return review_no;
@@ -48,13 +52,25 @@ public class ReviewVO {
 	public void setReview_txt(String review_txt) {
 		this.review_txt = review_txt;
 	}
+	public int getReview_star() {
+		return review_star;
+	}
+	public void setReview_star(int review_star) {
+		this.review_star = review_star;
+	}
 	
+	public ProductVO getProductResult() {
+		return productResult;
+	}
+	public void setProductResult(ProductVO productResult) {
+		this.productResult = productResult;
+	}
 	
 	@Override
 	public String toString() {
 		return "ReviewVO [review_no=" + review_no + ", writer=" + writer + ", review_txt=" + review_txt
 				+ ", review_star=" + review_star + ", review_file=" + review_file + ", product_no=" + product_no
-				+ ", reg_date=" + reg_date + "]";
+				+ ", reg_date=" + reg_date + ", productResult=" + productResult + "]";
 	}
 	
 }

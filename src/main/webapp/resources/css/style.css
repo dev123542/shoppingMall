@@ -1857,3 +1857,208 @@ padding: 0;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
 }
+
+/*-------------------------------------------------------------------------------------------------------
+									 myreviewList.jsp (마이페이지 내가 쓴 후기)
+---------------------------------------------------------------------------------------------------------*/
+.title-wrap {
+  position: relative;
+}
+
+.my-review-container {
+  position: relative;
+  min-width: 900px;
+  max-width: 1500px;
+  margin: 40px auto 0;
+  padding: 0 50px 100px;
+}
+
+.my-review .title {
+  position: relative;
+  padding-bottom: 10px;
+  border-bottom: 4px solid #000;
+  font-size: 22px;
+  color: #000;
+  line-height: 30px;
+  font-weight: 600;
+}
+
+.written-review {
+  position: relative;
+}
+
+.review-list .review-item {
+  border-bottom: 1px solid #d4d4d4;
+}
+
+.reviews {
+  /* position: relative; */
+  padding: 30px 0;
+}
+
+.reviews .product-row {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.reviews .in-td {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.reviews .col1 {
+  width: 60%;
+}
+
+.reviews .info-box {
+  display: block;
+  min-height: 48px;
+  padding: 0 15px 0 68px;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.reviews .info {
+  display: block;
+  font-size: 14px;
+  color: #303033;
+  line-height: 22px;
+  word-break: break-all;
+  text-decoration: none;
+}
+
+.reviews .image-box {
+  width: 48px;
+  height: 48px;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.reviews .image-in {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100% !important;
+}
+
+/* .p-load.p-prv {
+  opacity: 1;
+  height: auto;
+}
+
+.p-load {
+  opacity: 0;
+  max-width: 100%;
+  width: 100%;
+  min-height: 1px;
+  transition: opacity 0.2s ease-in-out;
+} */
+
+.reviews .product {
+  font-weight: 800;
+  text-decoration: underline;
+}
+
+.reviews .product-color {
+  margin: 2px 0;
+  word-wrap: break-word;
+}
+
+.review-rating-box {
+  padding-bottom: 8px;
+}
+
+.review-rating a {
+  /* font-size: 22px; */
+  letter-spacing: 0;
+  display: inline-block;
+  color: #ff4800;
+  text-decoration: none;
+}
+
+/* 내용 */
+.txt-full {
+  display: block;
+  overflow: inherit;
+  position: relative;
+  color: #303033;
+}
+
+.txt-in {
+  max-height: none;
+  overflow: hidden;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.review-image {
+  margin-top: 15px;
+}
+
+.review-image li {
+  float: left;
+  margin-right: 4px;
+}
+
+.review-image li .image-box {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  width: 88px;
+  height: 88px;
+}
+
+.review-image li .image-in {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+}
+
+.reviews .col2 {
+  width: 15%;
+  text-align: center;
+}
+
+.reviews .col3 {
+  width: 100px;
+  text-align: right;
+}
+
+.btn-wr {
+  display: inline-block;
+  width: 96px;
+  padding: 0;
+  border-radius: 2px;
+  background: none;
+  color: #5d5d5d;
+  font-size: 13px;
+  line-height: 32px;
+  font-weight: 600;
+  text-align: center;
+  box-sizing: border-box;
+  border: 1px solid #d4d4d4;
+  outline: none;
+  cursor: pointer;
+}
+
+.btn-wr + .btn-wr {
+  margin-top: 6px;
+}

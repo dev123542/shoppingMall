@@ -13,13 +13,14 @@
 </head>
 <body>
 <br><br>
-	<c:if test="${empty sessionScope.member && sessionScope.member == null }">
+	<c:if test="${empty member_id && member_id == null }">
 	    <jsp:forward page="/member/loginForm.do"/>
 	</c:if>
-	<c:if test="${not empty sessionScope.member && sessionScope.member != null }">
+	<c:if test="${not empty member_id && member_id != null }">
 	    <a href="${path }/member/updateMyInfoForm.do?member_id=${member_id}">내 정보 수정</a>
 	    <a href="${path }/order/orderList.do">주문 내역</a>
 	    <a href="${path }/cart/myCartList.do">장바구니</a>
+	    <a href="${path }/review/myreviewList.do">상품 후기</a>
 	</c:if>
 </body>
 </html>

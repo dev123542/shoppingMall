@@ -67,6 +67,7 @@ public class AdminProductServiceImpl implements AdminProductService {
 		Map<String, Object> productMap = new HashedMap();
 		List<ProductVO> productList = adminProductDAO.selectAdminProductList(param);
 		productMap.put("productList", productList);
+		logger.info(productList.toString());
 		List<ProductDetailVO> modelList = adminProductDAO.selectProductDetail();
 		productMap.put("modelList", modelList);
 		return productMap;

@@ -404,8 +404,8 @@ public class MemberController{
 
 		// 이메일 보내기
 		String setFrom = "zappydep@gmail.com"; // xml에 작성한 본인 이메일 계정
-		String toMail = email; // 뷰에서 받은 이메일 주소
-		String title = "회원가입 인증번호"; // 이메일 제목
+		String toMail = email; 				   // 뷰에서 받은 이메일 주소
+		String title = "회원가입 인증번호"; 		   // 이메일 제목
 		String content = "Whosbag 회원가입을 위한 인증번호입니다." + "<br>" // 이메일 내용
 				+ "<h2>인증번호: [ " + authkey + " ]</h2> <br>";
 
