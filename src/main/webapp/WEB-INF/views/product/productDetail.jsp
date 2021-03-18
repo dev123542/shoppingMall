@@ -7,6 +7,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="product" value="${productMap.productVO}" />
 <c:set var="reviewList" value="${productMap.reviewList}" />
+<c:set var="pageMaker" value="${productMap.pageMaker}" />
 <%-- <c:set var="imageList" value="${productMap.imageList }" /> --%>
 <%
      //치환 변수 선언합니다.
@@ -137,7 +138,7 @@
 	        $('#review_file').click();
 	      }); 
 	      
-	      // 후기 쓰기를 눌렀을 때
+	      // 후기를 눌렀을 때
 	       $('.review-top').on('click', function(e){
 	        
 	    	   e.preventDefault();
@@ -274,6 +275,40 @@
 		.service_information_img{
 			text-align:center;
 		}
+		
+		.SMS_list_paging{
+			text-align:center;
+		}
+		
+		.paging{
+			display: inline-block;
+		}
+		
+		.paging li{
+			width: 23px;
+		    height: 23px;
+		    float: left;
+		    line-height: 0;
+		    text-align: center;
+		    margin: 0 2px;
+		    padding: 0;
+		    color: #333;
+		    font-weight: normal;
+		}
+		
+		.paging li a{
+			display: inline-block;
+		    /* zoom: 1; */
+		    *: ;
+		    display: inline;
+		    /* height: 30px; */
+		    /* width: 100%; */
+		    line-height: 2.1;
+		    /* padding: 0px; */
+		    /* height: 100%; */
+		    color: #333;
+		    font-weight: normal;
+		}
 </style>   
 </head>
 <body>
@@ -382,8 +417,9 @@
             
          <div class="prd-btns">
 <%-- 			<a href="${path }/order/orderMain.do?product_no=${product.product_no}&product_name=${product.product_name }&sale_price=${product.sale_price}&fileName=${product.fileName}', '${product.product_color }"> --%>
-			<a href="${path }/order/orderMain.do">
+			<a href="${path }/order/orderMain.do?product_no=${product.product_no}&product_name=${product.product_name }&sale_price=${product.sale_price}&product_image=${product.product_image}&product_color=${product.product_color }">
 				<img class="smp-btn-cart tb_tagManagerCart" src="${path }/resources/image/btn_h46_order.gif" alt="주문하기" title="주문하기" /></a>
+<%-- 				<img class="smp-btn-cart tb_tagManagerCart" src="${path }/resources/image/btn_h46_order.gif" alt="주문하기" title="주문하기" /></a> --%>
 			<a id="cartBtn" href="javascript:add_cart('${product.product_no }')">
 				<img class="smp-btn-cart tb_tagManagerCart" src="${path }/resources/image/btn_h46_cart_add.gif" alt="장바구니 담기" title="장바구니 담기" /></a>
 		 </div>
@@ -546,11 +582,13 @@
 				                  <p class="review-title">
 				                    <span class="review-area">${review.review_txt }</span>
 				                    <span class="photo-prv">
+				                    <c:if test="${not empty review.review_file }">
 				                      <span class="photo-box">
 				                        <span class="photo">
 				                          <img src="${path }/reviewImage?product_no=${review.product_no}&review_file=${review.review_file}" alt="" class="p-load p-prv" />
 				                        </span>
 				                      </span>
+				                    </c:if>  
 				                    </span>
 				                  </p>
 				                </a>
@@ -558,6 +596,7 @@
 				              <!-- review-top end -->
 				    
 				              <!-- 후기를 누르면 자세히 나오는 내용 -->
+				              <c:if test="${not empty review.review_file }">
 				              <div id="review-bottom">
 				                <div class="review-detail">
 				                  <ul class="review-detail-list">
@@ -571,72 +610,12 @@
 				                  </ul>
 				                </div>
 				              </div>
+				              </c:if>
 				              <!-- review-bottom end -->
 				            </div>
 				          </li>
 				    	</c:forEach>
 				    	
-				          <!-- 2 -->
-				          <%-- <li class="review-list-item">
-				            <!-- 후기 한 줄 컨테이너 -->
-				            <div class="review-box">
-				              <!-- 바로 보여지는 글 부분 -->
-				              <div class="review-top">
-				                <a href="#" class="review-top-inner">
-				                  <div class="review-top-info">
-				                    <!-- 별점 -->
-				                    <span class="cell-rating">
-				                      <span class="rating">
-				                        <span class="rating-item">
-					                        <span id="1">★</span>
-						                    <span id="2">★</span>
-						                    <span id="3">★</span>
-						                    <span id="4">★</span>
-						                    <span id="5">★</span>
-					                    </span>
-				                      </span>
-				                    </span>
-				                    <!-- 작성 회원 아이디 -->
-				                    <span class="cell-reviewer">
-				                      <span>회원</span>
-				                    </span>
-				                    <!-- 작성일 -->
-				                    <div class="cell-date">
-				                      <span>2021.03.03</span>
-				                    </div>
-				                  </div>
-				                  <p class="review-title">
-				                    <span class="review-area">너무 좋아요</span>
-				                    <span class="photo-prv">
-				                      <span class="photo-box">
-				                        <span class="photo">
-				                          <img src="${path }/resources/image/group01-banner01.jpg" alt="" class="p-load p-prv" />
-				                        </span>
-				                      </span>
-				                    </span>
-				                  </p>
-				                </a>
-				              </div>
-				              <!-- review-top end -->
-				    
-				              <!-- 후기를 누르면 자세히 나오는 내용 -->
-				              <div id="review-bottom">
-				                <div class="review-detail">
-				                  <ul class="review-detail-list">
-				                    <li class="review-detail-item">
-				                      <div class="detail-photo-box">
-				                        <div class="photo">
-				                          <img src="${path }/resources/image/group01-banner01.jpg" alt="" class="p-load p-prv" />
-				                        </div>
-				                      </div>
-				                    </li>
-				                  </ul>
-				                </div>
-				              </div>
-				              <!-- review-bottom end -->
-				            </div>
-				          </li> --%>
-				    
 				        </ul>
 				      </div>
 				      <!-- review-list-box end -->
@@ -645,21 +624,20 @@
 				  <!-- review section end -->
 				
 				<!-- paging start -->
-         	<%-- <div class="SMS_list_paging"> 
+         	<div class="SMS_list_paging"> 
 	          <ul class="paging">
 	          	<c:if test="${pageMaker.prev }">
-	            	<li class="first"><a href="newProductList.do${pageMaker.makeQuery(pageMaker.startPage - 1) }"><img src="${path }/resources/image/paging_first.gif" alt="맨 처음 페이지 화살표"></a></li>
+	            	<li class="first"><a href="productDetail.do${pageMaker.makeQuery(pageMaker.startPage - 1) }"><img src="${path }/resources/image/paging_first.gif" alt="맨 처음 페이지 화살표"></a></li>
 	            </c:if>
 	            <c:forEach var="idx" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" >
- 	            	<li><a href="newProductList.do${pageMaker.makeQuery(idx) }&s=${s}&sort=${sort}">${idx }</a></li>
- 	            	<li><a href="newProductList.do${pageMaker.makeQuery(idx) }&sort=${sort}">${idx }</a></li>
+ 	            	<li><a href="productDetail.do${pageMaker.makeQuery(idx) }&product_no=${product.product_no}">${idx }</a></li>
 	            </c:forEach>
 	            <!-- <li class="now"><a href="/shop/shopbrand.html?type=P&amp;xcode=036&amp;sort=&amp;page=2">2</a></li> -->
 	            <c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
-	            	<li class="last"><a href="newProductList.do${pageMaker.makeQuery(pageMaker.endPage + 1) }"><img src="${path }/resources/image/paging_end.gif" alt="마지막 페이지 화살표"></a></li>
+	            	<li class="last"><a href="productDetail.do${pageMaker.makeQuery(pageMaker.endPage + 1) }"><img src="${path }/resources/image/paging_end.gif" alt="마지막 페이지 화살표"></a></li>
 	          	</c:if>
 	          </ul>
-	       </div> --%>
+	       </div>
 	 <!-- paging end -->
 				
 				

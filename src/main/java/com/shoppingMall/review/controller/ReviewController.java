@@ -1,7 +1,9 @@
 package com.shoppingMall.review.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -20,12 +22,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.shoppingMall.board.vo.CriteriaVO;
+import com.shoppingMall.board.vo.PageMaker;
 import com.shoppingMall.review.service.ReviewService;
 import com.shoppingMall.review.vo.ReviewVO;
 
@@ -132,18 +139,56 @@ public class ReviewController {
 	
 	// 마이페이지 후기 목록
 	@RequestMapping(value = "/myreviewList.do", method = { RequestMethod.POST, RequestMethod.GET })
-	public ModelAndView myReview(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView myReview(CriteriaVO cri ,HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView("/member/myreviewList");
 
 		HttpSession session = request.getSession();
 		String writer = (String) session.getAttribute("member");
-
-		List<ReviewVO> reviewList = reviewService.myReviewList(writer);
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		cri.setPerPageNum(5);
+		int rowStart = cri.getRowStart();
+		int rowEnd = cri.getRowEnd();
+		param.put("writer", writer);
+		param.put("rowStart", rowStart);
+		param.put("rowEnd", rowEnd);
+		logger.info("회원이 쓴 댓글목록 rowStart/end:" + rowStart+"/"+rowEnd);
+		
+		List<ReviewVO> reviewList = reviewService.myReviewList(param);
+//		List<ReviewVO> reviewList = reviewService.myReviewList(writer);
 		logger.info("회원이 쓴 댓글목록:" + reviewList.toString());
+		
+		int page = reviewService.myReviewCount(writer);
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(page);
 
 		mav.addObject("reviewList", reviewList);
-
+		mav.addObject("pageMaker", pageMaker);
+		
 		return mav;
+	}
+//	@RequestMapping(value = "/myreviewList.do", method = { RequestMethod.POST, RequestMethod.GET })
+//	public ModelAndView myReview(HttpServletRequest request, HttpServletResponse response) throws Exception {
+//		ModelAndView mav = new ModelAndView("/member/myreviewList");
+//		
+//		HttpSession session = request.getSession();
+//		String writer = (String) session.getAttribute("member");
+//		
+//		List<ReviewVO> reviewList = reviewService.myReviewList(writer);
+//		logger.info("회원이 쓴 댓글목록:" + reviewList.toString());
+//		
+//		mav.addObject("reviewList", reviewList);
+//		
+//		return mav;
+//	}
+	
+	// 후기 수정 창
+	@ResponseBody
+	@RequestMapping(value="/updateBtn", method=RequestMethod.POST)
+	public ReviewVO updateBtn(@RequestParam("review_no") int review_no) throws Exception{
+		ReviewVO view = reviewService.updateBtn(review_no);
+		return view;
 	}
 
 	// 후기 수정
@@ -194,11 +239,11 @@ public class ReviewController {
 				UUID uuid = UUID.randomUUID();
 				originalFileName = uuid + "-" + originalFileName;
 				reviewMap.put("review_file", originalFileName);
-				logger.info("******** 파라미터값:" + reviewMap.toString());
-				logger.info("input file name:" + fileName);
-				logger.info("random image name:" + originalFileName);
 
 			}
+			logger.info("******** 파라미터값:" + reviewMap.toString());
+			logger.info("input file name:" + fileName);
+			logger.info("random image name:" + originalFileName);
 
 			reviewService.updateReview(reviewMap);
 
@@ -225,7 +270,7 @@ public class ReviewController {
 
 		}
 		message = "<script>";
-		message += " alert('상품 등록 성공');";
+		message += " alert('상품 수정 성공');";
 		message += " location.href='"+multipartRequest.getContextPath()+"/review/myreviewList.do'; ";
 //		message += " history.go(-1); ";
 		message += ("</script>");

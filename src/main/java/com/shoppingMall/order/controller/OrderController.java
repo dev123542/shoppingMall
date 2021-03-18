@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.shoppingMall.cart.vo.CartVO;
 import com.shoppingMall.order.service.OrderService;
 import com.shoppingMall.order.vo.OrderDetailsVO;
 import com.shoppingMall.order.vo.OrderListVO;
@@ -35,11 +34,24 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 	
-	// 주문 화면
-	@RequestMapping(value = "/orderMain.do")
-	public ModelAndView orderMain(HttpServletRequest request, HttpServletResponse response) {
+	// 상품 바로 주문 화면
+	@RequestMapping(value="/orderMain.do", method=RequestMethod.GET)
+	public ModelAndView orderMain(@ModelAttribute("product") ProductVO productvo,HttpServletRequest request) throws Exception{
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
+		
+		//int product_no = Integer.parseInt(String.valueOf(request.getParameter("product_no")));
+		
+		mav.addObject("productvo",productvo);
+		
+		return mav;
+	}
+	
+	
+	// 장바구니 주문 화면
+	@RequestMapping(value = "/orderCartMain.do")
+	public ModelAndView orderCartMain(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView("/order/orderMain");
 		HttpSession session = request.getSession();
 		String member_id = (String) session.getAttribute("member");
 		try {

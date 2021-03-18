@@ -410,7 +410,7 @@ function fn_order_all_cart_goods(){
 		</c:choose>      
 		
 				<!-- 테스트용 버트 -->
-	           	<a href="${path }/order/orderMain.do">
+	           	<a href="${path }/order/orderCartMain.do">
 					     <img src="${path }/resources/image/cart_order_btn_on.gif" alt="주문하기" title="주문하기" 
 					     onmouseover="this.src='${path }/resources/image/cart_order_btn.gif'" onmouseout="this.src='${path }/resources/image/cart_order_btn_on.gif'" /></a>       
                            

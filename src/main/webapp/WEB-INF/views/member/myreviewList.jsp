@@ -16,10 +16,10 @@
 $(document).ready(function(){
 	 
 	  // 후기 수정 팝업창
-     $('#updateReview').on('click', function(){
+/*      $('#updateReview').on('click', function(){
     	 console.log("눌림");
 	     $('.review-dimm').addClass('on');
-     });
+     }); */
      
      // 후기 수정창 닫힘 버튼
       $('.review-close').on('click', function(){
@@ -74,12 +74,33 @@ $(document).ready(function(){
 	}  
 	
 	// 삭제 버튼 눌렀을 때
-	function deleteReview(product_no){
+	function deleteReview(review_no){
 		if(confirm("정말 삭제하시겠습니까?") == true){
-			location.href="${path}/review/deleteReview?product_no="+product_no;
+			location.href="${path}/review/deleteReview?review_no="+review_no;
 		}else{
 			return;
 		}
+	}
+	
+	// 수정 버튼 눌렀을 때
+	function updateBtn(review_no){
+		$.ajax({
+			url: "${path}/review/updateBtn",
+			type: "post",
+			data: {review_no:review_no},
+			dataType: "json",
+			success: function(data){
+				console.log("눌림");
+			     $(".review-dimm").addClass("on");
+			     $("#product_no").val(data.product_no);
+			     $("#review-img-img").attr("src", "${path}/thumbnails.do?product_no="+data.product_no+"&fileName="+data.productResult.product_image);
+				 $(".review-product-info strong").html(data.productResult.product_name);
+				 $(".review-product-info span").html(data.productResult.product_color);
+				 $("#review_star").val(data.review_star);
+				 $(".review_txt").val(data.review_txt);
+				 $("#review_no").val(data.review_no);
+			}
+		});
 	}
 </script>
 <style type="text/css">
@@ -89,6 +110,43 @@ $(document).ready(function(){
 	    text-align: center;
 	    line-height: 24px;
 	}
+	.service_information_img{
+			text-align:center;
+		}
+		
+		.SMS_list_paging{
+			text-align:center;
+		}
+		
+		.paging{
+			display: inline-block;
+		}
+		
+		.paging li{
+			width: 23px;
+		    height: 23px;
+		    float: left;
+		    line-height: 0;
+		    text-align: center;
+		    margin: 0 2px;
+		    padding: 0;
+		    color: #333;
+		    font-weight: normal;
+		}
+		
+		.paging li a{
+			display: inline-block;
+		    /* zoom: 1; */
+		    *: ;
+		    display: inline;
+		    /* height: 30px; */
+		    /* width: 100%; */
+		    line-height: 2.1;
+		    /* padding: 0px; */
+		    /* height: 100%; */
+		    color: #333;
+		    font-weight: normal;
+		}
 </style>
 </head>
 <body>
@@ -171,23 +229,45 @@ $(document).ready(function(){
                   <p>${reg_date }</p>
                 </div>
                 <div class="in-td col3">
-                  <button type="button" class="btn-wr" id="updateReview">수정</button>
-                  <button type="button" class="btn-wr" onclick="deleteReview(${review.product_no})">삭제</button>
+<!--                   <button type="button" class="btn-wr" id="updateReview">수정</button> -->
+                  <button type="button" class="btn-wr" id="updateReview" onclick="updateBtn(${review.review_no})">수정</button>
+                  <button type="button" class="btn-wr" onclick="deleteReview(${review.review_no})">삭제</button>
+<%--                   <button type="button" class="btn-wr" onclick="deleteReview(${review.product_no})">삭제</button> --%>
                 </div>
               </div>
             </div>
           </li>
-        <%-- </c:forEach> --%>
+        </c:forEach>
         </ul>
       </div>
     </div>
+    
+    
+    <!-- paging start -->
+         	<div class="SMS_list_paging"> 
+	          <ul class="paging">
+	          	<c:if test="${pageMaker.prev }">
+	            	<li class="first"><a href="myreviewList.do${pageMaker.makeQuery(pageMaker.startPage - 1) }"><img src="${path }/resources/image/paging_first.gif" alt="맨 처음 페이지 화살표"></a></li>
+	            </c:if>
+	            <c:forEach var="idx" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" >
+ 	            	<li><a href="myreviewList.do${pageMaker.makeQuery(idx) }">${idx }</a></li>
+	            </c:forEach>
+	            <!-- <li class="now"><a href="/shop/shopbrand.html?type=P&amp;xcode=036&amp;sort=&amp;page=2">2</a></li> -->
+	            <c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
+	            	<li class="last"><a href="myreviewList.do${pageMaker.makeQuery(pageMaker.endPage + 1) }"><img src="${path }/resources/image/paging_end.gif" alt="마지막 페이지 화살표"></a></li>
+	          	</c:if>
+	          </ul>
+	       </div>
+	 <!-- paging end -->
+    
+    
     
     <!------------------------------------
                  후기 작성 레이어 팝업            
       ------------------------------------->
     <form action="${path }/review/updateReview" method="post" enctype="multipart/form-data" id="reviewForm">
-    <input type="hidden" name="product_no" value="${review.product_no }" />
-    
+    <input type="hidden" name="product_no" id="product_no" />
+    <input type="hidden" name="review_no" id="review_no" />
     <div class="review-dimm">
       <section class="review">
       <div class="review-title">
@@ -202,12 +282,12 @@ $(document).ready(function(){
             <div class="review-box">
               <div class="review-img-box">
                 <div class="review-img">
-                  <img src="${path}/thumbnails.do?product_no=${review.product_no}&fileName=${review.productResult.product_image}" alt="후기 작성 상품 이미지" />
+                  <img src="" alt="후기 작성 상품 이미지" id="review-img-img" />
                 </div>
               </div>
               <div class="review-product-info">
-                <strong>${review.productResult.product_name }</strong>
-                <span>${review.productResult.product_color }</span>
+                <strong></strong>
+                <span></span>
               </div>
             </div>
           </div>
@@ -222,7 +302,7 @@ $(document).ready(function(){
           <a href="#" id="3">★</a>
           <a href="#" id="4">★</a>
           <a href="#" id="5">★</a>
-          <input type="hidden" id="review_star" name="review_star" value="0" />
+          <input type="hidden" id="review_star" name="review_star" />
         </div>
 
 
@@ -237,11 +317,6 @@ $(document).ready(function(){
               <span class="prv-box">
                 <span class="prv-img"></span>
               </span>
-<%--               <span class="prv-box old">
-                <span class="prv-box old">
-                	<img src="${path }/reviewImage?product_no=${review.product_no}&review_file=${review.review_file}" alt=""/>
-                </span>
-              </span> --%>
               <button type="button" class="prv-remove" onclick="deleteThumbnail()">삭제</button>
             </li>
           </ul>
@@ -254,7 +329,7 @@ $(document).ready(function(){
 
       <!-- 후기 내용 -->
       <div class="review-txt-box">
-        <textarea name="review_txt" class="review_txt" cols="80" rows="6" placeholder="최소 15자 이상 작성 해 주세요.">${review.review_txt }</textarea>
+        <textarea name="review_txt" class="review_txt" cols="80" rows="6" placeholder="최소 15자 이상 작성 해 주세요."></textarea>
       </div>
 
       <!-- 후기 안내 -->
@@ -274,7 +349,7 @@ $(document).ready(function(){
       </section>
     </div>
   </form>
-  </c:forEach>
+<%--   </c:forEach> --%>
   <!-- review form end -->  
   </section>
 </body>

@@ -28,14 +28,38 @@ public class ReviewDAOImpl implements ReviewDAO{
 	
 	// 후기 목록
 	@Override
-	public List<ReviewVO> selectReview (int product_no) throws DataAccessException{
-		return sqlSession.selectList("selectReview", product_no);
+	public List<ReviewVO> selectReview (Map<String, Object> paramMap)throws DataAccessException{
+		return sqlSession.selectList("selectReview", paramMap);
+	}
+//	public List<ReviewVO> selectReview (int product_no) throws DataAccessException{
+//		return sqlSession.selectList("selectReview", product_no);
+//	}
+	
+	// 후기 목록 총 개수
+	@Override
+	public int reviewListCount(int product_no) throws DataAccessException{
+		return sqlSession.selectOne("reviewListCount", product_no);
 	}
 	
 	// 마이페이지에서 후기 목록
 	@Override
-	public List<ReviewVO> myReviewList (String writer) throws DataAccessException{
-		return sqlSession.selectList("myReviewList", writer);
+	public List<ReviewVO> myReviewList (Map<String, Object> param) throws DataAccessException{
+		return sqlSession.selectList("myReviewList", param);
+	}
+//	public List<ReviewVO> myReviewList (String writer) throws DataAccessException{
+//		return sqlSession.selectList("myReviewList", writer);
+//	}
+	
+	// 마이페이지 후기 목록 개수
+	@Override
+	public int myReviewCount(String writer) throws DataAccessException{
+		return sqlSession.selectOne("myReviewCount", writer);
+	}
+	
+	// 마이페이지 후기 수정창
+	@Override
+	public ReviewVO updateBtn(int review_no) throws DataAccessException{
+		return sqlSession.selectOne("updateBtn", review_no);
 	}
 	
 	// 후기 수정

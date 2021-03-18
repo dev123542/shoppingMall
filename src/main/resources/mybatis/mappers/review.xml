@@ -41,28 +41,54 @@
 							#{writer},
 							#{review_txt},
 							#{review_star},
-							#{review_file},
+							#{review_file, jdbcType=VARCHAR},
 							#{product_no},
 							SYSDATE
 					)
 	</insert>
 	
 	<!-- 후기 목록 -->
-	<select id="selectReview" resultMap="reviewResult" parameterType="int">
-		SELECT writer, 
+	<select id="selectReview" resultMap="reviewResult" parameterType="java.util.Map">
+<!-- 	<select id="selectReview" resultMap="reviewResult" parameterType="int"> -->
+		<!-- SELECT writer, 
 			   review_txt, 
 			   review_file, 
 			   reg_date,
-			   review_star
+			   review_star,
 			   product_no 
 		FROM review
 		WHERE product_no = #{product_no}
+		ORDER BY reg_date DESC -->
+		
+		SELECT a.* 
+		FROM(
+		    SELECT  row_number() over(order by review_no desc) rnum,
+		            writer, 
+		            review_txt, 
+		            review_file, 
+		            reg_date,
+		            review_star,
+		            product_no,
+		            review_no
+		    FROM review
+		    WHERE product_no = #{product_no}
+		    )a
+		WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}
 		ORDER BY reg_date DESC
 	</select>
 	
+	<!-- 후기 목록 총 개수 -->
+	<select id="reviewListCount" resultType="int" parameterType="int">
+		SELECT count(review_no)
+		FROM review
+		WHERE review_no > 0 AND product_no = #{product_no}
+	</select>
+	
 	<!-- 마이 페이지에서 후기 목록 -->
-	<select id="myReviewList" resultMap="reviewResult" parameterType="String">
-		SELECT r.review_txt, 
+	<select id="myReviewList" resultMap="reviewResult" parameterType="java.util.Map">
+<!-- 	<select id="myReviewList" resultMap="reviewResult" parameterType="String"> -->
+		<!-- SELECT r.review_no,
+			   r.review_txt, 
 			   r.review_file,
 			   r.review_star, 
 			   r.reg_date,
@@ -73,7 +99,48 @@
 		FROM review r INNER JOIN s_product p
 		ON writer = #{writer} 
 			AND p.product_no = r.product_no
+		ORDER BY reg_date DESC -->
+		
+		SELECT a.*
+		FROM(
+		        SELECT row_number() over(order by r.review_no desc) rnum,
+					   r.review_txt, 
+					   r.review_file,
+					   r.review_star, 
+					   r.reg_date,
+					   r.review_no,
+					   r.product_no, 
+					   p.product_image, 
+					   p.product_name, 
+					   p.product_color
+				FROM review r INNER JOIN s_product p
+				ON writer = #{writer}
+					AND p.product_no = r.product_no
+		    )a
+		WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}
 		ORDER BY reg_date DESC
+	</select>
+	
+	<!-- 마이 페이지 후기 목록 개수 -->
+	<select id="myReviewCount" resultType="int" parameterType="String">
+		SELECT count(review_no)
+		FROM review
+		WHERE review_no > 0 AND writer = #{writer}	
+	</select>
+	
+	<!-- 마이페이지 후기 수정 창 -->
+	<select id="updateBtn" resultMap="reviewResult" parameterType="int">
+		SELECT r.review_no,
+			   r.review_txt, 
+			   r.review_file,
+			   r.review_star, 
+			   r.product_no, 
+			   p.product_image, 
+			   p.product_name, 
+			   p.product_color
+		FROM review r INNER JOIN s_product p
+		ON review_no = #{review_no}
+			AND p.product_no = r.product_no
 	</select>
 	
 	<!-- 후기 수정 -->
@@ -82,13 +149,15 @@
 		SET	review_txt = #{review_txt}, 
 			review_file = #{review_file, jdbcType=VARCHAR}, 
 			review_star = #{review_star}
-		WHERE writer = #{writer} AND product_no = #{product_no}
+		WHERE writer = #{writer} AND product_no = #{product_no} AND review_no = #{review_no}
 	</update>
 	
 	<!-- 삭제 -->
 	<delete id="deleteReview" parameterType="ReviewVO">
 		DELETE FROM review
-		WHERE writer = #{writer} AND product_no = #{product_no}
+		WHERE writer = #{writer} AND review_no = #{review_no}
+<!-- 		DELETE FROM review
+		WHERE writer = #{writer} AND product_no = #{product_no} -->
 	</delete>
 	
 </mapper>

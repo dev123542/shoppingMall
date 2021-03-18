@@ -43,7 +43,7 @@ public class ProductControllerImpl extends BaseController implements ProductCont
 	
 	// 상품번호조회 productDetail
 	@RequestMapping(value = "/productDetail.do", method = RequestMethod.GET)
-	public ModelAndView productDetail(@RequestParam("product_no") String product_no, HttpServletRequest request,
+	public ModelAndView productDetail(@RequestParam("product_no") String product_no, CriteriaVO cri, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		HttpSession session = request.getSession();
@@ -57,10 +57,15 @@ public class ProductControllerImpl extends BaseController implements ProductCont
 		
 		// 상품 후기 목록 불러오기
 		int review_product_no = Integer.parseInt(String.valueOf(product_no));
-		List<ReviewVO> reviewList = reviewService.selectReview(review_product_no);
-		logger.info("후기 상품 번호:"+review_product_no);
+		List<ReviewVO> reviewList = reviewService.selectReview(review_product_no, cri);
 		logger.info("후기 목록:"+reviewList.toString());
-		//productMap.put("reviewList", reviewList);
+		productMap.put("reviewList", reviewList);
+		
+		int page = reviewService.reviewListCount(review_product_no);
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(page);
+		productMap.put("pageMaker", pageMaker);
 		
 		mav.addObject("productMap", productMap);
 		
@@ -68,6 +73,34 @@ public class ProductControllerImpl extends BaseController implements ProductCont
 //		addproductInQuick(product_no,productVO,session);
 		return mav;
 	}
+	
+	// 원본
+//	@RequestMapping(value = "/productDetail.do", method = RequestMethod.GET)
+//	public ModelAndView productDetail(@RequestParam("product_no") String product_no, HttpServletRequest request,
+//			HttpServletResponse response) throws Exception {
+//		String viewName = (String) request.getAttribute("viewName");
+//		HttpSession session = request.getSession();
+//		// 상품번호 Map으로 반환
+//		Map productMap = productService.productDetail(product_no);
+//		ModelAndView mav = new ModelAndView(viewName);
+//		logger.info("상세 상품번호:"+product_no);
+//		//logger.info("상세 imageList:"+productMap.get("imageList"));
+//		logger.info("상세 productVO:"+productMap.get("productVO"));
+//		logger.info("상세 이미지:"+productMap.get("productVO"));
+//		
+//		// 상품 후기 목록 불러오기
+//		int review_product_no = Integer.parseInt(String.valueOf(product_no));
+//		List<ReviewVO> reviewList = reviewService.selectReview(review_product_no);
+//		logger.info("후기 상품 번호:"+review_product_no);
+//		logger.info("후기 목록:"+reviewList.toString());
+//		productMap.put("reviewList", reviewList);
+//		
+//		mav.addObject("productMap", productMap);
+//		
+////		ProductVO productVO=(ProductVO)productMap.get("productVO");
+////		addproductInQuick(product_no,productVO,session);
+//		return mav;
+//	}
 
 	@RequestMapping(value = "/keywordSearch.do", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	public @ResponseBody String keywordSearch(@RequestParam("keyword") String keyword, HttpServletRequest request,
