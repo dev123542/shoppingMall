@@ -13,7 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.shoppingMall.board.vo.CriteriaVO;
 
 public interface ProductController  {
-	public ModelAndView productDetail(@RequestParam("product_no") String products_id,HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView productDetail(@RequestParam("product_no") String products_id,CriteriaVO cri,HttpServletRequest request, HttpServletResponse response) throws Exception;
+//	public ModelAndView productDetail(@RequestParam("product_no") String products_id,HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public @ResponseBody String keywordSearch(@RequestParam("keyword") String keyword,HttpServletRequest request, HttpServletResponse response) throws Exception;
 //	public ModelAndView searchProduct(@RequestParam("searchWord") String searchWord,HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView newProductList(@RequestParam String sort, @RequestParam String s ,@RequestParam String cate_name, CriteriaVO cri) throws Exception;

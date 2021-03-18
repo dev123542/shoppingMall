@@ -5,6 +5,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
 <c:set var="myCartList"  value="${cartMap.myCartList}"  />
 <c:set var="myProductList"  value="${cartMap.myProductList}"  />
+<c:set var="productvo"  value="${productvo}"  />
 <!DOCTYPE html>
 <html>
 <head>
@@ -1318,6 +1319,39 @@ input, select, textarea, button {
                                     </tr>
                                 </thead>
                                 <tbody>
+                                	<c:if test="${not empty productvo and empty myProductList }">
+                                	<c:set var="cart_goods_qty" value="${myCartList[cnt.count-1].cart_goods_qty}" />
+				    				<c:set var="cart_no" value="${myCartList[cnt.count-1].cart_no}" />      	
+                                     <tr class="nbg">
+                                        <td class="notborder_right">
+                                            <div class="thumb txt_c"><img src="${contextPath }/thumbnails.do?product_no=${productvo.product_no}&fileName=${productvo.product_image}" width="40"/></div>
+                                        </td>
+                                        <td class="goods_opt">
+                                            <div class="txt_l">
+												<div class="goods_title">
+													<a href="">${productvo.product_name }</a>
+												</div>
+												<div class="uni-opt"><img src="${contextPath }/resources/image/opt_kor_ico.gif"> COLOR : ${productvo.product_color }</div>
+											</div>
+                                        </td>
+                                        <td>
+                                            <div class="txt_c">${cart_goods_qty }개</div>
+                                        </td>
+                                        <td>
+                                            <div class="txt_c b">
+                                                ${productvo.sale_price }
+                                            </div>
+                                        </td>
+                                        <td class="notborder_right">
+                                            <div class="txt_c">없음</div>
+                                        </td>
+                                    </tr>
+                                     <c:set  var="totalGoodsPrice" value="${product.sale_price }" />
+									 <c:set  var="totalGoodsNum" value="${totalGoodsNum+1 }" />
+                                    </c:if>
+                                    
+                                    <!-- 장바구니 결제 -->
+                                    <c:if test="${not empty myProductList and empty productvo }">
                                 	<c:forEach var="product" items="${myProductList }"  varStatus="cnt">
                                 	<c:set var="cart_goods_qty" value="${myCartList[cnt.count-1].cart_goods_qty}" />
 				    				<c:set var="cart_no" value="${myCartList[cnt.count-1].cart_no}" />      	
@@ -1350,7 +1384,8 @@ input, select, textarea, button {
                                     </tr>
                                      <c:set  var="totalGoodsPrice" value="${totalGoodsPrice+product.sale_price *cart_goods_qty }" />
 									 <c:set  var="totalGoodsNum" value="${totalGoodsNum+1 }" />
-                                    </c:forEach> 
+                                    </c:forEach>
+                                    </c:if>  
                                 </tbody>
                                 <tfoot>
                                     <tr>
