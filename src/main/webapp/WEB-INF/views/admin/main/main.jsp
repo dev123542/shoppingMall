@@ -11,8 +11,10 @@
   <meta name="author" content="Dashboard">
   <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
   <title>관리자 메인</title>
-  <!-- <script type="text/javascript">
-  	//구글 차트 라이브러리 로딩
+<%-- <script src="${contextPath }/resources/lib/chart-master/Chart.js"></script> --%>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<!-- <script type="text/javascript">
+  	/* //구글 차트 라이브러리 로딩
   	google.load('visualization','1',{
     	'packages' : ['corechart']
 	});
@@ -38,12 +40,120 @@
   			width: 600,
   			height: 400
   		});
+  	} */
+  	
+  	// chart.js 
+  	// chart colors 
+  	var colors = ['red','skyblue','yellowgreen','#c3e6cb','#dc3545','#6c757d']; 
+  	
+  	/* 3 donut charts */ 
+  	var donutOptions = { 
+  			cutoutPercentage: 30, //도넛두께 : 값이 클수록 얇아짐 
+  			legend: {position:'bottom', padding:5, labels: {pointStyle:'circle', usePointStyle:true}} 
+  	}; 
+  	
+  	// donut 1 
+  	var chDonutData1 = { 
+  			labels: ['Bootstrap', 'Popper', 'Other'], 
+  			datasets: [ 
+  				{ 
+  					backgroundColor: colors.slice(0,3), 
+  					borderWidth: 0, 
+  					data: [74, 11, 40] 
+  				} 
+  			] 
+  	}; 
+  	
+  	var chDonut1 = document.getElementById("chDonut1"); 
+  	if (chDonut1) { 
+  		new Chart(chDonut1, { 
+  			type: 'pie', 
+  			data: chDonutData1, 
+  			options: donutOptions 
+  		}); 
+  	} 
+  	
+  	// donut 2 
+  	var chDonutData2 = { 
+  			labels: ['Wips', 'Pops', 'Dags'], 
+  			datasets: [ 
+  				{ 
+  					backgroundColor: colors.slice(0,3), 
+  					borderWidth: 0, 
+  					data: [40, 45, 30] 
+  				} 
+  			] 
+  	}; 
+  	
+  	var chDonut2 = document.getElementById("chDonut2"); 
+  	if (chDonut2) { 
+  		new Chart(chDonut2, { 
+  			type: 'pie', 
+  			data: chDonutData2,
+  			options: donutOptions 
+  		}); 
+  	} 
+  	
+  	// donut 3 
+  	var chDonutData3 = { 
+  			labels: ['Angular', 'React', 'Other'], 
+  			datasets: [ 
+  				{ 
+  					backgroundColor: colors.slice(0,3), 
+  					borderWidth: 0, data: [21, 45, 55, 33] 
+  				} 
+  			] 
+  	}; 
+  	
+  	var chDonut3 = document.getElementById("chDonut3"); 
+  	if (chDonut3) { 
+  		new Chart(chDonut3, { 
+  			type: 'pie', 
+  			data: chDonutData3, 
+  			options: donutOptions 
+  		}); 
   	}
+
+
   </script> -->
 </head>
 
 <body>
-<div id="chart_div"></div>
+<!-- 차트 -->
+<div class="container" style="padding: 99px 80px 0;"> 
+	<div class="row my-3"> 
+		<div class="col"> 
+			<h4>Bootstrap 4 Chart.js - pie to donut</h4> 
+		</div> 
+	</div> 
+	<div class="row py-2"> 
+		<div class="col-md-4 py-1"> 
+			<div class="card"> 
+				<div class="card-body"> 
+					<canvas id="chDonut1"></canvas> 
+				</div> 
+			</div> 
+		</div> 
+		<div class="col-md-4 py-1"> 
+			<div class="card"> 
+				<div class="card-body"> 
+					<canvas id="chDonut2"></canvas> 
+				</div> 
+			</div> 
+		</div> 
+		<div class="col-md-4 py-1"> 
+			<div class="card"> 
+				<div class="card-body"> 
+					<canvas id="chDonut3"></canvas> 
+				</div> 
+			</div> 
+		</div> 
+	</div> 
+</div>
+
+
+
+
   <%-- <section id="container" style="background: #fff;">
     <!--main content start-->
     <section id="main-content">
@@ -534,5 +644,111 @@
       console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
     }
   </script> -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> 
+ <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+ <script type="text/javascript">
+	/* //구글 차트 라이브러리 로딩
+	google.load('visualization','1',{
+ 	'packages' : ['corechart']
+	});
+	
+	// 로딩 완료 후 drawChart 함수 호출
+	google.setOnLoadCallback(drawChart);
+	
+	function drawChart(){
+		var jsonData = $. ajax({
+			url: ${contextPath}/"admin/product/chart.do",
+			type: "post"
+			dataType: "json",
+			async: false
+		}).responseText;  //json 파일을 text파일로 읽음
+		
+		console.log(jsonData);
+		
+		var data = new  google.visualization.DataTable(jsonData);
+		var chart  = new google.visualization.PieChart(document.getElementById('chart_div'));
+		
+		chart.draw(data, {
+			title : "카테고리 통계",
+			width: 600,
+			height: 400
+		});
+	} */
+	
+	// chart.js 
+	// chart colors 
+	var colors = ['red','skyblue','yellowgreen','#c3e6cb','#dc3545','#6c757d']; 
+	
+	/* 3 donut charts */ 
+	var donutOptions = { 
+			cutoutPercentage: 30, //도넛두께 : 값이 클수록 얇아짐 
+			legend: {position:'bottom', padding:5, labels: {pointStyle:'circle', usePointStyle:true}} 
+	}; 
+	
+	// donut 1 
+	var chDonutData1 = { 
+			labels: ['Bootstrap', 'Popper', 'Other'], 
+			datasets: [ 
+				{ 
+					backgroundColor: colors.slice(0,3), 
+					borderWidth: 0, 
+					data: [74, 11, 40] 
+				} 
+			] 
+	}; 
+	
+	var chDonut1 = document.getElementById("chDonut1"); 
+	if (chDonut1) { 
+		new Chart(chDonut1, { 
+			type: 'pie', 
+			data: chDonutData1, 
+			options: donutOptions 
+		}); 
+	} 
+	
+	// donut 2 
+	/* var chDonutData2 = { 
+			labels: ['Wips', 'Pops', 'Dags'], 
+			datasets: [ 
+				{ 
+					backgroundColor: colors.slice(0,3), 
+					borderWidth: 0, 
+					data: [40, 45, 30] 
+				} 
+			] 
+	}; 
+	
+	var chDonut2 = document.getElementById("chDonut2"); 
+	if (chDonut2) { 
+		new Chart(chDonut2, { 
+			type: 'pie', 
+			data: chDonutData2,
+			options: donutOptions 
+		}); 
+	} 
+	
+	// donut 3 
+	var chDonutData3 = { 
+			labels: ['Angular', 'React', 'Other'], 
+			datasets: [ 
+				{ 
+					backgroundColor: colors.slice(0,3), 
+					borderWidth: 0, data: [21, 45, 55, 33] 
+				} 
+			] 
+	}; 
+	
+	var chDonut3 = document.getElementById("chDonut3"); 
+	if (chDonut3) { 
+		new Chart(chDonut3, { 
+			type: 'pie', 
+			data: chDonutData3, 
+			options: donutOptions 
+		}); 
+	} */
+
+
+</script>
 </body>
 </html>

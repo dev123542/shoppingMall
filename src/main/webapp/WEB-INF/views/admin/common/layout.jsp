@@ -24,7 +24,6 @@
 <!-- Custom styles for this template -->
 <link href="${contextPath }/resources/css/style2.css" rel="stylesheet">
 <link href="${contextPath }/resources/css/style-responsive.css" rel="stylesheet">
-<script src="${contextPath }/resources/lib/chart-master/Chart.js"></script>
 <style type="text/css">
 	.admin-body{
 		width:100%;
