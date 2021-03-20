@@ -7,5 +7,6 @@ import com.shoppingMall.member.vo.MemberVO;
 public interface AdminService {
 	public List<MemberVO> memberList();
 	public MemberVO selectMember(String member_id);
+	public List<MemberVO> memberchart();
 
 }

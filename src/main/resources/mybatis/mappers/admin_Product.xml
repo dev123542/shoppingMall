@@ -188,11 +188,17 @@
 		FROM s_product_detail
 	</select>
 	
-	<!-- 관리자 메인에서 차트 -->
-	<!-- <select id="chart" resultMap="categoryResult">
+	<!--  관리자 메인에서 차트 : 회원가입 월별 통계 
+	<select id="chart" resultMap="categoryResult">
 		SELECT c.cate_name 
 		FROM s_product p, s_category c 
 		WHERE p.cate_parent = c.cate_code 
 		AND c.cate_parent is null; 
+		
+		SELECT COUNT(member_id) 회원수, TO_CHAR(member_credate, 'yyyy-MM') 가입일
+		FROM s_member
+		WHERE member_credate >= '21/01/31'
+		GROUP BY TO_CHAR(member_credate, 'yyyy-MM')
+		ORDER BY TO_CHAR(member_credate, 'yyyy-MM') DESC
 	</select> -->
 </mapper>

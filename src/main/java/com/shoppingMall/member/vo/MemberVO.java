@@ -71,11 +71,12 @@ public class MemberVO {
 	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
+	
 	@Override
 	public String toString() {
 		return "MemberVO [member_id=" + member_id + ", member_name=" + member_name + ", pw=" + pw + ", email=" + email
-				+ ", phone=" + phone + "]";
+				+ ", phone=" + phone + ", member_credate=" + member_credate + ", verify=" + verify + ", authority="
+				+ authority + "]";
 	}
-	
 	
 }
