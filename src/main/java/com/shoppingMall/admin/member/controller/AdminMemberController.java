@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.shoppingMall.admin.member.servicce.AdminService;
 import com.shoppingMall.admin.member.servicce.AdminServiceImpl;
 import com.shoppingMall.member.vo.MemberVO;
 
@@ -22,7 +23,7 @@ import com.shoppingMall.member.vo.MemberVO;
 public class AdminMemberController {
 
 	@Autowired
-	private AdminServiceImpl adminService;
+	private AdminService adminService;
 
 	// 회원 목록 보여주기 - 검색창 아직 안만들었음, 페이징도 아직못함, 수정해야 함
 	@RequestMapping(value = "/memberList.do", method = { RequestMethod.GET, RequestMethod.POST })
