@@ -28,6 +28,7 @@
 	.admin-body{
 		width:100%;
 		height:2000px;
+		background:#efefef;
 	}
 </style>
 </head>

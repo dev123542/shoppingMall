@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.shoppingMall.admin.member.dao.AdminDAO;
 import com.shoppingMall.admin.member.dao.AdminDAOImpl;
 import com.shoppingMall.member.vo.MemberVO;
+import com.shoppingMall.order.vo.OrderVO;
 
 @Service("adminService")
 public class AdminServiceImpl implements AdminService{
@@ -33,4 +34,9 @@ public class AdminServiceImpl implements AdminService{
 		return adminDAO.memberchart();
 	}
 
+	// 관리자 메인 월별 매출액 차트
+	@Override
+	public List<OrderVO> orderChart(){
+		return adminDAO.orderChart();
+	}
 }

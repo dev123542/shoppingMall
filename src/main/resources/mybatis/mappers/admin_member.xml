@@ -27,10 +27,11 @@
 	
 	<!-- 관리자 메인에서 차트 : 회원가입 월별 통계 -->
 	<select id="memberchart" resultMap="adminResult">
-		SELECT COUNT(member_id) AS "member_id", TO_CHAR(member_credate, 'yyyy-MM-dd') AS "member_credate"
+ 		SELECT COUNT(member_id) AS "member_id", TO_CHAR(member_credate, 'yyyy-MM-dd') AS "member_credate"
 		FROM s_member
 		WHERE member_credate >= '21/01/31'
 		GROUP BY TO_CHAR(member_credate, 'yyyy-MM-dd')
-		ORDER BY TO_CHAR(member_credate, 'yyyy-MM-dd') DESC
+		ORDER BY TO_CHAR(member_credate, 'yyyy-MM-dd') ASC
 	</select>
+	
 </mapper>

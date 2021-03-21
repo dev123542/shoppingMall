@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.shoppingMall.member.vo.MemberVO;
+import com.shoppingMall.order.vo.OrderVO;
 
 @Repository("adminDAO")
 public class AdminDAOImpl implements AdminDAO{
@@ -31,5 +32,10 @@ public class AdminDAOImpl implements AdminDAO{
 	@Override
 	public List<MemberVO> memberchart(){
 		return sqlSession.selectList("memberchart");
+	}
+	// 관리자 메인 월별 매출액 차트
+	@Override
+	public List<OrderVO> orderChart(){
+		return sqlSession.selectList("orderChart");
 	}
 }
