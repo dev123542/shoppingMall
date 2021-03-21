@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.shoppingMall.admin.member.servicce.AdminService;
 import com.shoppingMall.member.vo.MemberVO;
+import com.shoppingMall.order.vo.OrderVO;
 import com.sun.media.jfxmedia.logging.Logger;
 
 @Controller("adminMainController")
@@ -42,12 +43,16 @@ public class AdminMainController {
 		String viewName = (String)request.getAttribute("viewName");
 		
 		// 차트 그리기 위한 데이터
+		// 회원 통계
 		List<MemberVO> list = adminServie.memberchart();
 		System.out.println("list:"+list.toString());
-		//Map<String, Object> map = new HashMap<String, Object>();
-		//map.put("list", list);
+		
+		// 월별 매출 통계
+		List<OrderVO> orderList = adminServie.orderChart();
+		System.out.println("order:"+orderList.toString());
 		
 		mav.addObject("list",list);
+		mav.addObject("orderList",orderList);
 		mav.setViewName(viewName);
 		return mav;
 	}

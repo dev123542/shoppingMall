@@ -4,7 +4,22 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="mapper.admin.order">
-	
+	<resultMap id="orderResult" type="OrderVO">
+	  <result property="order_no" column="order_no" />
+	  <result property="member_id" column="member_id" />
+	  <result property="member_add1" column="member_add1" />
+	  <result property="member_add2" column="member_add2" />
+	  <result property="member_add3" column="member_add3" />
+	  <result property="phone" column="phone" />
+	  <result property="order_date" column="order_date" />
+	  <result property="amount" column="amount" />
+	  <result property="orderRec" column="orderRec" />
+	  <result property="order_msg" column="order_msg" />
+	  <result property="total_goods_price" column="total_goods_price" />
+	  <result property="payment" column="payment" />
+	  <result property="bank" column="bank" />
+	  <result property="status" column="status" />
+	</resultMap>
 	
 	<!-- 모든 회원들의 주문 목록 간단 조회 -->
 	<select id="adminOrderList" resultType="OrderVO">
@@ -14,5 +29,12 @@
 		ORDER BY order_date desc
 	</select>
 	
+	<!-- 관리자 메인에서 차트 : 월별 매출액 통계 -->
+	<select id="orderChart" resultType="OrderVO">
+		SELECT  TO_CHAR(o.order_date, 'yyyy-MM-dd') AS "order_date", SUM(o.total_goods_price) AS "total_goods_price"
+		FROM s_product p , s_order o
+		GROUP BY o.order_date
+		ORDER BY o.order_date ASC
+	</select>
 		
 </mapper>
