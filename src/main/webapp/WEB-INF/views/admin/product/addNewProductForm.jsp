@@ -276,14 +276,14 @@
 				</script>
               </tr>
               <tr>
-               <td>메인 이미지 추가 </td>
+               <td>썸네일 이미지 추가 </td>
                <td style="display: flex; justify-content: space-between;">
                 <input type="file" value="메인 이미지 등록" id="main_image" name="main_image"  onchange="readURL(this,this.id);" />
                 <input type="button" value="디테일 이미지 추가" onClick="fn_addFile()" class="btn btn-primary" /> 
                </td>
                </tr>
              <tr>
-              <td>상품 이미지 등록 </td>
+              <td>썸네일 이미지 등록 </td>
               <td colspan="2">
                   <!-- 상품 상세 내용에 들어갈 이미지 input file -->
                   <div id="detail_list"></div>
