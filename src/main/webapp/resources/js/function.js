@@ -6,6 +6,7 @@ function signUpCheck(){
   var email = document.getElementById("email");
   var phone = document.getElementById("phone");
   var name = document.getElementById("member_name");
+  var authkey = document.getElementById("email-authkey-input");
 
   if(name.value == ""){
     alert("이름을 입력하세요");
@@ -22,6 +23,11 @@ function signUpCheck(){
     pw.focus();
     return false;
   }
+  if(pwCheck.value == ""){
+  	alert("비밀번호 확인을 위해 재입력해주세요");
+  	pwCheck.focus();
+  	return false;
+  }
   if(email.value == ""){
     alert("이메일을 입력하세요");
     email.focus();
@@ -31,6 +37,10 @@ function signUpCheck(){
     alert("전화번호를 입력하세요");
     phone.focus();
     return false;
+  }
+  if(authkey.value == ""){
+  	alert("이메일 인증을 해주세요");
+  	return false;
   }
 }
 
