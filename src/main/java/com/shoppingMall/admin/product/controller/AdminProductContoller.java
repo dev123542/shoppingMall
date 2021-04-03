@@ -166,11 +166,7 @@ public class AdminProductContoller extends BaseController{
 			
 			System.out.println("물리 경로:"+fileUrl);
 			System.out.println("절대 경로:"+ckUploadPath);
-//			out.println("<script type='text/javascript'>"
-//						+ "window.parent.CKEDITOR.tools.callFunction("
-//						+ callback +", '" + fileUrl + "', '이미지 업로드 완료')"
-//						+ "</script>"
-//					   );
+			
 			out.println("{\"filename\" : \""+ fileName + "\", \"uploaded\" : 1, \"url\":\"" + fileUrl + "\"}");
 			out.flush();
 			

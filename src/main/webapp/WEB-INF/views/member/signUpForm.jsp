@@ -42,8 +42,6 @@ function idCheck(){
 					$("#idResult").html("이미 사용 중인 아이디입니다");
 					$("#idResult").css("color", "red");
 				}else if($.trim(data) == 0){
-					/* $("#idResult").html("사용 가능한 아이디입니다");
-					$("#idResult").css("color", "green"); */
 					
 					if(!idReg.test(member_id)){
 						$("#idResult").html("영문,숫자포함 4~12자리");
@@ -127,35 +125,22 @@ function emailAuthkey(){
 	// 인증번호 입력칸
 	var authkey = document.getElementById("email-authkey-input");
 	
-	// url을 통해 get방식으로 데이터를 보냄
-	$.ajax({
-		type:"GET",
-		url:"mailCheck?email="+email,
-		success: function(data){
-			authkey.disabled = false;			// 인증번호 입력 가능하도록 변경
-			code = data;						// 변수에 인증번호 저장
-		}
-	});
-	
+	if(email == null || email == ""){
+		alert("이메일을 입력하세요.");
+	}else{
+		// url을 통해 get방식으로 데이터를 보냄
+		$.ajax({
+			type:"GET",
+			url:"mailCheck?email="+email,
+			success: function(data){
+				authkey.disabled = false;			// 인증번호 입력 가능하도록 변경
+				code = data;						// 변수에 인증번호 저장
+			}
+		});
+	}
 }
 
 // 인증번호 비교
-/* var authkey = document.getElementById("email-authkey-input");
-authkey.addEventListener("keyup", function(){
-	// 사용자가 입력한 코드
-	var inputCode = authkey.value;
-	// 일치유무 확인
-	var codeCheck = document.getElementById("email-authkey-Result");
-	
-	if(inputCode == code){
-		codeCheck.innerHTML = "인증번호 일치";
-		codeCheck.style.color = "green";
-	}else{
-		codeCheck.innerHTML = "인증번호를 확인해주세요";
-		codeCheck.style.color = "red";
-	}
-});  */
-
 function authkeyCheck(){
 	var authkey = document.getElementById("email-authkey-input");
 	// 사용자가 입력한 코드

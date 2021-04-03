@@ -91,7 +91,7 @@
     }
   }
   
-  // 상품 상세 내역에 들어갈 이미지, 버튼을 누르면 파일선택이 나옴
+  // 상품 상세 내역에 들어갈 이미지, 버튼을 누르면 파일선택이 나옴(사용안해서 주석처리 해둠)
   var cnt=1;
 	function fn_addFile(){
 		
@@ -138,6 +138,10 @@
 	  }
 	}
 	
+	// 상품 목록 페이지로 이동 버튼
+	function backToList(){
+		location.href = "${contextPath}/admin/product/productList.do";
+	}
 </script>
   <style>
     td, th {
@@ -279,7 +283,7 @@
                <td>썸네일 이미지 추가 </td>
                <td style="display: flex; justify-content: space-between;">
                 <input type="file" value="메인 이미지 등록" id="main_image" name="main_image"  onchange="readURL(this,this.id);" />
-                <input type="button" value="디테일 이미지 추가" onClick="fn_addFile()" class="btn btn-primary" /> 
+                <!-- <input type="button" value="디테일 이미지 추가" onClick="fn_addFile()" class="btn btn-primary" />  -->
                </td>
                </tr>
              <tr>
@@ -296,7 +300,7 @@
            <tr>
              <td colspan="4" style="text-align: center; padding:10px;">
               <input type="submit" value="상품 등록하기" class="btn btn-primary" /> 
-              <input type="button" value="목록창으로 돌아가기" onClick="backToList(this.form)" class="btn btn-warning"/>
+              <input type="button" value="목록창으로 돌아가기" onclick="backToList()" class="btn btn-warning"/>
              </td>
           </tr>
            </table>
