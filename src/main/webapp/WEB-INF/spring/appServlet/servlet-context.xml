@@ -48,7 +48,8 @@
 	</interceptors>
 
 	<!-- 멀티파트 리졸버 -->
-	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<!-- <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">-->
+	<beans:bean id="filterMultipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
 		<beans:property name="maxUploadSize" value="52428800" />
 		<beans:property name="maxInMemorySize" value="52428800" />
 		<beans:property name="defaultEncoding" value="utf-8" />

@@ -264,6 +264,13 @@
 		    <version>4.5.2</version>
 		</dependency>
 		
+		<!-- xss 방어 https://github.com/naver/lucy-xss-servlet-filter -->
+		<dependency>
+			<groupId>com.navercorp.lucy</groupId>
+			<artifactId>lucy-xss-servlet</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+		
 		<!-- AOP -->
 		<dependency>
 		  <groupId>org.springframework</groupId>

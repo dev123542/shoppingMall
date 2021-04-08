@@ -13,7 +13,7 @@
 	$(document).ready(function(){	
 	 	$(".write_btn").on("click", function(){
 	 		
-	 		/* 과제2번 */
+	 		/* xss 방지 */
 		 	var strv = document.getElementsByClassName('chk').value;
 			var __entityMap = { 
 					"&": "&amp;", 
@@ -44,7 +44,7 @@
 			  /* } */
 
 			
-			/* 과제2번끝 */
+			/* 방지 코드 끝 */
 			
 			if(fn_valiChk()){
 				return false;
