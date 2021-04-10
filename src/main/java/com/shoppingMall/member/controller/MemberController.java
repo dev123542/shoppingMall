@@ -81,7 +81,7 @@ public class MemberController{
 	public String loginForm(Model model, HttpServletRequest request, HttpServletResponse response) {
 		String viewName = (String) request.getAttribute("viewName");
 
-		// 로그인 뷰페이지로 이동할 경우, 네이버 로그인 url을 model에 붙인다.
+		// 로그인 뷰페이지로 이동할 경우, 네이버/카카오 로그인 url을 model에 붙인다.
 		if (viewName.equals("/member/loginForm")) {
 			/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
 			HttpSession session = request.getSession();
@@ -97,25 +97,6 @@ public class MemberController{
 			// 네이버, 카카오
 			model.addAttribute("naver_url", naverAuthUrl);
 			model.addAttribute("kakao_url", kakaoAuthUrl);
-
-//			String clientId = "";//애플리케이션 클라이언트 아이디값";
-//		    String redirectURI;
-//			try {
-//				redirectURI = URLEncoder.encode("http://", "UTF-8");
-//				SecureRandom random = new SecureRandom();
-//			    String state = new BigInteger(130, random).toString();
-//			    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
-//			    apiURL += "&client_id=" + clientId;
-//			    apiURL += "&redirect_uri=" + redirectURI;
-//			    apiURL += "&state=" + state;
-//			    
-//			    HttpSession session = request.getSession();
-//			    session.setAttribute("state", state);
-//			    model.addAttribute("url", apiURL);
-//			    
-//			} catch (UnsupportedEncodingException e) {
-//				e.printStackTrace();
-//			}
 
 		}
 
@@ -236,64 +217,6 @@ public class MemberController{
 
 		// 파싱한 닉네임을 세션에 저장
 		session.setAttribute("member", id);
-
-//        String clientId = "";//애플리케이션 클라이언트 아이디값";
-//        String clientSecret = "";//애플리케이션 클라이언트 시크릿값";
-//        String code2 = request.getParameter("code");
-//        String state2 = request.getParameter("state");
-//        String redirectURI = URLEncoder.encode("http://", "UTF-8");
-//        String apiURL;
-//        apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
-//        apiURL += "client_id=" + clientId;
-//        apiURL += "&client_secret=" + clientSecret;
-//        apiURL += "&redirect_uri=" + redirectURI;
-//        apiURL += "&code=" + code2;
-//        apiURL += "&state=" + state2;
-//        String access_token = "";
-//        String refresh_token = "";
-//        System.out.println("apiURL="+apiURL);
-//        
-//        try {
-//          URL url = new URL(apiURL);
-//          HttpURLConnection con = (HttpURLConnection)url.openConnection();
-//          con.setRequestMethod("GET");
-//          int responseCode = con.getResponseCode();
-//          BufferedReader br;
-//          System.out.println("responseCode="+responseCode);
-//          if(responseCode==200) { // 정상 호출
-//            br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-//          } else {  // 에러 발생
-//            br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
-//          }
-//          String inputLine;
-//          StringBuffer res = new StringBuffer();
-//          while ((inputLine = br.readLine()) != null) {
-//            res.append(inputLine);
-//          }
-//          br.close();
-//          if(responseCode==200) {
-//        	  System.out.println("res:"+res.toString());
-//        	  
-//        	  JsonParser parsing = new JsonParser();
-//        	  Object obj = parsing.parse(res.toString());
-//        	  JsonObject jsonObj = (JsonObject)obj;
-//        	  JsonObject response_obj = (JsonObject) jsonObj.get("response");
-//        	  System.out.println("값:"+response_obj.toString());
-//        	  
-//        	  String id = response_obj.get("id").getAsString();
-////        	  String email = response_obj.get("email").getAsString();
-////        	  String name = response_obj.get("name").getAsString();
-////        	  String nickName = response_obj.get("nickName").getAsString();
-//        	  
-//        	  access_token = jsonObj.get("access_token").getAsString();
-//        	  refresh_token = jsonObj.get("refresh_token").getAsString();
-//        	  
-//        	  session.setAttribute("member", id);
-//        	  
-//          }
-//        } catch (Exception e) {
-//          e.printStackTrace();
-//        }
 
 		return mav;
 	}
