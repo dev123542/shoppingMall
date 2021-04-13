@@ -170,7 +170,7 @@ function authkeyCheck(){
 	            </colgroup>
 	            <thead>
 	              <tr>
-	                <th colspan="7"><h2>후즈백 간편회원가입</h2></th>
+	                <th colspan="7"><h2>더백 간편회원가입</h2></th>
 	              </tr>
 	            </thead>
 	            <tbody>

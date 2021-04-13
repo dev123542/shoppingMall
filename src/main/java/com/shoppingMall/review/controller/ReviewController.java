@@ -87,7 +87,7 @@ public class ReviewController {
 			logger.info("image name:" + originalFileName);
 
 			// 파일이 없다면
-			if (originalFileName == "") {
+			if (originalFileName.equals("")) {
 				originalFileName = null;
 			}
 

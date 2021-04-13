@@ -329,13 +329,13 @@ public class MemberController{
 		String setFrom = "zappydep@gmail.com"; // xml에 작성한 본인 이메일 계정
 		String toMail = email; 				   // 뷰에서 받은 이메일 주소
 		String title = "회원가입 인증번호"; 		   // 이메일 제목
-		String content = "Whosbag 회원가입을 위한 인증번호입니다." + "<br>" // 이메일 내용
+		String content = "THEBAG 회원가입을 위한 인증번호입니다." + "<br>" // 이메일 내용
 				+ "<h2>인증번호: [ " + authkey + " ]</h2> <br>";
 
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
-			helper.setFrom(setFrom, "후즈백");
+			helper.setFrom(setFrom, "THEBAG(더백)");
 			helper.setTo(toMail);
 			helper.setSubject(title);
 			helper.setText(content, true);

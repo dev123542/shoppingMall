@@ -126,7 +126,7 @@ function sns_login_log(event){
 	    <div class="login_wrap_02">
 	        <h3 class="signup_title">회원 가입 하기</h3>
 	        <div class="signup_txt">
-	            <span class="br">후즈백은 '성함, 아이디, 이메일' 만으로 "간편회원가입" 됩니다.</span>
+	            <span class="br">더백은 '성함, 아이디, 이메일' 만으로 "간편회원가입" 됩니다.</span>
 	            <span>신규회원 첫구매 무료배송쿠폰, 적립금3,000원 즉시할인, 앱으로 구매시 1,000원추가할인까지 좋은상품 합리적인 가격으로 이용하세요.</span>
 	        </div>
 	        <div class="signup_input">
