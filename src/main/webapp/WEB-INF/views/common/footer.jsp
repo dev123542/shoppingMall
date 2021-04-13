@@ -18,11 +18,11 @@
 	<footer class="footer inbox">
         <div class="footer__copy">
             <ul>
-                <li><h3 class="footer__logo"><a href="">WHOSBAG</a></h3></li>
-                <li>믿고 사는 쇼핑몰 후즈백</li>
+                <li><h3 class="footer__logo"><a href="">THEBAG</a></h3></li>
+                <li>믿고 사는 쇼핑몰 더백</li>
                 <li>SINCE 2004</li>
             </ul>
-            <span>&copy;whosbag.com All rights reserved</span>
+            <span>&copy;THEBAG.com All rights reserved</span>
         </div>
         <div class="footer__info">
             <div class="footer__tel">
@@ -40,7 +40,7 @@
             <div class="footer__bank">
                 <h4>BANKING INFO</h4>
                 <div class="footer__txt">
-                    <span class="txt_md">예금주: 후즈백</span>
+                    <span class="txt_md">예금주: 더백</span>
                     <div class="txt_small">
                         <span>국민은행 933901-01-111111</span>
                         <span>신한은행 110-111-111111</span>
@@ -52,13 +52,13 @@
             <div class="footer__company">
                 <h4>COMPANY INFOMATION</h4>
                 <div class="footer__txt">
-                    <span class="txt_big">whosbag</span>
+                    <span class="txt_big">THEBAG</span>
                     <div class="txt_small">
                         <span>Business licence / 211-11-11111 <a href="">사업자 정보확인</a></span>
                         <span>Mail order licence / 동대문구 제02904호</span>
                         <span>Owner. Song</span>
                         <span>Add. 서울 동대문구 천호대로</span>
-                        <span>Email. whosbag@gmail.com</span>  
+                        <span>Email. THEBAG@gmail.com</span>  
                     </div>
                 </div> 
             </div>

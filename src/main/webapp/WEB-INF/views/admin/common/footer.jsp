@@ -19,7 +19,7 @@
     <footer class="site-footer">
       <div class="text-center">
         <p>
-          &copy; Copyrights <strong>WHOSBAG</strong>. All Rights Reserved
+          &copy; Copyrights <strong>THEBAG</strong>. All Rights Reserved
         </p>
         <a href="index.html#" class="go-top">
           <i class="fa fa-angle-up"></i>

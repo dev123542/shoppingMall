@@ -21,7 +21,7 @@
         <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
       </div>
       <!--logo start-->
-      <a href="${contextPath }/admin/main/main.do" class="logo"><b>whos<span>bag</span></b></a>
+      <a href="${contextPath }/admin/main/main.do" class="logo"><b>THE<span>BAG</span></b></a>
       <!--logo end-->
 
       <div class="top-menu">

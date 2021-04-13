@@ -85,7 +85,7 @@
 						<li class="sbn_03">
 							<a href="${path }/"><img src="${path }/resources/image/group01-banner03.jpg" alt="배너3"></a>
 							<dl>
-								<dt class="tit">후즈백 특별세일</dt>
+								<dt class="tit">더백 특별세일</dt>
 								<dd class="txt">최대80% ~ 한정수량 득템찬스 </dd>
 							</dl>
 						</li>

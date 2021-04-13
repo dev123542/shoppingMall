@@ -316,7 +316,7 @@
 <div class="productDetail inbox">
     <div class="flex_right">
         <!-- 나중에 수정 -->
-        <a href=""><img src="" alt="">WHOSBAG</a> &gt;
+        <a href=""><img src="" alt="">THEBAG</a> &gt;
         <a href="">LEATHER BAG</a> &gt;
         <a href="">TOTE - ${product.product_no}</a>
     </div>
@@ -445,7 +445,7 @@
 
 
 <!-- <h3 id="01" class="tit-detail cb_clear">
-    <img class="tapover" src="/design/whosbag/smartpc/defalut_img/detail_tap01_over.gif" alt="detail prdoduct - 상품상세정보" title="detail prdoduct - 상품상세정보" onclick="location.href='#01'">
+    <img class="tapover" src="/design/TheBAG/smartpc/defalut_img/detail_tap01_over.gif" alt="detail prdoduct - 상품상세정보" title="detail prdoduct - 상품상세정보" onclick="location.href='#01'">
     <img class="tapnormal" src="/design/whosbag/smartpc/defalut_img/detail_tap02.gif" alt="detail prdoduct - 배송,교환,반품안내" title="detail prdoduct - 배송,교환,반품안내" onclick="location.href='#02'">
     <img class="tapnormal" src="/design/whosbag/smartpc/defalut_img/detail_tap03.gif" alt="relation product - 코디상품" title="relation product - 코디상품" onclick="location.href='#03'">
     <img class="tapnormal" src="/design/whosbag/smartpc/defalut_img/detail_tap04.gif" alt="detail prdoduct - 상품후기" title="detail prdoduct - 상품후기" onclick="location.href='#04'">

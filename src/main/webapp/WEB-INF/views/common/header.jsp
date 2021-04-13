@@ -47,7 +47,7 @@
       
         <div class="top inbox">
             <header id="top" class="header">
-                <h1 class="top__logo"><a href="${path }/">WHOSBAG</a></h1>
+                <h1 class="top__logo"><a href="${path }/">THEBAG</a></h1>
             </header>
             <div class="top__form">
                 <form action="" method="post" name="search">
