@@ -39,8 +39,7 @@
   <br>  
   
   * ajax를 이용한 아이디 중복 확인 📌 [코드 확인](https://github.com/dev123542/shoppingMall/blob/main/src/main/java/com/shoppingMall/member/controller/MemberController.java#L307)  
-    
-    ```
+    ```javascript
           function idCheck(){
             var idReg = /^(?=.*[a-zA-Z])(?=.*[0-9]).{4,12}$/;   /* 영문,숫자 4~12자리만 가능 */
             var member_id = $("#member_id").val();
@@ -71,38 +70,38 @@
   * 정규식으로 아이디, 비밀번호, 이메일 유효성 검사 📌 [코드 확인]() 
   * spring security에서 제공하는 passwordEncoder의 BCrypt 방식으로 비밀번호 암호화  
     
-    ```
-    @RequestMapping(value = "/signUp.do", method = RequestMethod.POST)
-    public ModelAndView signUp(@ModelAttribute("membervo") MemberVO membervo, HttpServletRequest request, HttpServletResponse response) {
-      ModelAndView mav = new ModelAndView("redirect:/");
-      // membervo 객체로 만들어진 파라미터에서 뽑은 비밀번호
-      String inputPW = membervo.getPw();
-      // 뽑은 비밀번호를 암호화
-      String encodePW = pwEncoder.encode(inputPW);
-      // 암호화시킨 비밀번호를 다시 membervo 객체에 넣는다
-      membervo.setPw(encodePW);
-      // 이메일 인증 여부
-      membervo.setVerify(1);
-      int result;
-      try {
-        result = memberService.signUp(membervo);
-        if (result > 0) {
-          return mav;
-        } else {
-          try {
-            PrintWriter out = response.getWriter();
-            out.write("<script>");
-            out.write("alert('회원가입 실패')");
-            out.write("</script>");
-          } catch (IOException e) {
-            e.printStackTrace();
+    ```java
+      @RequestMapping(value = "/signUp.do", method = RequestMethod.POST)
+      public ModelAndView signUp(@ModelAttribute("membervo") MemberVO membervo, HttpServletRequest request, HttpServletResponse response) {
+        ModelAndView mav = new ModelAndView("redirect:/");
+        // membervo 객체로 만들어진 파라미터에서 뽑은 비밀번호
+        String inputPW = membervo.getPw();
+        // 뽑은 비밀번호를 암호화
+        String encodePW = pwEncoder.encode(inputPW);
+        // 암호화시킨 비밀번호를 다시 membervo 객체에 넣는다
+        membervo.setPw(encodePW);
+        // 이메일 인증 여부
+        membervo.setVerify(1);
+        int result;
+        try {
+          result = memberService.signUp(membervo);
+          if (result > 0) {
+            return mav;
+          } else {
+            try {
+              PrintWriter out = response.getWriter();
+              out.write("<script>");
+              out.write("alert('회원가입 실패')");
+              out.write("</script>");
+            } catch (IOException e) {
+              e.printStackTrace();
+            }
           }
+        } catch (Exception e1) {
+          e1.printStackTrace();
         }
-      } catch (Exception e1) {
-        e1.printStackTrace();
+        return mav;
       }
-      return mav;
-    }
     ```
   * 작성란 전부 입력시 회원 가입 가능 📌 [코드 확인]() 
   * SMTP를 이용한 이메일 인증 📌 [코드 확인]() 
