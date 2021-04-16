@@ -38,6 +38,11 @@
   <summary>회원 가입</summary>  
   <br>  
   
+  <p align="center">
+  <img src="https://user-images.githubusercontent.com/74228420/114997168-8799e100-9eda-11eb-9ea5-4446a834d30b.gif">
+  </p>
+  <br> 
+  
   * ajax를 이용한 아이디 중복 확인 📌 [코드 확인](https://github.com/dev123542/shoppingMall/blob/main/src/main/java/com/shoppingMall/member/controller/MemberController.java#L307)  
     ```javascript
           function idCheck(){
@@ -154,6 +159,11 @@
   <summary>로그인</summary> 
   <br>
   
+  <p align="center">
+  <img src="https://user-images.githubusercontent.com/74228420/115019837-af963e00-9ef4-11eb-9b43-ec6048f66672.gif">
+  </p>
+  <br>
+  
   * 인터셉터 처리를 하여 임의로 관리자 페이지 접근시 로그인 페이지로 이동 📌 [코드 확인](https://github.com/dev123542/shoppingMall/blob/main/src/main/java/com/shoppingMall/common/AdminInterceptor.java#L14)  
   * 세션에 저장된 값으로 로그인 여부 확인 📌 [코드 확인](https://github.com/dev123542/shoppingMall/blob/main/src/main/java/com/shoppingMall/member/controller/MemberController.java#L124) 
   * 네이버/카카오 로그인 API를 통한 소셜 로그인 구현 📌 [코드 확인](https://github.com/dev123542/shoppingMall/blob/main/src/main/java/com/shoppingMall/member/controller/MemberController.java#L189)
@@ -164,8 +174,14 @@
   <summary>관리자</summary>
   <br>
   
+  <p align="center">
+  <img src="https://user-images.githubusercontent.com/74228420/115033143-0b68c300-9f05-11eb-8940-770206e28fe1.gif">
+  </p>
+  <br>
+  
   * chart.js를 이용한 신규 가입자, 매출액, 상품별 수요 통계 차트 📌 [코드 확인](https://github.com/dev123542/shoppingMall/blob/main/src/main/java/com/shoppingMall/admin/main/AdminMainController.java#L41)  
   * DB에 저장된 회원 정보 확인  
+    
     ```java
       @RequestMapping(value = "/memberList.do", method = { RequestMethod.GET, RequestMethod.POST })
         private ModelAndView memberList(HttpServletRequest request, HttpServletResponse response) {
@@ -186,8 +202,14 @@
   <summary>상품 주문</summary>
   <br>
   
+  <p align="center">
+  <img src="https://user-images.githubusercontent.com/74228420/115035953-06594300-9f08-11eb-9451-53144f146d31.gif">
+  </p>
+  <br>
+  
   * Daum postcode API를 사용하여 우편 번호 조회 📌 [코드 확인](https://github.com/dev123542/shoppingMall/blob/main/src/main/webapp/WEB-INF/views/order/orderMain.jsp#L18) 
   * 상품 주문시 주문날짜와 .Math()로 생성한 무작위 난수 주문 번호 생성 📌 [코드 확인](https://github.com/dev123542/shoppingMall/blob/main/src/main/java/com/shoppingMall/order/controller/OrderController.java#L71)
+    
     ```java
       // 년/월/일과 랜덤숫자를 이용해 주문 번호 만들기
       Calendar cal = Calendar.getInstance();
@@ -204,7 +226,8 @@
       // 주문번호 = "날짜-랜덤숫자"
       String order_no = ymd + "-" + subNum;
     ```
-  * 마이 페이지에서 주문 정보 확인
+  * 마이 페이지에서 주문 정보 확인  
+    
     ```java
     @RequestMapping(value="/orderView.do", method = RequestMethod.GET)
     public ModelAndView orderView(@RequestParam("n") String order_no, HttpServletRequest request) {
@@ -233,6 +256,11 @@
 
 <details>  
   <summary>상품 후기</summary>
+  <br>
+  
+  <p align="center">
+  <img src="https://user-images.githubusercontent.com/74228420/115040000-edeb2780-9f0b-11eb-899e-1a0233d30aa4.gif">
+  </p>
   <br>
   
   * 상품 후기 작성/수정/삭제 📌 [코드 확인](https://github.com/dev123542/shoppingMall/blob/main/src/main/java/com/shoppingMall/review/controller/ReviewController.java#L52)
