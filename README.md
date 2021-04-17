@@ -33,7 +33,7 @@
 - Chart.js
 <br>
 
-## 주요 기능  
+## 주요 기능 (눌러서 내용 펼치기) 
 <details>  
   <summary>회원 가입</summary>  
   <br>  
