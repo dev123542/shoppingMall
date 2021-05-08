@@ -409,16 +409,19 @@ function fn_order_all_cart_goods(){
         </c:otherwise>
 		</c:choose>      
 		
-				<!-- 테스트용 버트 -->
-	           	<a href="${path }/order/orderCartMain.do">
+				<!-- 테스트용 버튼 -->
+	           	<%-- <a href="${path }/order/orderCartMain.do">
 					     <img src="${path }/resources/image/cart_order_btn_on.gif" alt="주문하기" title="주문하기" 
-					     onmouseover="this.src='${path }/resources/image/cart_order_btn.gif'" onmouseout="this.src='${path }/resources/image/cart_order_btn_on.gif'" /></a>       
+					     onmouseover="this.src='${path }/resources/image/cart_order_btn.gif'" onmouseout="this.src='${path }/resources/image/cart_order_btn_on.gif'" /></a> --%>       
                            
 	             </div><!-- .table-fill-prd -->
 				 <div class="btn-order-ctrl">
-				     <a href="javascript:alert('주문이 가능한 금액이 아닙니다.고객센터에 문의 바랍니다.')">
+				     <%-- <a href="javascript:alert('주문이 가능한 금액이 아닙니다.고객센터에 문의 바랍니다.')">
 					     <img src="${path }/resources/image/cart_order_btn_on.gif" alt="주문하기" title="주문하기" 
-					     onmouseover="this.src='${path }/resources/image/cart_order_btn.gif'" onmouseout="this.src='${path }/resources/image/cart_order_btn_on.gif'" /></a>
+					     onmouseover="this.src='${path }/resources/image/cart_order_btn.gif'" onmouseout="this.src='${path }/resources/image/cart_order_btn_on.gif'" /></a> --%>
+					 <a href="${path }/order/orderCartMain.do">
+					     <img src="${path }/resources/image/cart_order_btn_on.gif" alt="주문하기" title="주문하기" 
+					     onmouseover="this.src='${path }/resources/image/cart_order_btn.gif'" onmouseout="this.src='${path }/resources/image/cart_order_btn_on.gif'" /></a>    
 				     <a href="${path }/">
 					     <img src="${path }/resources/image/join_cancel_on3.gif" alt="쇼핑계속하기" title="쇼핑계속하기" 
 					     onmouseover="this.src='${path }/resources/image/join_cancel.gif'" onmouseout="this.src='${path }/resources/image/join_cancel_on3.gif'" /></a>
