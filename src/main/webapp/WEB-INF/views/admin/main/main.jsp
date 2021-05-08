@@ -239,9 +239,10 @@
 	
 	console.log(JSON.stringify(label[0].date));
 	console.log(label.length);
+	console.log(datas[4].sign);
 	
 	var chLineData2 = { 
-			labels: [label[0].date, label[1].date, label[2].date, label[3].date, label[4].date], 
+			labels: [label[0].date, label[1].date, label[2].date, label[3].date, label[4].date, label[5].date, label[6].date], 
 			datasets: [ 
 				{ 
 					/* label: '신규 회원 수', */
@@ -252,7 +253,7 @@
  					borderWidth: 0, 
  					fill: false, 		// 배경색 채우기 안함
  					//lineTension: 0,		// 직선 그래프
-					data: [datas[0].sign, datas[1].sign, datas[2].sign, datas[3].sign, datas[4].sign]
+					data: [datas[0].sign, datas[1].sign, datas[2].sign, datas[3].sign, datas[4].sign, datas[5].sign, datas[6].sign]
 				} 
 			] 
 	};  
