@@ -1,6 +1,6 @@
 # 👜 THEBAG
 > 가방 쇼핑몰 웹사이트  
-> [사이트 바로가기](http://localhost:8080/shoppingMall) 
+> [사이트 바로가기 서버내림](http://localhost:8080/shoppingMall) 
 
 
 > 테스트 계정 (ID / PW)  
